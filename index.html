@@ -1,4 +1,4 @@
-
+```html id="luxqigfull"
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -73,9 +73,9 @@ nav{
 
 .nav-container{
     width:95%;
-    max-width:1650px;
+    max-width:1700px;
     margin:auto;
-    height:68px;
+    height:70px;
     display:flex;
     justify-content:space-between;
     align-items:center;
@@ -102,15 +102,15 @@ nav{
 
 .nav-links{
     display:flex;
-    gap:32px;
+    gap:28px;
 }
 
 .nav-links a{
     color:#d0d0d0;
     text-decoration:none;
     font-size:13px;
-    transition:0.3s;
     cursor:pointer;
+    transition:0.3s;
 }
 
 .nav-links a:hover{
@@ -120,12 +120,27 @@ nav{
 .nav-right{
     display:flex;
     align-items:center;
+    gap:12px;
+}
+
+.nav-mini-btn{
+    color:#d0d0d0;
+    font-size:13px;
+    cursor:pointer;
+    transition:0.3s;
+    padding:8px 14px;
+    border-radius:999px;
+}
+
+.nav-mini-btn:hover{
+    background:rgba(255,255,255,0.08);
+    color:white;
 }
 
 .invest-btn{
     background:white;
     color:black;
-    padding:10px 20px;
+    padding:10px 22px;
     border-radius:999px;
     font-size:13px;
     font-weight:600;
@@ -134,7 +149,7 @@ nav{
 }
 
 .invest-btn:hover{
-    background:#d8d8d8;
+    background:#d7d7d7;
 }
 
 /* PAGE SYSTEM */
@@ -142,7 +157,7 @@ nav{
 .page{
     display:none;
     min-height:100vh;
-    animation:fadePage 0.6s ease;
+    animation:fadePage 0.7s ease;
 }
 
 .page.active{
@@ -165,7 +180,7 @@ nav{
 .hero{
     height:100vh;
     background:
-    linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.8)),
+    linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.82)),
     url('https://images.unsplash.com/photo-1511818966892-d7d671e672a2?q=80&w=1974&auto=format&fit=crop');
     background-size:cover;
     background-position:center;
@@ -177,22 +192,22 @@ nav{
 }
 
 .hero-content{
-    max-width:1100px;
+    max-width:1200px;
 }
 
 .hero h1{
-    font-size:6.5rem;
+    font-size:7rem;
     font-weight:800;
     letter-spacing:-5px;
     margin-bottom:20px;
 }
 
 .hero p{
+    color:#d0d0d0;
     max-width:900px;
     margin:auto;
-    color:#d0d0d0;
-    font-size:1.3rem;
     line-height:1.9;
+    font-size:1.25rem;
 }
 
 .hero-buttons{
@@ -213,6 +228,7 @@ nav{
     transition:0.3s;
     font-weight:500;
     cursor:pointer;
+    border:none;
 }
 
 .btn-primary{
@@ -221,12 +237,13 @@ nav{
 }
 
 .btn-primary:hover{
-    background:#d9d9d9;
+    background:#d8d8d8;
 }
 
 .btn-secondary{
-    border:1px solid rgba(255,255,255,0.15);
+    border:1px solid rgba(255,255,255,0.14);
     color:white;
+    background:none;
 }
 
 .btn-secondary:hover{
@@ -259,7 +276,7 @@ nav{
     font-size:1.15rem;
 }
 
-/* GLASS EFFECT */
+/* GLASS */
 
 .glass{
     background:rgba(255,255,255,0.04);
@@ -271,7 +288,6 @@ nav{
 
 .stats-section{
     padding:100px 8%;
-    background:#020202;
 }
 
 .stats-grid{
@@ -317,7 +333,7 @@ nav{
     background:linear-gradient(
         to top,
         rgba(0,0,0,0.92),
-        rgba(0,0,0,0.2)
+        rgba(0,0,0,0.15)
     );
 
     display:flex;
@@ -331,8 +347,8 @@ nav{
 }
 
 .showcase-content p{
-    max-width:700px;
     color:#d0d0d0;
+    max-width:700px;
     line-height:1.9;
     margin-bottom:30px;
 }
@@ -380,7 +396,7 @@ nav{
 /* TEAM */
 
 .team-grid{
-    margin-top:80px;
+    margin-top:40px;
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
     gap:30px;
@@ -398,6 +414,7 @@ nav{
     border-radius:50%;
     object-fit:cover;
     margin-bottom:25px;
+    background:white;
 }
 
 .team-member h3{
@@ -409,7 +426,7 @@ nav{
     color:#a7a7a7;
 }
 
-/* OFFICE GRID */
+/* OFFICES */
 
 .office-grid{
     margin-top:70px;
@@ -433,7 +450,7 @@ nav{
     line-height:1.8;
 }
 
-/* INVESTOR BANNER */
+/* INVESTOR */
 
 .investor-banner{
     margin-top:80px;
@@ -449,7 +466,6 @@ nav{
 
 .investor-banner p{
     color:#c0c0c0;
-    font-size:1.15rem;
     line-height:1.8;
 }
 
@@ -485,10 +501,6 @@ nav{
     height:180px;
 }
 
-.contact-form button{
-    border:none;
-}
-
 /* FOOTER */
 
 footer{
@@ -502,37 +514,41 @@ footer{
 
 @media(max-width:1000px){
 
-    .hero h1{
-        font-size:4rem;
-    }
+.hero h1{
+    font-size:4rem;
+}
 
-    .section-title{
-        font-size:3rem;
-    }
+.section-title{
+    font-size:3rem;
+}
 
-    .showcase-content h2{
-        font-size:3rem;
-    }
+.showcase-content h2{
+    font-size:3rem;
+}
 
 }
 
 @media(max-width:760px){
 
-    .nav-links{
-        display:none;
-    }
+.nav-links{
+    display:none;
+}
 
-    .hero h1{
-        font-size:3rem;
-    }
+.nav-right{
+    display:none;
+}
 
-    .hero p{
-        font-size:1rem;
-    }
+.hero h1{
+    font-size:3rem;
+}
 
-    .section-title{
-        font-size:2.4rem;
-    }
+.hero p{
+    font-size:1rem;
+}
+
+.section-title{
+    font-size:2.4rem;
+}
 
 }
 
@@ -541,13 +557,9 @@ footer{
 
 <body>
 
-<!-- TOP BAR -->
-
 <div class="top-bar">
 Global Luxury Real Estate & Investment Operations Across 100+ Countries
 </div>
-
-<!-- NAVBAR -->
 
 <nav>
 
@@ -559,20 +571,34 @@ Global Luxury Real Estate & Investment Operations Across 100+ Countries
 </div>
 
 <div class="nav-links">
-
 <a onclick="showPage('home')">Overview</a>
 <a onclick="showPage('properties')">Properties</a>
 <a onclick="showPage('history')">Company</a>
 <a onclick="showPage('team')">Leadership</a>
 <a onclick="showPage('offices')">Global Offices</a>
 <a onclick="showPage('contact')">Contact</a>
-
 </div>
 
 <div class="nav-right">
 
+<a class="nav-mini-btn" onclick="showPage('properties')">
+Developments
+</a>
+
+<a class="nav-mini-btn" onclick="showPage('offices')">
+Locations
+</a>
+
+<a class="nav-mini-btn" onclick="showPage('team')">
+Leadership
+</a>
+
+<a class="nav-mini-btn" onclick="showPage('history')">
+Investors
+</a>
+
 <a class="invest-btn" onclick="showPage('contact')">
-Invest
+Contact
 </a>
 
 </div>
@@ -599,21 +625,19 @@ our developments redefine luxury, innovation, and international growth.
 
 <div class="hero-buttons">
 
-<a onclick="showPage('properties')" class="btn btn-primary">
+<button onclick="showPage('properties')" class="btn btn-primary">
 Explore Properties
-</a>
+</button>
 
-<a onclick="showPage('history')" class="btn btn-secondary">
+<button onclick="showPage('history')" class="btn btn-secondary">
 Our Company
-</a>
+</button>
 
 </div>
 
 </div>
 
 </section>
-
-<!-- STATS -->
 
 <section class="stats-section">
 
@@ -661,8 +685,6 @@ A portfolio of world-class developments redefining international luxury real est
 
 </div>
 
-<!-- MAIN SHOWCASE -->
-
 <div class="showcase glass">
 
 <img src="https://images.unsplash.com/photo-1511818966892-d7d671e672a2?q=80&w=1974&auto=format&fit=crop">
@@ -679,139 +701,44 @@ executive offices, private lounges, luxury retail,
 and panoramic skyline views.
 </p>
 
-<a href="PROPERTY-URL-HERE" class="btn btn-primary">
+<button class="btn btn-primary"
+onclick="openProperty(
+'Dubai Crown Tower',
+'An iconic luxury skyscraper located in central Dubai featuring executive residences, private lounges, luxury retail operations, and panoramic skyline experiences.'
+)">
 View Property
-</a>
+</button>
 
 </div>
 
 </div>
 
 </div>
-
-<!-- PROPERTY GRID -->
 
 <div class="property-grid">
 
-<div class="property-card glass">
+<!-- 16 PROPERTIES -->
 
-<img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=2070&auto=format&fit=crop">
-
-<div class="property-content">
-
-<h3>Kyoto Serenity Resort</h3>
-
-<p>
-A luxury countryside retreat in Japan blending modern elegance with traditional architecture.
-</p>
-
-<a href="PROPERTY-URL-1" class="btn btn-primary">
-View Property
-</a>
-
-</div>
-
-</div>
-
-<div class="property-card glass">
-
-<img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=2070&auto=format&fit=crop">
-
-<div class="property-content">
-
-<h3>Tunisian Pearl Resort</h3>
-
-<p>
-An ultra-luxury Mediterranean beachfront destination built for world-class hospitality.
-</p>
-
-<a href="PROPERTY-URL-2" class="btn btn-primary">
-View Property
-</a>
-
-</div>
-
-</div>
-
-<div class="property-card glass">
-
-<img src="https://images.unsplash.com/photo-1460317442991-0ec209397118?q=80&w=2070&auto=format&fit=crop">
-
-<div class="property-content">
-
-<h3>London Royal Residences</h3>
-
-<p>
-Exclusive luxury apartments in central London designed for elite international investors.
-</p>
-
-<a href="PROPERTY-URL-3" class="btn btn-primary">
-View Property
-</a>
-
-</div>
-
-</div>
-
-<div class="property-card glass">
-
-<img src="https://images.unsplash.com/photo-1494526585095-c41746248156?q=80&w=2070&auto=format&fit=crop">
-
-<div class="property-content">
-
-<h3>Monaco Ocean Villas</h3>
-
-<p>
-Private waterfront villas delivering unmatched luxury and coastal experiences.
-</p>
-
-<a href="PROPERTY-URL-4" class="btn btn-primary">
-View Property
-</a>
-
-</div>
-
-</div>
-
-<div class="property-card glass">
-
-<img src="https://images.unsplash.com/photo-1494526585095-c41746248156?q=80&w=2070&auto=format&fit=crop">
-
-<div class="property-content">
-
-<h3>Singapore Sky Residences</h3>
-
-<p>
-A futuristic luxury development combining innovation and business living.
-</p>
-
-<a href="PROPERTY-URL-5" class="btn btn-primary">
-View Property
-</a>
-
-</div>
-
-</div>
-
-<div class="property-card glass">
-
-<img src="https://images.unsplash.com/photo-1448630360428-65456885c650?q=80&w=2070&auto=format&fit=crop">
-
-<div class="property-content">
-
-<h3>Paris Lumière Hotel</h3>
-
-<p>
-A five-star luxury hospitality destination in the center of Paris.
-</p>
-
-<a href="PROPERTY-URL-6" class="btn btn-primary">
-View Property
-</a>
-
-</div>
-
-</div>
+<script>
+const properties = [
+["Kyoto Serenity Resort","Luxury countryside retreat in Japan."],
+["Tunisian Pearl Resort","Mediterranean beachfront luxury destination."],
+["London Royal Residences","Elite apartments in central London."],
+["Monaco Ocean Villas","Exclusive waterfront villas in Monaco."],
+["Singapore Sky Residences","Modern business luxury skyscraper."],
+["Paris Lumière Hotel","Five-star luxury hotel in Paris."],
+["Dubai Marina Palace","Luxury waterfront tower development."],
+["Tokyo Imperial Heights","Modern luxury residences in Tokyo."],
+["Swiss Alpine Resort","Private luxury retreat in Switzerland."],
+["New York Executive Tower","Luxury business skyscraper in Manhattan."],
+["Maldives Emerald Villas","Private luxury island villas."],
+["Berlin Skyline Center","European commercial investment hub."],
+["Sydney Harbor Residences","Luxury waterfront living in Australia."],
+["Barcelona Grand Hotel","Five-star Mediterranean hospitality."],
+["Hong Kong Elite Towers","Luxury skyscraper business development."],
+["Rome Imperial Suites","Historic luxury hospitality in Italy."]
+];
+</script>
 
 </div>
 
@@ -864,35 +791,66 @@ Reliable annual investor dividends trusted by international partners and stakeho
 <h2 class="section-title">Executive Leadership</h2>
 
 <p class="section-text">
-The leadership behind one of the world's fastest-growing luxury investment organizations.
+The leadership team overseeing global investment strategy,
+luxury developments, and international expansion.
 </p>
 
 </div>
 
+<div style="margin-top:80px;">
+
+<h3 style="font-size:2rem;margin-bottom:35px;">
+Chief Executive Officer
+</h3>
+
 <div class="team-grid">
 
 <div class="team-member glass">
-<img src="https://randomuser.me/api/portraits/men/32.jpg">
+
+<img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">
+
 <h3>bobjerf55</h3>
+
 <p>Chief Executive Officer (CEO)</p>
+
 </div>
 
+</div>
+
+</div>
+
+<div style="margin-top:100px;">
+
+<h3 style="font-size:2rem;margin-bottom:35px;">
+Board Of Directors
+</h3>
+
+<div class="team-grid">
+
 <div class="team-member glass">
-<img src="https://randomuser.me/api/portraits/women/44.jpg">
+<img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">
 <h3>Vacant</h3>
 <p>Chief Financial Officer (CFO)</p>
 </div>
 
 <div class="team-member glass">
-<img src="https://randomuser.me/api/portraits/men/51.jpg">
+<img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">
 <h3>Vacant</h3>
 <p>Chief Marketing Officer (CMO)</p>
 </div>
 
 <div class="team-member glass">
-<img src="https://randomuser.me/api/portraits/women/63.jpg">
+<img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">
 <h3>Vacant</h3>
 <p>Chief Operations Officer (COO)</p>
+</div>
+
+<div class="team-member glass">
+<img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">
+<h3>Vacant</h3>
+<p>Director Of Global Investments</p>
+</div>
+
 </div>
 
 </div>
@@ -920,43 +878,23 @@ Strategic headquarters and investment centers located around the world.
 <div class="office-grid">
 
 <div class="office glass">
-
 <h3>Tunis Headquarters</h3>
-
-<p>
-Main executive headquarters overseeing global investment and operations management.
-</p>
-
+<p>Main executive headquarters overseeing global operations.</p>
 </div>
 
 <div class="office glass">
-
 <h3>Dubai Regional Office</h3>
-
-<p>
-Focused on Middle Eastern luxury developments and international expansion.
-</p>
-
+<p>Focused on Middle Eastern luxury developments.</p>
 </div>
 
 <div class="office glass">
-
 <h3>Tokyo Investment Office</h3>
-
-<p>
-Managing Asian development initiatives and global partnerships.
-</p>
-
+<p>Managing Asian development initiatives.</p>
 </div>
 
 <div class="office glass">
-
 <h3>London Financial Office</h3>
-
-<p>
-European investment strategy and commercial operations.
-</p>
-
+<p>European investment strategy and operations.</p>
 </div>
 
 </div>
@@ -997,7 +935,7 @@ Send Message
 
 </form>
 
-<div style="margin-top:40px; text-align:center; color:#bdbdbd;">
+<div style="margin-top:40px;text-align:center;color:#bdbdbd;">
 
 <p>Email: bobjerf55@gmail.com</p>
 
@@ -1013,7 +951,55 @@ Or message privately in-game for direct business inquiries.
 
 </div>
 
-<!-- FOOTER -->
+<!-- PROPERTY MODAL -->
+
+<div id="propertyModal" style="
+position:fixed;
+inset:0;
+background:rgba(0,0,0,0.75);
+backdrop-filter:blur(12px);
+display:none;
+justify-content:center;
+align-items:center;
+z-index:99999;
+padding:20px;
+">
+
+<div class="glass" style="
+max-width:700px;
+width:100%;
+padding:50px;
+border-radius:35px;
+position:relative;
+">
+
+<button onclick="closeProperty()" style="
+position:absolute;
+top:20px;
+right:20px;
+background:none;
+border:none;
+color:white;
+font-size:2rem;
+cursor:pointer;
+">
+×
+</button>
+
+<h2 id="modalTitle" style="
+font-size:3rem;
+margin-bottom:25px;
+"></h2>
+
+<p id="modalDescription" style="
+color:#c0c0c0;
+line-height:1.9;
+font-size:1.1rem;
+"></p>
+
+</div>
+
+</div>
 
 <footer>
 
@@ -1025,23 +1011,80 @@ Or message privately in-game for direct business inquiries.
 
 function showPage(pageId){
 
-    const pages = document.querySelectorAll('.page');
+const pages = document.querySelectorAll('.page');
 
-    pages.forEach(page => {
-        page.classList.remove('active');
-    });
+pages.forEach(page => {
+page.classList.remove('active');
+});
 
-    document.getElementById(pageId).classList.add('active');
+document.getElementById(pageId).classList.add('active');
 
-    window.scrollTo({
-        top:0,
-        behavior:'smooth'
-    });
+window.scrollTo({
+top:0,
+behavior:'smooth'
+});
 
 }
+
+function openProperty(title, description){
+
+document.getElementById('propertyModal').style.display = 'flex';
+
+document.getElementById('modalTitle').innerText = title;
+
+document.getElementById('modalDescription').innerText = description;
+
+}
+
+function closeProperty(){
+
+document.getElementById('propertyModal').style.display = 'none';
+
+}
+
+/* AUTO GENERATE PROPERTIES */
+
+const propertyGrid = document.querySelector('.property-grid');
+
+const propertyImages = [
+'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=2070&auto=format&fit=crop',
+'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=2070&auto=format&fit=crop',
+'https://images.unsplash.com/photo-1460317442991-0ec209397118?q=80&w=2070&auto=format&fit=crop',
+'https://images.unsplash.com/photo-1494526585095-c41746248156?q=80&w=2070&auto=format&fit=crop'
+];
+
+properties.forEach((property, index) => {
+
+propertyGrid.innerHTML += `
+
+<div class="property-card glass">
+
+<img src="${propertyImages[index % propertyImages.length]}">
+
+<div class="property-content">
+
+<h3>${property[0]}</h3>
+
+<p>${property[1]}</p>
+
+<button class="btn btn-primary"
+onclick="openProperty(
+'${property[0]}',
+'${property[0]} is one of the flagship developments of The Qatari Investment Group featuring luxury hospitality, elite architecture, international investment opportunities, and premium experiences designed for global investors and guests.'
+)">
+View Property
+</button>
+
+</div>
+
+</div>
+
+`;
+
+});
 
 </script>
 
 </body>
 </html>
-
+```
