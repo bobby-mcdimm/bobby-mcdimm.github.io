@@ -1,4 +1,4 @@
-
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,93 +7,1041 @@
 
 <title>The Qatari Investment Group</title>
 
-<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
 
+/* RESET */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:'Inter', sans-serif;
+    background:#000;
+    color:white;
+    overflow-x:hidden;
+}
+
+/* SCROLLBAR */
+
+::-webkit-scrollbar{
+    width:10px;
+}
+
+::-webkit-scrollbar-track{
+    background:#050505;
+}
+
+::-webkit-scrollbar-thumb{
+    background:#222;
+    border-radius:20px;
+}
+
+/* TOP BAR */
+
+.top-bar{
+    height:32px;
+    background:#050505;
+    border-bottom:1px solid rgba(255,255,255,0.05);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:12px;
+    color:#9d9d9d;
+    letter-spacing:0.5px;
+}
+
+/* NAVBAR */
+
+nav{
+    position:fixed;
+    top:0;
+    width:100%;
+    z-index:9999;
+    backdrop-filter:blur(30px);
+    background:rgba(0,0,0,0.72);
+    border-bottom:1px solid rgba(255,255,255,0.06);
+}
+
+.nav-container{
+    width:95%;
+    max-width:1650px;
+    margin:auto;
+    height:68px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.logo img{
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    object-fit:cover;
+}
+
+.logo span{
+    font-size:14px;
+    font-weight:600;
+    letter-spacing:1px;
+}
+
+.nav-links{
+    display:flex;
+    gap:32px;
+}
+
+.nav-links a{
+    color:#d0d0d0;
+    text-decoration:none;
+    font-size:13px;
+    transition:0.3s;
+    cursor:pointer;
+}
+
+.nav-links a:hover{
+    color:white;
+}
+
+.nav-right{
+    display:flex;
+    align-items:center;
+}
+
+.invest-btn{
+    background:white;
+    color:black;
+    padding:10px 20px;
+    border-radius:999px;
+    font-size:13px;
+    font-weight:600;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.invest-btn:hover{
+    background:#d8d8d8;
+}
+
+/* PAGE SYSTEM */
+
+.page{
+    display:none;
+    min-height:100vh;
+    animation:fadePage 0.6s ease;
+}
+
+.page.active{
+    display:block;
+}
+
+@keyframes fadePage{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* HERO */
+
+.hero{
+    height:100vh;
+    background:
+    linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.8)),
+    url('https://images.unsplash.com/photo-1511818966892-d7d671e672a2?q=80&w=1974&auto=format&fit=crop');
+    background-size:cover;
+    background-position:center;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:20px;
+}
+
+.hero-content{
+    max-width:1100px;
+}
+
+.hero h1{
+    font-size:6.5rem;
+    font-weight:800;
+    letter-spacing:-5px;
+    margin-bottom:20px;
+}
+
+.hero p{
+    max-width:900px;
+    margin:auto;
+    color:#d0d0d0;
+    font-size:1.3rem;
+    line-height:1.9;
+}
+
+.hero-buttons{
+    margin-top:40px;
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+/* BUTTONS */
+
+.btn{
+    display:inline-block;
+    padding:16px 38px;
+    border-radius:999px;
+    text-decoration:none;
+    transition:0.3s;
+    font-weight:500;
+    cursor:pointer;
+}
+
+.btn-primary{
+    background:white;
+    color:black;
+}
+
+.btn-primary:hover{
+    background:#d9d9d9;
+}
+
+.btn-secondary{
+    border:1px solid rgba(255,255,255,0.15);
+    color:white;
+}
+
+.btn-secondary:hover{
+    background:white;
+    color:black;
+}
+
+/* SECTION */
+
+.section{
+    padding:140px 8%;
+}
+
+.section-center{
+    text-align:center;
+}
+
+.section-title{
+    font-size:4.5rem;
+    font-weight:800;
+    letter-spacing:-3px;
+    margin-bottom:25px;
+}
+
+.section-text{
+    max-width:900px;
+    margin:auto;
+    color:#bcbcbc;
+    line-height:1.9;
+    font-size:1.15rem;
+}
+
+/* GLASS EFFECT */
+
+.glass{
+    background:rgba(255,255,255,0.04);
+    border:1px solid rgba(255,255,255,0.06);
+    backdrop-filter:blur(20px);
+}
+
+/* STATS */
+
+.stats-section{
+    padding:100px 8%;
+    background:#020202;
+}
+
+.stats-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:25px;
+}
+
+.stat-box{
+    padding:55px;
+    border-radius:30px;
+    text-align:center;
+}
+
+.stat-box h2{
+    font-size:4rem;
+    margin-bottom:15px;
+}
+
+.stat-box p{
+    color:#bcbcbc;
+}
+
+/* SHOWCASE */
+
+.showcase{
+    margin-top:80px;
+    border-radius:35px;
+    overflow:hidden;
+    position:relative;
+    height:90vh;
+}
+
+.showcase img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.showcase-overlay{
+    position:absolute;
+    inset:0;
+    background:linear-gradient(
+        to top,
+        rgba(0,0,0,0.92),
+        rgba(0,0,0,0.2)
+    );
+
+    display:flex;
+    align-items:flex-end;
+    padding:70px;
+}
+
+.showcase-content h2{
+    font-size:5rem;
+    margin-bottom:20px;
+}
+
+.showcase-content p{
+    max-width:700px;
+    color:#d0d0d0;
+    line-height:1.9;
+    margin-bottom:30px;
+}
+
+/* PROPERTY GRID */
+
+.property-grid{
+    margin-top:70px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(380px,1fr));
+    gap:35px;
+}
+
+.property-card{
+    overflow:hidden;
+    border-radius:30px;
+    transition:0.4s;
+}
+
+.property-card:hover{
+    transform:translateY(-10px);
+}
+
+.property-card img{
+    width:100%;
+    height:500px;
+    object-fit:cover;
+}
+
+.property-content{
+    padding:35px;
+}
+
+.property-content h3{
+    font-size:2rem;
+    margin-bottom:15px;
+}
+
+.property-content p{
+    color:#bdbdbd;
+    line-height:1.8;
+    margin-bottom:25px;
+}
+
+/* TEAM */
+
+.team-grid{
+    margin-top:80px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:30px;
+}
+
+.team-member{
+    padding:45px;
+    border-radius:30px;
+    text-align:center;
+}
+
+.team-member img{
+    width:110px;
+    height:110px;
+    border-radius:50%;
+    object-fit:cover;
+    margin-bottom:25px;
+}
+
+.team-member h3{
+    font-size:1.4rem;
+    margin-bottom:10px;
+}
+
+.team-member p{
+    color:#a7a7a7;
+}
+
+/* OFFICE GRID */
+
+.office-grid{
+    margin-top:70px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+    gap:30px;
+}
+
+.office{
+    padding:45px;
+    border-radius:30px;
+}
+
+.office h3{
+    font-size:1.8rem;
+    margin-bottom:18px;
+}
+
+.office p{
+    color:#bcbcbc;
+    line-height:1.8;
+}
+
+/* INVESTOR BANNER */
+
+.investor-banner{
+    margin-top:80px;
+    padding:90px;
+    border-radius:40px;
+    text-align:center;
+}
+
+.investor-banner h2{
+    font-size:6rem;
+    margin-bottom:20px;
+}
+
+.investor-banner p{
+    color:#c0c0c0;
+    font-size:1.15rem;
+    line-height:1.8;
+}
+
+/* CONTACT */
+
+.contact-container{
+    max-width:900px;
+    margin:auto;
+    margin-top:70px;
+    padding:60px;
+    border-radius:35px;
+}
+
+.contact-form{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+
+.contact-form input,
+.contact-form textarea{
+    background:#0a0a0a;
+    border:1px solid rgba(255,255,255,0.08);
+    color:white;
+    padding:20px;
+    border-radius:18px;
+    font-size:16px;
+    outline:none;
+}
+
+.contact-form textarea{
+    resize:none;
+    height:180px;
+}
+
+.contact-form button{
+    border:none;
+}
+
+/* FOOTER */
+
+footer{
+    padding:50px;
+    text-align:center;
+    color:#777;
+    border-top:1px solid rgba(255,255,255,0.05);
+}
+
+/* MOBILE */
+
+@media(max-width:1000px){
+
+    .hero h1{
+        font-size:4rem;
+    }
+
+    .section-title{
+        font-size:3rem;
+    }
+
+    .showcase-content h2{
+        font-size:3rem;
+    }
+
+}
+
+@media(max-width:760px){
+
+    .nav-links{
+        display:none;
+    }
+
+    .hero h1{
+        font-size:3rem;
+    }
+
+    .hero p{
+        font-size:1rem;
+    }
+
+    .section-title{
+        font-size:2.4rem;
+    }
+
+}
+
+</style>
 </head>
+
 <body>
 
+<!-- TOP BAR -->
+
+<div class="top-bar">
+Global Luxury Real Estate & Investment Operations Across 100+ Countries
+</div>
+
+<!-- NAVBAR -->
+
 <nav>
+
 <div class="nav-container">
 
 <div class="logo">
-<img src="images/logo.png">
-<h1>Qatari Investment Group</h1>
+<img src="YOUR-LOGO-URL-HERE">
+<span>QIG</span>
 </div>
 
 <div class="nav-links">
-<a href="index.html">Home</a>
-<a href="about.html">About</a>
-<a href="properties.html">Properties</a>
-<a href="team.html">Team</a>
-<a href="offices.html">Offices</a>
-<a href="contact.html">Contact</a>
+
+<a onclick="showPage('home')">Overview</a>
+<a onclick="showPage('properties')">Properties</a>
+<a onclick="showPage('history')">Company</a>
+<a onclick="showPage('team')">Leadership</a>
+<a onclick="showPage('offices')">Global Offices</a>
+<a onclick="showPage('contact')">Contact</a>
+
+</div>
+
+<div class="nav-right">
+
+<a class="invest-btn" onclick="showPage('contact')">
+Invest
+</a>
+
 </div>
 
 </div>
+
 </nav>
+
+<!-- HOME -->
+
+<div class="page active" id="home">
 
 <section class="hero">
 
 <div class="hero-content">
 
-<h2>Luxury Without Borders</h2>
+<h1>Luxury Without Borders.</h1>
 
 <p>
-The Qatari Investment Group is a Tunisian-based global real estate and investment powerhouse with developments in over 100 countries worldwide.
-From the peaceful countryside of Japan to the skyline of Dubai and the beaches of Tunisia, the company represents luxury, innovation, and global growth.
+The Qatari Investment Group is a Tunisian-based global investment and real estate powerhouse operating across more than 100 countries worldwide.
+From the skyline of Dubai to the beaches of Tunisia and the countryside of Japan,
+our developments redefine luxury, innovation, and international growth.
 </p>
 
-<a href="properties.html" class="btn">Explore Properties</a>
+<div class="hero-buttons">
+
+<a onclick="showPage('properties')" class="btn btn-primary">
+Explore Properties
+</a>
+
+<a onclick="showPage('history')" class="btn btn-secondary">
+Our Company
+</a>
+
+</div>
 
 </div>
 
 </section>
 
-<section>
+<!-- STATS -->
 
-<h2 class="section-title">Global Excellence</h2>
+<section class="stats-section">
 
-<p class="section-sub">
-Specializing in luxury resorts, skyscrapers, hotels, and commercial investments,
-The Qatari Investment Group continues to redefine modern international development.
-</p>
+<div class="stats-grid">
 
-<div class="cards">
-
-<div class="card">
-<img src="images/property1.jpg">
-<div class="card-content">
-<h3>Luxury Developments</h3>
-<p>Premium residential and commercial projects across major world cities.</p>
-</div>
+<div class="stat-box glass">
+<h2>100+</h2>
+<p>Countries Worldwide</p>
 </div>
 
-<div class="card">
-<img src="images/property2.jpg">
-<div class="card-content">
-<h3>World-Class Resorts</h3>
-<p>Exclusive beachfront resorts and hospitality experiences built for luxury.</p>
-</div>
+<div class="stat-box glass">
+<h2>$48B</h2>
+<p>Assets Managed</p>
 </div>
 
-<div class="card">
-<img src="images/property3.jpg">
-<div class="card-content">
-<h3>Investor Confidence</h3>
-<p>Reliable 5% annual dividends and long-term investment stability.</p>
+<div class="stat-box glass">
+<h2>250+</h2>
+<p>Luxury Developments</p>
 </div>
+
+<div class="stat-box glass">
+<h2>5%</h2>
+<p>Annual Investor Dividend</p>
 </div>
 
 </div>
 
 </section>
+
+</div>
+
+<!-- PROPERTIES -->
+
+<div class="page" id="properties">
+
+<section class="section">
+
+<div class="section-center">
+
+<h2 class="section-title">Featured Properties</h2>
+
+<p class="section-text">
+A portfolio of world-class developments redefining international luxury real estate.
+</p>
+
+</div>
+
+<!-- MAIN SHOWCASE -->
+
+<div class="showcase glass">
+
+<img src="https://images.unsplash.com/photo-1511818966892-d7d671e672a2?q=80&w=1974&auto=format&fit=crop">
+
+<div class="showcase-overlay">
+
+<div class="showcase-content">
+
+<h2>Dubai Crown Tower</h2>
+
+<p>
+An iconic luxury skyscraper featuring elite residences,
+executive offices, private lounges, luxury retail,
+and panoramic skyline views.
+</p>
+
+<a href="PROPERTY-URL-HERE" class="btn btn-primary">
+View Property
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- PROPERTY GRID -->
+
+<div class="property-grid">
+
+<div class="property-card glass">
+
+<img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=2070&auto=format&fit=crop">
+
+<div class="property-content">
+
+<h3>Kyoto Serenity Resort</h3>
+
+<p>
+A luxury countryside retreat in Japan blending modern elegance with traditional architecture.
+</p>
+
+<a href="PROPERTY-URL-1" class="btn btn-primary">
+View Property
+</a>
+
+</div>
+
+</div>
+
+<div class="property-card glass">
+
+<img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=2070&auto=format&fit=crop">
+
+<div class="property-content">
+
+<h3>Tunisian Pearl Resort</h3>
+
+<p>
+An ultra-luxury Mediterranean beachfront destination built for world-class hospitality.
+</p>
+
+<a href="PROPERTY-URL-2" class="btn btn-primary">
+View Property
+</a>
+
+</div>
+
+</div>
+
+<div class="property-card glass">
+
+<img src="https://images.unsplash.com/photo-1460317442991-0ec209397118?q=80&w=2070&auto=format&fit=crop">
+
+<div class="property-content">
+
+<h3>London Royal Residences</h3>
+
+<p>
+Exclusive luxury apartments in central London designed for elite international investors.
+</p>
+
+<a href="PROPERTY-URL-3" class="btn btn-primary">
+View Property
+</a>
+
+</div>
+
+</div>
+
+<div class="property-card glass">
+
+<img src="https://images.unsplash.com/photo-1494526585095-c41746248156?q=80&w=2070&auto=format&fit=crop">
+
+<div class="property-content">
+
+<h3>Monaco Ocean Villas</h3>
+
+<p>
+Private waterfront villas delivering unmatched luxury and coastal experiences.
+</p>
+
+<a href="PROPERTY-URL-4" class="btn btn-primary">
+View Property
+</a>
+
+</div>
+
+</div>
+
+<div class="property-card glass">
+
+<img src="https://images.unsplash.com/photo-1494526585095-c41746248156?q=80&w=2070&auto=format&fit=crop">
+
+<div class="property-content">
+
+<h3>Singapore Sky Residences</h3>
+
+<p>
+A futuristic luxury development combining innovation and business living.
+</p>
+
+<a href="PROPERTY-URL-5" class="btn btn-primary">
+View Property
+</a>
+
+</div>
+
+</div>
+
+<div class="property-card glass">
+
+<img src="https://images.unsplash.com/photo-1448630360428-65456885c650?q=80&w=2070&auto=format&fit=crop">
+
+<div class="property-content">
+
+<h3>Paris Lumière Hotel</h3>
+
+<p>
+A five-star luxury hospitality destination in the center of Paris.
+</p>
+
+<a href="PROPERTY-URL-6" class="btn btn-primary">
+View Property
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+</div>
+
+<!-- HISTORY -->
+
+<div class="page" id="history">
+
+<section class="section section-center">
+
+<h2 class="section-title">Founded In Tunisia.</h2>
+
+<p class="section-text">
+
+The Qatari Investment Group was founded in Tunisia with a vision to redefine international luxury investment and real estate development.
+
+Beginning as a regional investment organization, the company expanded rapidly into international hospitality,
+commercial development, luxury resorts, and skyscraper projects.
+
+Today, the company operates across more than 100 countries worldwide and continues to build a reputation for innovation,
+stability, investor confidence, and world-class excellence.
+
+</p>
+
+<div class="investor-banner glass">
+
+<h2>5%</h2>
+
+<p>
+Reliable annual investor dividends trusted by international partners and stakeholders worldwide.
+</p>
+
+</div>
+
+</section>
+
+</div>
+
+<!-- TEAM -->
+
+<div class="page" id="team">
+
+<section class="section">
+
+<div class="section-center">
+
+<h2 class="section-title">Executive Leadership</h2>
+
+<p class="section-text">
+The leadership behind one of the world's fastest-growing luxury investment organizations.
+</p>
+
+</div>
+
+<div class="team-grid">
+
+<div class="team-member glass">
+<img src="https://randomuser.me/api/portraits/men/32.jpg">
+<h3>bobjerf55</h3>
+<p>Chief Executive Officer (CEO)</p>
+</div>
+
+<div class="team-member glass">
+<img src="https://randomuser.me/api/portraits/women/44.jpg">
+<h3>Vacant</h3>
+<p>Chief Financial Officer (CFO)</p>
+</div>
+
+<div class="team-member glass">
+<img src="https://randomuser.me/api/portraits/men/51.jpg">
+<h3>Vacant</h3>
+<p>Chief Marketing Officer (CMO)</p>
+</div>
+
+<div class="team-member glass">
+<img src="https://randomuser.me/api/portraits/women/63.jpg">
+<h3>Vacant</h3>
+<p>Chief Operations Officer (COO)</p>
+</div>
+
+</div>
+
+</section>
+
+</div>
+
+<!-- OFFICES -->
+
+<div class="page" id="offices">
+
+<section class="section">
+
+<div class="section-center">
+
+<h2 class="section-title">Global Offices</h2>
+
+<p class="section-text">
+Strategic headquarters and investment centers located around the world.
+</p>
+
+</div>
+
+<div class="office-grid">
+
+<div class="office glass">
+
+<h3>Tunis Headquarters</h3>
+
+<p>
+Main executive headquarters overseeing global investment and operations management.
+</p>
+
+</div>
+
+<div class="office glass">
+
+<h3>Dubai Regional Office</h3>
+
+<p>
+Focused on Middle Eastern luxury developments and international expansion.
+</p>
+
+</div>
+
+<div class="office glass">
+
+<h3>Tokyo Investment Office</h3>
+
+<p>
+Managing Asian development initiatives and global partnerships.
+</p>
+
+</div>
+
+<div class="office glass">
+
+<h3>London Financial Office</h3>
+
+<p>
+European investment strategy and commercial operations.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+</div>
+
+<!-- CONTACT -->
+
+<div class="page" id="contact">
+
+<section class="section">
+
+<div class="section-center">
+
+<h2 class="section-title">Contact Us</h2>
+
+<p class="section-text">
+For partnerships, investments, acquisitions, or business inquiries.
+</p>
+
+</div>
+
+<div class="contact-container glass">
+
+<form class="contact-form">
+
+<input type="text" placeholder="Your Name">
+
+<input type="email" placeholder="Your Email">
+
+<textarea placeholder="Your Message"></textarea>
+
+<button class="btn btn-primary">
+Send Message
+</button>
+
+</form>
+
+<div style="margin-top:40px; text-align:center; color:#bdbdbd;">
+
+<p>Email: bobjerf55@gmail.com</p>
+
+<p style="margin-top:10px;">
+Or message privately in-game for direct business inquiries.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+</div>
+
+<!-- FOOTER -->
 
 <footer>
+
 © 2025 The Qatari Investment Group — All Rights Reserved
+
 </footer>
+
+<script>
+
+function showPage(pageId){
+
+    const pages = document.querySelectorAll('.page');
+
+    pages.forEach(page => {
+        page.classList.remove('active');
+    });
+
+    document.getElementById(pageId).classList.add('active');
+
+    window.scrollTo({
+        top:0,
+        behavior:'smooth'
+    });
+
+}
+
+</script>
 
 </body>
 </html>
-
+```
