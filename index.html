@@ -3,503 +3,2220 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Qatari Investment Group</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
+<title>QIG — Qatari Investment Group</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 
-/* =========================
-BASE
-========================= */
+/* =============================================
+   RESET & ROOT
+============================================= */
 
-*{margin:0;padding:0;box-sizing:border-box;}
-body{
-font-family:Inter,sans-serif;
-background:#000;
-color:#fff;
-overflow-x:hidden;
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+:root {
+  --gold: #c9a96e;
+  --gold-light: #e8cc9a;
+  --gold-dim: rgba(201,169,110,0.15);
+  --white: #ffffff;
+  --off-white: #e8e4dc;
+  --gray: #8a8680;
+  --dark: #0a0908;
+  --dark-2: #111009;
+  --dark-3: #161410;
+  --border: rgba(201,169,110,0.12);
+  --font-display: 'Cormorant Garamond', serif;
+  --font-body: 'DM Sans', sans-serif;
 }
 
-/* =========================
-APPLE-LIKE PAGE TRANSITIONS
-========================= */
+html { scroll-behavior: smooth; }
 
-.page{
-position:absolute;
-top:0;
-left:0;
-width:100%;
-min-height:100vh;
-opacity:0;
-transform:scale(1.02);
-filter:blur(10px);
-pointer-events:none;
-transition:0.7s cubic-bezier(.7,0,.2,1);
-padding-top:90px;
+body {
+  font-family: var(--font-body);
+  background: var(--dark);
+  color: var(--off-white);
+  overflow-x: hidden;
+  cursor: none;
 }
 
-.page.active{
-opacity:1;
-transform:scale(1);
-filter:blur(0px);
-pointer-events:auto;
-position:relative;
+/* =============================================
+   CUSTOM CURSOR
+============================================= */
+
+.cursor {
+  position: fixed;
+  width: 8px; height: 8px;
+  background: var(--gold);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate(-50%,-50%);
+  transition: transform 0.1s, width 0.3s, height 0.3s, opacity 0.3s;
 }
 
-/* =========================
-NAV
-========================= */
-
-nav{
-position:fixed;
-top:0;
-width:100%;
-z-index:9999;
-backdrop-filter:blur(25px);
-background:rgba(0,0,0,0.75);
-border-bottom:1px solid rgba(255,255,255,0.06);
+.cursor-ring {
+  position: fixed;
+  width: 36px; height: 36px;
+  border: 1px solid rgba(201,169,110,0.5);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99998;
+  transform: translate(-50%,-50%);
+  transition: transform 0.12s ease-out, width 0.3s, height 0.3s, opacity 0.3s;
 }
 
-.nav-container{
-display:flex;
-justify-content:space-between;
-align-items:center;
-height:70px;
-width:95%;
-max-width:1600px;
-margin:auto;
+body:hover .cursor { opacity: 1; }
+
+/* =============================================
+   NAV
+============================================= */
+
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 9000;
+  padding: 0 60px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(10,9,8,0);
+  backdrop-filter: blur(0px);
+  border-bottom: 1px solid transparent;
+  transition: all 0.6s ease;
 }
 
-.nav-links a{
-margin:0 12px;
-font-size:13px;
-cursor:pointer;
-color:#cfcfcf;
-transition:0.3s;
+nav.scrolled {
+  background: rgba(10,9,8,0.92);
+  backdrop-filter: blur(30px);
+  border-bottom: 1px solid var(--border);
 }
 
-.nav-links a:hover{color:#fff;}
-
-.invest-btn{
-background:#fff;
-color:#000;
-padding:10px 20px;
-border-radius:999px;
-cursor:pointer;
-font-weight:600;
+.nav-logo {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 300;
+  letter-spacing: 0.3em;
+  color: var(--gold);
+  text-transform: uppercase;
 }
 
-/* =========================
-HERO
-========================= */
-
-.hero{
-height:100vh;
-display:flex;
-align-items:center;
-justify-content:center;
-text-align:center;
-padding:20px;
-background:
-linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.85)),
-url('https://images.unsplash.com/photo-1505843513577-22bb7d21e455?q=80&w=1970');
-background-size:cover;
-background-position:center;
+.nav-links {
+  display: flex;
+  gap: 40px;
+  list-style: none;
 }
 
-.hero h1{
-font-size:5.5rem;
-letter-spacing:-3px;
+.nav-links a {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gray);
+  text-decoration: none;
+  cursor: none;
+  transition: color 0.3s;
 }
 
-.hero p{
-max-width:900px;
-margin:20px auto;
-color:#bdbdbd;
-line-height:1.8;
-font-size:1.2rem;
+.nav-links a:hover { color: var(--gold-light); }
+
+.nav-cta {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--dark);
+  background: var(--gold);
+  padding: 11px 28px;
+  border: none;
+  cursor: none;
+  font-family: var(--font-body);
+  font-weight: 500;
+  transition: background 0.3s, transform 0.2s;
 }
 
-/* =========================
-SECTIONS
-========================= */
+.nav-cta:hover { background: var(--gold-light); transform: translateY(-1px); }
 
-.section{
-padding:120px 8%;
+/* =============================================
+   PAGE SYSTEM
+============================================= */
+
+.page {
+  display: none;
+  min-height: 100vh;
 }
 
-.section-title{
-font-size:3.5rem;
-text-align:center;
-margin-bottom:15px;
+.page.active { display: block; }
+
+/* =============================================
+   HERO
+============================================= */
+
+#home { display: block; }
+
+.hero {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
 }
 
-.section-text{
-text-align:center;
-max-width:900px;
-margin:auto;
-color:#bdbdbd;
-line-height:1.8;
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=2000');
+  background-size: cover;
+  background-position: center 40%;
+  transform: scale(1.05);
+  animation: heroZoom 20s ease-in-out infinite alternate;
 }
 
-/* =========================
-GLASS
-========================= */
-
-.glass{
-background:rgba(255,255,255,0.04);
-border:1px solid rgba(255,255,255,0.08);
-backdrop-filter:blur(18px);
-border-radius:25px;
+@keyframes heroZoom {
+  from { transform: scale(1.05); }
+  to   { transform: scale(1.12); }
 }
 
-/* =========================
-STATS
-========================= */
-
-.stats{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-gap:20px;
-padding:80px 8%;
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(10,9,8,0.3) 0%,
+    rgba(10,9,8,0.55) 50%,
+    rgba(10,9,8,0.95) 100%
+  );
 }
 
-.stat{
-padding:40px;
-text-align:center;
-border-radius:25px;
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 1000px;
+  padding: 0 40px;
+  animation: heroFade 1.6s cubic-bezier(0.16,1,0.3,1) both;
 }
 
-.stat h2{font-size:3rem;}
-
-/* =========================
-PROPERTY GRID (20 UNIQUE)
-========================= */
-
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-gap:25px;
-margin-top:60px;
+@keyframes heroFade {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-.card{
-overflow:hidden;
-cursor:pointer;
-transition:0.4s;
+.hero-eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 28px;
+  font-weight: 400;
 }
 
-.card:hover{transform:translateY(-10px);}
-
-.card img{
-width:100%;
-height:240px;
-object-fit:cover;
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(3.5rem, 8vw, 7.5rem);
+  font-weight: 300;
+  line-height: 1.0;
+  letter-spacing: -0.02em;
+  color: var(--white);
+  margin-bottom: 30px;
 }
 
-.card-content{
-padding:22px;
+.hero h1 em {
+  font-style: italic;
+  color: var(--gold-light);
 }
 
-.tag{
-font-size:11px;
-color:#aaa;
-margin-bottom:8px;
+.hero-sub {
+  font-size: 1.05rem;
+  color: rgba(232,228,220,0.7);
+  line-height: 1.75;
+  max-width: 640px;
+  margin: 0 auto 50px;
+  font-weight: 300;
 }
 
-/* =========================
-NEWS
-========================= */
-
-.news-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-gap:25px;
-margin-top:60px;
+.hero-actions {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
 }
 
-.news{
-padding:25px;
+.btn-primary {
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--dark);
+  background: var(--gold);
+  padding: 16px 40px;
+  border: none;
+  font-family: var(--font-body);
+  font-weight: 500;
+  cursor: none;
+  transition: all 0.3s;
+  text-decoration: none;
+  display: inline-block;
 }
 
-.news small{
-color:#888;
+.btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+.btn-ghost {
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--off-white);
+  background: transparent;
+  padding: 15px 40px;
+  border: 1px solid rgba(232,228,220,0.25);
+  font-family: var(--font-body);
+  font-weight: 400;
+  cursor: none;
+  transition: all 0.3s;
+  text-decoration: none;
+  display: inline-block;
 }
 
-/* =========================
-MODAL
-========================= */
+.btn-ghost:hover { border-color: var(--gold); color: var(--gold-light); }
 
-.modal{
-position:fixed;
-inset:0;
-display:none;
-align-items:center;
-justify-content:center;
-background:rgba(0,0,0,0.75);
-backdrop-filter:blur(12px);
-z-index:99999;
-padding:20px;
+.hero-scroll {
+  position: absolute;
+  bottom: 48px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  animation: bounce 2.5s infinite;
 }
 
-.modal-box{
-max-width:850px;
-width:100%;
-padding:40px;
-border-radius:30px;
-background:rgba(10,10,10,0.9);
-border:1px solid rgba(255,255,255,0.08);
+@keyframes bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50%       { transform: translateX(-50%) translateY(8px); }
 }
 
-/* =========================
-CONTACT
-========================= */
-
-input,textarea{
-width:100%;
-padding:15px;
-margin:10px 0;
-background:#0a0a0a;
-border:1px solid #222;
-color:#fff;
-border-radius:12px;
+.hero-scroll span {
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
 }
 
-/* =========================
-MOBILE
-========================= */
+.hero-scroll-line {
+  width: 1px;
+  height: 50px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+}
 
-@media(max-width:800px){
-.hero h1{font-size:3rem;}
-.section-title{font-size:2.3rem;}
-.nav-links{display:none;}
+/* =============================================
+   STATS BAR
+============================================= */
+
+.stats-bar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background: rgba(22,20,16,0.7);
+}
+
+.stat-item {
+  padding: 50px 40px;
+  text-align: center;
+  border-right: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-item:last-child { border-right: none; }
+
+.stat-item::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 50%;
+  transform: translateX(-50%) scaleX(0);
+  width: 60%; height: 1px;
+  background: var(--gold);
+  transition: transform 0.5s;
+}
+
+.stat-item:hover::after { transform: translateX(-50%) scaleX(1); }
+
+.stat-num {
+  font-family: var(--font-display);
+  font-size: 3.8rem;
+  font-weight: 300;
+  color: var(--gold-light);
+  line-height: 1;
+  display: block;
+}
+
+.stat-label {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gray);
+  margin-top: 10px;
+  display: block;
+}
+
+.stat-desc {
+  font-size: 12px;
+  color: rgba(138,134,128,0.6);
+  margin-top: 6px;
+}
+
+/* =============================================
+   SECTION BASE
+============================================= */
+
+.section {
+  padding: 130px 10%;
+}
+
+.section-eyebrow {
+  font-size: 10px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 20px;
+  display: block;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 5vw, 5rem);
+  font-weight: 300;
+  line-height: 1.1;
+  color: var(--white);
+  margin-bottom: 24px;
+}
+
+.section-title em { font-style: italic; color: var(--gold-light); }
+
+.section-body {
+  font-size: 1rem;
+  line-height: 1.85;
+  color: rgba(232,228,220,0.65);
+  max-width: 560px;
+  font-weight: 300;
+}
+
+/* =============================================
+   DIVIDER
+============================================= */
+
+.divider {
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
+  margin: 0 10%;
+  opacity: 0.3;
+}
+
+/* =============================================
+   PROPERTIES
+============================================= */
+
+.properties-intro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: end;
+  margin-bottom: 80px;
+}
+
+.properties-count {
+  font-family: var(--font-display);
+  font-size: 8rem;
+  font-weight: 300;
+  color: rgba(201,169,110,0.08);
+  line-height: 1;
+  text-align: right;
+}
+
+.prop-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+
+.prop-card {
+  position: relative;
+  overflow: hidden;
+  cursor: none;
+  aspect-ratio: 3/4;
+  background: var(--dark-3);
+}
+
+.prop-card.wide {
+  grid-column: span 2;
+  aspect-ratio: auto;
+}
+
+.prop-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s cubic-bezier(0.4,0,0.2,1), filter 0.8s;
+  filter: brightness(0.65) saturate(0.8);
+}
+
+.prop-card:hover img {
+  transform: scale(1.06);
+  filter: brightness(0.8) saturate(0.9);
+}
+
+.prop-info {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 32px 28px;
+  background: linear-gradient(to top, rgba(10,9,8,0.95) 0%, transparent 100%);
+  transform: translateY(0);
+  transition: transform 0.4s ease;
+}
+
+.prop-tag {
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 8px;
+  display: block;
+}
+
+.prop-name {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: var(--white);
+  line-height: 1.2;
+}
+
+.prop-loc {
+  font-size: 12px;
+  color: var(--gray);
+  margin-top: 6px;
+}
+
+.prop-detail {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(10,9,8,0.85);
+  backdrop-filter: blur(12px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.prop-card:hover .prop-detail { opacity: 1; }
+
+.prop-detail h3 {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 300;
+  color: var(--white);
+  margin-bottom: 16px;
+}
+
+.prop-detail p {
+  font-size: 13px;
+  color: rgba(232,228,220,0.7);
+  line-height: 1.8;
+  margin-bottom: 24px;
+}
+
+.prop-detail-meta {
+  display: flex;
+  gap: 30px;
+}
+
+.prop-detail-meta div {
+  font-size: 11px;
+}
+
+.prop-detail-meta strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  color: var(--gold-light);
+  font-weight: 400;
+}
+
+.prop-detail-meta span {
+  color: var(--gray);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* View all btn */
+.view-all-wrap {
+  text-align: center;
+  margin-top: 60px;
+}
+
+/* =============================================
+   MARQUEE STRIP
+============================================= */
+
+.marquee-strip {
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 22px 0;
+  overflow: hidden;
+  background: rgba(16,14,10,0.9);
+}
+
+.marquee-inner {
+  display: flex;
+  gap: 60px;
+  animation: marquee 28s linear infinite;
+  white-space: nowrap;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.marquee-inner span {
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gray);
+}
+
+.marquee-inner span.gold { color: var(--gold); }
+
+/* =============================================
+   STRATEGY / TWO COL
+============================================= */
+
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 100px;
+  align-items: center;
+}
+
+.two-col.reverse { direction: rtl; }
+.two-col.reverse > * { direction: ltr; }
+
+.two-col-visual {
+  position: relative;
+}
+
+.two-col-img {
+  width: 100%;
+  aspect-ratio: 4/5;
+  object-fit: cover;
+  filter: saturate(0.7);
+}
+
+.two-col-badge {
+  position: absolute;
+  bottom: -30px;
+  right: -30px;
+  background: var(--gold);
+  color: var(--dark);
+  padding: 30px;
+  width: 160px;
+  height: 160px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.two-col-badge strong {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.two-col-badge span {
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-top: 6px;
+}
+
+.pillars {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-top: 40px;
+  border-top: 1px solid var(--border);
+}
+
+.pillar {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  padding: 28px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.pillar-num {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  color: var(--gold);
+  min-width: 30px;
+  padding-top: 2px;
+}
+
+.pillar-text h4 {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--off-white);
+  margin-bottom: 6px;
+  letter-spacing: 0.03em;
+}
+
+.pillar-text p {
+  font-size: 13px;
+  color: var(--gray);
+  line-height: 1.7;
+}
+
+/* =============================================
+   NEWS
+============================================= */
+
+.news-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 2px;
+  margin-top: 60px;
+}
+
+.news-card {
+  background: var(--dark-3);
+  position: relative;
+  overflow: hidden;
+  cursor: none;
+}
+
+.news-card.featured { grid-row: span 2; }
+
+.news-card img {
+  width: 100%;
+  height: 100%;
+  min-height: 240px;
+  object-fit: cover;
+  filter: brightness(0.5) saturate(0.6);
+  transition: filter 0.5s;
+}
+
+.news-card:hover img { filter: brightness(0.65) saturate(0.7); }
+
+.news-card-content {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 30px;
+  background: linear-gradient(to top, rgba(10,9,8,1) 0%, rgba(10,9,8,0.3) 100%);
+}
+
+.news-cat {
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 10px;
+  display: block;
+}
+
+.news-card h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  color: var(--white);
+  line-height: 1.3;
+}
+
+.news-card.featured h3 { font-size: 2rem; }
+.news-card:not(.featured) h3 { font-size: 1.3rem; }
+
+.news-card p {
+  font-size: 13px;
+  color: rgba(232,228,220,0.65);
+  margin-top: 10px;
+  line-height: 1.7;
+}
+
+.news-date {
+  font-size: 10px;
+  color: var(--gray);
+  margin-top: 14px;
+  display: block;
+}
+
+/* =============================================
+   LEADERSHIP
+============================================= */
+
+.leadership-intro {
+  max-width: 620px;
+  margin-bottom: 80px;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+}
+
+.team-card {
+  position: relative;
+  overflow: hidden;
+  cursor: none;
+}
+
+.team-img-wrap {
+  aspect-ratio: 3/4;
+  overflow: hidden;
+  background: var(--dark-3);
+}
+
+.team-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(100%) brightness(0.7);
+  transition: filter 0.6s, transform 0.6s;
+}
+
+.team-card:hover .team-img-wrap img {
+  filter: grayscale(30%) brightness(0.8);
+  transform: scale(1.04);
+}
+
+.team-info {
+  padding: 24px 0 30px;
+}
+
+.team-name {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: var(--white);
+}
+
+.team-title {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-top: 6px;
+  display: block;
+}
+
+.team-bio {
+  font-size: 13px;
+  color: var(--gray);
+  margin-top: 12px;
+  line-height: 1.75;
+}
+
+/* =============================================
+   OFFICES
+============================================= */
+
+.offices-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2px;
+  margin-top: 60px;
+}
+
+.office-card {
+  position: relative;
+  overflow: hidden;
+  cursor: none;
+  aspect-ratio: 16/9;
+}
+
+.office-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.45) saturate(0.5);
+  transition: filter 0.5s, transform 0.6s;
+}
+
+.office-card:hover img {
+  filter: brightness(0.6) saturate(0.7);
+  transform: scale(1.04);
+}
+
+.office-content {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 40px;
+  background: linear-gradient(to top, rgba(10,9,8,0.9) 0%, transparent 100%);
+}
+
+.office-city {
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+  font-weight: 300;
+  color: var(--white);
+}
+
+.office-role {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-top: 6px;
+  display: block;
+}
+
+.office-address {
+  font-size: 13px;
+  color: rgba(232,228,220,0.5);
+  margin-top: 8px;
+}
+
+.office-detail {
+  margin-top: 20px;
+  display: flex;
+  gap: 30px;
+}
+
+.office-detail div {
+  font-size: 11px;
+  color: var(--gray);
+}
+
+.office-detail strong {
+  display: block;
+  color: var(--off-white);
+  margin-bottom: 2px;
+  font-size: 13px;
+}
+
+/* =============================================
+   COMPANY
+============================================= */
+
+.company-hero {
+  height: 60vh;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.company-hero img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.35) saturate(0.5);
+}
+
+.company-hero-content {
+  position: relative;
+  z-index: 2;
+  padding: 0 10%;
+  max-width: 900px;
+}
+
+.company-hero-content h1 {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 5vw, 5.5rem);
+  font-weight: 300;
+  color: var(--white);
+  line-height: 1.1;
+}
+
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  margin-top: 60px;
+}
+
+.value-card {
+  padding: 50px 40px;
+  background: var(--dark-3);
+  border-top: 2px solid var(--gold);
+  transition: background 0.3s;
+}
+
+.value-card:hover { background: rgba(22,20,16,0.95); }
+
+.value-icon {
+  width: 48px;
+  height: 2px;
+  background: var(--gold);
+  margin-bottom: 30px;
+}
+
+.value-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 400;
+  color: var(--white);
+  margin-bottom: 16px;
+}
+
+.value-card p {
+  font-size: 13px;
+  color: var(--gray);
+  line-height: 1.8;
+}
+
+/* =============================================
+   TIMELINE
+============================================= */
+
+.timeline {
+  position: relative;
+  margin-top: 80px;
+  padding-left: 50px;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+}
+
+.tl-item {
+  position: relative;
+  margin-bottom: 60px;
+}
+
+.tl-item::before {
+  content: '';
+  position: absolute;
+  left: -54px;
+  top: 6px;
+  width: 8px;
+  height: 8px;
+  background: var(--gold);
+  border-radius: 50%;
+}
+
+.tl-year {
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+
+.tl-item h4 {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: var(--white);
+  margin-bottom: 10px;
+}
+
+.tl-item p {
+  font-size: 13px;
+  color: var(--gray);
+  line-height: 1.8;
+  max-width: 500px;
+}
+
+/* =============================================
+   CONTACT
+============================================= */
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 100px;
+  align-items: start;
+  margin-top: 60px;
+}
+
+.contact-info h3 {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 300;
+  color: var(--white);
+  margin-bottom: 20px;
+}
+
+.contact-info p {
+  font-size: 13px;
+  color: var(--gray);
+  line-height: 1.8;
+  margin-bottom: 40px;
+}
+
+.contact-details {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.contact-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--border);
+}
+
+.contact-detail label {
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.contact-detail span {
+  font-size: 14px;
+  color: var(--off-white);
+}
+
+.form-field {
+  margin-bottom: 20px;
+}
+
+.form-field label {
+  display: block;
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+
+.form-field input,
+.form-field textarea,
+.form-field select {
+  width: 100%;
+  background: var(--dark-3);
+  border: 1px solid rgba(201,169,110,0.15);
+  color: var(--off-white);
+  padding: 16px 20px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.3s;
+  appearance: none;
+  cursor: none;
+}
+
+.form-field input:focus,
+.form-field textarea:focus,
+.form-field select:focus {
+  border-color: var(--gold);
+}
+
+.form-field textarea { resize: vertical; min-height: 120px; }
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* =============================================
+   FOOTER
+============================================= */
+
+footer {
+  padding: 80px 10% 40px;
+  border-top: 1px solid var(--border);
+  background: var(--dark-2);
+}
+
+.footer-top {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 60px;
+  margin-bottom: 60px;
+}
+
+.footer-brand p {
+  font-size: 12px;
+  color: var(--gray);
+  line-height: 1.8;
+  margin-top: 20px;
+  max-width: 280px;
+}
+
+.footer-col h4 {
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 20px;
+}
+
+.footer-col ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.footer-col ul li a {
+  font-size: 13px;
+  color: var(--gray);
+  text-decoration: none;
+  cursor: none;
+  transition: color 0.3s;
+}
+
+.footer-col ul li a:hover { color: var(--off-white); }
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 30px;
+  border-top: 1px solid var(--border);
+}
+
+.footer-bottom p {
+  font-size: 11px;
+  color: rgba(138,134,128,0.5);
+}
+
+.footer-legal {
+  display: flex;
+  gap: 24px;
+}
+
+.footer-legal a {
+  font-size: 11px;
+  color: rgba(138,134,128,0.5);
+  text-decoration: none;
+  cursor: none;
+  transition: color 0.3s;
+}
+
+.footer-legal a:hover { color: var(--gray); }
+
+/* =============================================
+   MODAL
+============================================= */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(20px);
+  z-index: 99000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+
+.modal-overlay.open { display: flex; }
+
+.modal-box {
+  background: var(--dark-2);
+  border: 1px solid var(--border);
+  max-width: 700px;
+  width: 100%;
+  padding: 60px;
+  position: relative;
+  animation: modalIn 0.4s cubic-bezier(0.16,1,0.3,1);
+}
+
+@keyframes modalIn {
+  from { opacity: 0; transform: scale(0.96) translateY(20px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.modal-close {
+  position: absolute;
+  top: 24px; right: 24px;
+  background: none;
+  border: none;
+  color: var(--gray);
+  font-size: 24px;
+  cursor: none;
+  transition: color 0.3s;
+}
+
+.modal-close:hover { color: var(--white); }
+
+.modal-tag {
+  font-size: 9px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+  display: block;
+}
+
+.modal-box h2 {
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+  font-weight: 300;
+  color: var(--white);
+  margin-bottom: 20px;
+}
+
+.modal-box p {
+  font-size: 14px;
+  color: var(--gray);
+  line-height: 1.85;
+  margin-bottom: 20px;
+}
+
+.modal-specs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  margin-top: 30px;
+}
+
+.modal-spec {
+  background: var(--dark-3);
+  padding: 20px;
+}
+
+.modal-spec label {
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: block;
+  margin-bottom: 6px;
+}
+
+.modal-spec span {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: var(--off-white);
+}
+
+/* =============================================
+   SCROLL REVEAL
+============================================= */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* =============================================
+   MOBILE
+============================================= */
+
+@media (max-width: 1024px) {
+  .nav-links { display: none; }
+  .prop-grid { grid-template-columns: 1fr; }
+  .prop-card.wide { grid-column: span 1; }
+  .team-grid { grid-template-columns: repeat(2, 1fr); }
+  .offices-grid { grid-template-columns: 1fr; }
+  .two-col { grid-template-columns: 1fr; gap: 40px; }
+  .two-col.reverse { direction: ltr; }
+  .stats-bar { grid-template-columns: repeat(2,1fr); }
+  .footer-top { grid-template-columns: 1fr 1fr; }
+  .news-grid { grid-template-columns: 1fr; }
+  .contact-grid { grid-template-columns: 1fr; }
+  .values-grid { grid-template-columns: 1fr; }
+  nav { padding: 0 24px; }
+  .section { padding: 80px 6%; }
 }
 
 </style>
 </head>
-
 <body>
 
-<nav>
-<div class="nav-container">
+<!-- Custom cursor -->
+<div class="cursor" id="cur"></div>
+<div class="cursor-ring" id="curRing"></div>
 
-<div><b>QIG</b></div>
-
-<div class="nav-links">
-<a onclick="show('home')">Overview</a>
-<a onclick="show('properties')">Properties</a>
-<a onclick="show('news')">News</a>
-<a onclick="show('company')">Company</a>
-<a onclick="show('team')">Leadership</a>
-<a onclick="show('offices')">Offices</a>
-<a onclick="show('contact')">Contact</a>
-</div>
-
-<div class="invest-btn" onclick="window.open('https://www.thesharegame.com/company/QA0000000309','_blank')">
-Invest
-</div>
-
-</div>
+<!-- NAV -->
+<nav id="mainNav">
+  <div class="nav-logo">QIG</div>
+  <ul class="nav-links">
+    <li><a onclick="show('home')" href="#">Overview</a></li>
+    <li><a onclick="show('properties')" href="#">Portfolio</a></li>
+    <li><a onclick="show('company')" href="#">Company</a></li>
+    <li><a onclick="show('news')" href="#">Intelligence</a></li>
+    <li><a onclick="show('team')" href="#">Leadership</a></li>
+    <li><a onclick="show('offices')" href="#">Offices</a></li>
+    <li><a onclick="show('contact')" href="#">Contact</a></li>
+  </ul>
+  <button class="nav-cta" onclick="window.open('https://www.thesharegame.com/company/QA0000000309','_blank')">Invest Now</button>
 </nav>
 
-<!-- HOME -->
+<!-- ===========================
+     HOME
+=========================== -->
 <div class="page active" id="home">
 
-<section class="hero">
-<div>
-<h1>Luxury Investment Group</h1>
-<p>QIG is a Qatar-founded global investment powerhouse spanning real estate, infrastructure, hospitality, and sovereign-scale developments across 100+ countries.</p>
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Founded in Qatar &nbsp;·&nbsp; Est. 2008 &nbsp;·&nbsp; 100+ Nations</p>
+      <h1>Where Capital<br>Meets <em>Legacy</em></h1>
+      <p class="hero-sub">QIG is a sovereign-aligned global investment institution deploying capital into landmark real estate, infrastructure, and hospitality across the world's most consequential markets.</p>
+      <div class="hero-actions">
+        <a onclick="show('properties')" href="#" class="btn-primary">Explore Portfolio</a>
+        <a onclick="show('company')" href="#" class="btn-ghost">Our Story</a>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <span>Discover</span>
+      <div class="hero-scroll-line"></div>
+    </div>
+  </section>
+
+  <div class="stats-bar">
+    <div class="stat-item reveal">
+      <span class="stat-num">$48B</span>
+      <span class="stat-label">Assets Under Management</span>
+      <p class="stat-desc">Globally diversified</p>
+    </div>
+    <div class="stat-item reveal reveal-delay-1">
+      <span class="stat-num">100+</span>
+      <span class="stat-label">Countries of Operation</span>
+      <p class="stat-desc">Six continents</p>
+    </div>
+    <div class="stat-item reveal reveal-delay-2">
+      <span class="stat-num">20</span>
+      <span class="stat-label">Flagship Developments</span>
+      <p class="stat-desc">Live &amp; pipeline</p>
+    </div>
+    <div class="stat-item reveal reveal-delay-3">
+      <span class="stat-num">5.2%</span>
+      <span class="stat-label">Net Yield Average</span>
+      <p class="stat-desc">5-year rolling</p>
+    </div>
+  </div>
+
+  <div class="marquee-strip">
+    <div class="marquee-inner" id="marqueeInner"></div>
+  </div>
+
+  <section class="section">
+    <div class="two-col">
+      <div class="two-col-visual reveal">
+        <img class="two-col-img" src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?q=80&w=1000" alt="Skyline">
+        <div class="two-col-badge">
+          <strong>16</strong>
+          <span>Years of Excellence</span>
+        </div>
+      </div>
+      <div class="reveal reveal-delay-1">
+        <span class="section-eyebrow">Investment Philosophy</span>
+        <h2 class="section-title">Sovereign-Scale<br><em>Ambition</em></h2>
+        <p class="section-body">QIG was built on the principle that truly generational wealth is created at the intersection of geography, timing, and vision. We identify irreplaceable assets in irreplaceable locations.</p>
+        <div class="pillars">
+          <div class="pillar">
+            <span class="pillar-num">01</span>
+            <div class="pillar-text">
+              <h4>Capital Preservation</h4>
+              <p>Hard assets in tier-one cities form the bedrock of every portfolio structure we build.</p>
+            </div>
+          </div>
+          <div class="pillar">
+            <span class="pillar-num">02</span>
+            <div class="pillar-text">
+              <h4>Long-Term Compounding</h4>
+              <p>We invest with 20-year horizons, allowing compounding cycles to generate extraordinary returns.</p>
+            </div>
+          </div>
+          <div class="pillar">
+            <span class="pillar-num">03</span>
+            <div class="pillar-text">
+              <h4>Sovereign Relationships</h4>
+              <p>Access to deal flow inaccessible to conventional funds through decades of institutional trust.</p>
+            </div>
+          </div>
+          <div class="pillar">
+            <span class="pillar-num">04</span>
+            <div class="pillar-text">
+              <h4>Operational Excellence</h4>
+              <p>Every asset is actively managed by specialist teams embedded in local markets.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
 </div>
-</section>
 
-<div class="stats">
-
-<div class="stat glass"><h2>100+</h2><p>Countries</p></div>
-<div class="stat glass"><h2>$48B</h2><p>Assets</p></div>
-<div class="stat glass"><h2>20</h2><p>Mega Projects</p></div>
-<div class="stat glass"><h2>5%</h2><p>Yield</p></div>
-
-</div>
-
-</div>
-
-<!-- PROPERTIES -->
+<!-- ===========================
+     PROPERTIES
+=========================== -->
 <div class="page" id="properties">
-
-<section class="section">
-<h2 class="section-title">Global Portfolio</h2>
-<p class="section-text">20 flagship developments across luxury real estate markets.</p>
-
-<div class="grid" id="propertiesGrid"></div>
-
-</section>
+  <section class="section">
+    <div class="properties-intro">
+      <div class="reveal">
+        <span class="section-eyebrow">Global Portfolio</span>
+        <h2 class="section-title">20 Landmark<br><em>Developments</em></h2>
+        <p class="section-body">Across the world's most dynamic real estate markets — each asset selected for its irreplaceable position and long-term capital appreciation potential.</p>
+      </div>
+      <div class="properties-count reveal reveal-delay-1">20</div>
+    </div>
+    <div class="prop-grid" id="propGrid"></div>
+    <div class="view-all-wrap">
+      <a href="https://www.thesharegame.com/company/QA0000000309" target="_blank" class="btn-ghost">Request Full Portfolio Report</a>
+    </div>
+  </section>
 </div>
 
-<!-- NEWS -->
-<div class="page" id="news">
-
-<section class="section">
-<h2 class="section-title">Global Intelligence</h2>
-
-<div class="news-grid">
-
-<div class="news glass">
-<h3>QIG expands Dubai megaproject pipeline</h3>
-<small>Real Estate • Middle East</small>
-<p>New skyline developments approved across Marina district.</p>
-</div>
-
-<div class="news glass">
-<h3>European capital inflow increases 18%</h3>
-<small>Markets • Europe</small>
-<p>Institutional investors increase exposure to QIG assets.</p>
-</div>
-
-<div class="news glass">
-<h3>Asia luxury expansion announced</h3>
-<small>Growth • Asia</small>
-<p>Singapore and Tokyo projects enter construction phase.</p>
-</div>
-
-</div>
-
-</section>
-</div>
-
-<!-- COMPANY -->
+<!-- ===========================
+     COMPANY
+=========================== -->
 <div class="page" id="company">
 
-<section class="section">
-<h2 class="section-title">Founded in Qatar</h2>
+  <div class="company-hero">
+    <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=2000" alt="">
+    <div class="company-hero-content">
+      <span class="section-eyebrow">Our Story</span>
+      <h1>Built in Doha.<br>Trusted <em>Worldwide</em>.</h1>
+    </div>
+  </div>
 
-<p class="section-text">
-QIG originated in Qatar as a private sovereign-aligned investment group focused on long-term capital deployment into global infrastructure, luxury real estate, and institutional-grade asset development.
-</p>
+  <section class="section">
+    <div class="two-col">
+      <div class="reveal">
+        <span class="section-eyebrow">Foundation</span>
+        <h2 class="section-title">A New Kind of<br><em>Capital House</em></h2>
+        <p class="section-body">Founded in 2008 in Doha, Qatar, QIG was established to channel sovereign-grade capital discipline into a globally diversified real estate and infrastructure platform. Unlike conventional funds, QIG operates with permanent capital — allowing our investment teams to act decisively across market cycles.</p>
+        <br>
+        <p class="section-body">Today, QIG manages $48 billion in assets across 100+ countries, with active developments spanning luxury residential, ultra-prime commercial, world-class hospitality, and strategic infrastructure. Our institutional DNA — forged in partnership with Gulf sovereign entities — informs every decision we make.</p>
+        <br>
+        <a href="https://www.thesharegame.com/company/QA0000000309" target="_blank" class="btn-primary" style="margin-top:10px">Invest With Us</a>
+      </div>
+      <div class="reveal reveal-delay-2">
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-year">2008</div>
+            <h4>Founding in Doha</h4>
+            <p>Established with Gulf sovereign backing. First offices open in Doha and Dubai.</p>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">2011</div>
+            <h4>European Expansion</h4>
+            <p>London office opens. First acquisition on Park Lane, London — 14 luxury residences.</p>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">2015</div>
+            <h4>$10 Billion Milestone</h4>
+            <p>AUM reaches $10B. Asia-Pacific operations launch from Singapore.</p>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">2018</div>
+            <h4>Global Infrastructure Platform</h4>
+            <p>QIG Infrastructure arm launched. Inaugural fund closes at $3.2B.</p>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">2024</div>
+            <h4>$48B AUM &amp; 100 Nations</h4>
+            <p>QIG reaches landmark scale. New flagship developments in Tokyo, Seoul, and Vienna announced.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-</section>
+  <div class="divider"></div>
+
+  <section class="section">
+    <div class="reveal">
+      <span class="section-eyebrow">Core Values</span>
+      <h2 class="section-title">Principles That<br><em>Endure</em></h2>
+    </div>
+    <div class="values-grid" style="margin-top:60px">
+      <div class="value-card reveal">
+        <div class="value-icon"></div>
+        <h3>Integrity</h3>
+        <p>Every relationship, every transaction, every decision is governed by an unwavering commitment to transparency and fiduciary excellence. We protect capital as if it were our own.</p>
+      </div>
+      <div class="value-card reveal reveal-delay-1">
+        <div class="value-icon"></div>
+        <h3>Precision</h3>
+        <p>In global real estate, detail is everything. Our investment teams obsess over every layer — from macro positioning to individual building specifications — before committing a single dirham.</p>
+      </div>
+      <div class="value-card reveal reveal-delay-2">
+        <div class="value-icon"></div>
+        <h3>Legacy</h3>
+        <p>We build for generations, not quarters. QIG investments are designed to compound wealth across decades, creating landmarks that define skylines and careers alike.</p>
+      </div>
+    </div>
+  </section>
 
 </div>
 
-<!-- LEADERSHIP -->
+<!-- ===========================
+     NEWS
+=========================== -->
+<div class="page" id="news">
+  <section class="section">
+    <span class="section-eyebrow">Global Intelligence</span>
+    <h2 class="section-title reveal">Market Insights &amp;<br><em>Latest News</em></h2>
+    <div class="news-grid" id="newsGrid"></div>
+  </section>
+</div>
+
+<!-- ===========================
+     LEADERSHIP
+=========================== -->
 <div class="page" id="team">
-
-<section class="section">
-<h2 class="section-title">Leadership</h2>
-
-<div class="grid">
-
-<div class="card glass"><div class="card-content"><h3>CEO</h3><p>Strategic global expansion leadership</p></div></div>
-<div class="card glass"><div class="card-content"><h3>CFO</h3><p>Capital structuring & fund strategy</p></div></div>
-<div class="card glass"><div class="card-content"><h3>COO</h3><p>Operational global execution</p></div></div>
-<div class="card glass"><div class="card-content"><h3>CMO</h3><p>Brand & investor relations</p></div></div>
-
+  <section class="section">
+    <div class="leadership-intro reveal">
+      <span class="section-eyebrow">Leadership</span>
+      <h2 class="section-title">The Team Behind<br><em>Every Decision</em></h2>
+      <p class="section-body">QIG's leadership brings together decades of sovereign fund experience, global real estate expertise, and an unwavering focus on long-term value creation.</p>
+    </div>
+    <div class="team-grid" id="teamGrid"></div>
+  </section>
 </div>
 
-</section>
-</div>
-
-<!-- OFFICES -->
+<!-- ===========================
+     OFFICES
+=========================== -->
 <div class="page" id="offices">
-
-<section class="section">
-<h2 class="section-title">Global Offices</h2>
-
-<div class="grid">
-
-<div class="card glass"><div class="card-content"><h3>Doha HQ</h3><p>Main global headquarters</p></div></div>
-<div class="card glass"><div class="card-content"><h3>Dubai</h3><p>Middle East operations</p></div></div>
-<div class="card glass"><div class="card-content"><h3>London</h3><p>European investment hub</p></div></div>
-<div class="card glass"><div class="card-content"><h3>Tokyo</h3><p>Asia-Pacific expansion</p></div></div>
-
+  <section class="section">
+    <span class="section-eyebrow">Global Presence</span>
+    <h2 class="section-title reveal">Eight Cities.<br><em>One Vision.</em></h2>
+    <div class="offices-grid" id="officesGrid"></div>
+  </section>
 </div>
 
-</section>
-</div>
-
-<!-- CONTACT -->
+<!-- ===========================
+     CONTACT
+=========================== -->
 <div class="page" id="contact">
-
-<section class="section">
-<h2 class="section-title">Contact</h2>
-
-<div class="glass" style="padding:30px;max-width:600px;margin:auto;">
-<input placeholder="Name">
-<input placeholder="Email">
-<textarea placeholder="Message" rows="5"></textarea>
-<button class="invest-btn">Send</button>
+  <section class="section">
+    <span class="section-eyebrow">Get In Touch</span>
+    <h2 class="section-title reveal">Begin Your<br><em>Investment Journey</em></h2>
+    <div class="contact-grid">
+      <div class="reveal">
+        <h3>Speak to an Advisor</h3>
+        <p>Our institutional investment advisors are available to discuss portfolio allocation, co-investment opportunities, and bespoke capital solutions for high-net-worth and institutional clients.</p>
+        <div class="contact-details">
+          <div class="contact-detail">
+            <label>Headquarters</label>
+            <span>The Pearl District, Doha, Qatar</span>
+          </div>
+          <div class="contact-detail">
+            <label>General Enquiries</label>
+            <span>invest@qig-group.com</span>
+          </div>
+          <div class="contact-detail">
+            <label>Investor Relations</label>
+            <span>ir@qig-group.com</span>
+          </div>
+          <div class="contact-detail">
+            <label>Press &amp; Media</label>
+            <span>media@qig-group.com</span>
+          </div>
+        </div>
+      </div>
+      <div class="reveal reveal-delay-1">
+        <div class="form-row">
+          <div class="form-field">
+            <label>First Name</label>
+            <input type="text" placeholder="James">
+          </div>
+          <div class="form-field">
+            <label>Last Name</label>
+            <input type="text" placeholder="Thornton">
+          </div>
+        </div>
+        <div class="form-field">
+          <label>Email Address</label>
+          <input type="email" placeholder="james@institution.com">
+        </div>
+        <div class="form-field">
+          <label>Organisation</label>
+          <input type="text" placeholder="Thornton Capital Ltd.">
+        </div>
+        <div class="form-field">
+          <label>Enquiry Type</label>
+          <select>
+            <option>Investor Relations</option>
+            <option>Co-Investment</option>
+            <option>Fund Allocation</option>
+            <option>Press &amp; Media</option>
+            <option>General Enquiry</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label>Message</label>
+          <textarea placeholder="Tell us about your investment objectives..."></textarea>
+        </div>
+        <button class="btn-primary" style="width:100%">Submit Enquiry</button>
+      </div>
+    </div>
+  </section>
 </div>
 
-</section>
-</div>
+<!-- FOOTER (on all pages via JS injection or here globally) -->
+<footer id="globalFooter">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="nav-logo">QIG</div>
+      <p>Qatari Investment Group is a sovereign-aligned global investment institution managing $48 billion in real estate, infrastructure, and hospitality assets across 100+ countries.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Portfolio</h4>
+      <ul>
+        <li><a href="#">Real Estate</a></li>
+        <li><a href="#">Infrastructure</a></li>
+        <li><a href="#">Hospitality</a></li>
+        <li><a href="#">Private Equity</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a onclick="show('company')" href="#">About QIG</a></li>
+        <li><a onclick="show('team')" href="#">Leadership</a></li>
+        <li><a onclick="show('offices')" href="#">Offices</a></li>
+        <li><a onclick="show('news')" href="#">Intelligence</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Invest</h4>
+      <ul>
+        <li><a href="https://www.thesharegame.com/company/QA0000000309" target="_blank">The Share Game</a></li>
+        <li><a onclick="show('contact')" href="#">Contact IR</a></li>
+        <li><a href="#">Prospectus</a></li>
+        <li><a href="#">ESG Report</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2024 Qatari Investment Group. All rights reserved.</p>
+    <div class="footer-legal">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Legal Notice</a>
+      <a href="#">Cookie Policy</a>
+    </div>
+  </div>
+</footer>
 
 <!-- MODAL -->
-<div class="modal" id="modal">
-<div class="modal-box">
-<button onclick="closeModal()" style="float:right;font-size:2rem;background:none;border:none;color:#fff;">×</button>
-<h2 id="mTitle"></h2>
-<p id="mText"></p>
-</div>
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <span class="modal-tag" id="mTag">QIG Asset</span>
+    <h2 id="mTitle"></h2>
+    <p id="mDesc"></p>
+    <p id="mDetail"></p>
+    <div class="modal-specs" id="mSpecs"></div>
+  </div>
 </div>
 
 <script>
 
-/* NAV */
+/* ========== CURSOR ========== */
+const cur = document.getElementById('cur');
+const curRing = document.getElementById('curRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX; my=e.clientY;
+  cur.style.left=mx+'px'; cur.style.top=my+'px';
+});
+(function animRing(){
+  rx+=(mx-rx)*0.12; ry+=(my-ry)*0.12;
+  curRing.style.left=rx+'px'; curRing.style.top=ry+'px';
+  requestAnimationFrame(animRing);
+})();
+document.querySelectorAll('a,button,.prop-card,.team-card,.news-card,.office-card').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{
+    cur.style.width='14px'; cur.style.height='14px';
+    curRing.style.width='52px'; curRing.style.height='52px';
+  });
+  el.addEventListener('mouseleave',()=>{
+    cur.style.width='8px'; cur.style.height='8px';
+    curRing.style.width='36px'; curRing.style.height='36px';
+  });
+});
+
+/* ========== NAV SCROLL ========== */
+window.addEventListener('scroll',()=>{
+  document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 60);
+});
+
+/* ========== PAGE TRANSITIONS ========== */
 function show(id){
-document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-document.getElementById(id).classList.add('active');
-window.scrollTo({top:0,behavior:'smooth'});
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  const el = document.getElementById(id);
+  el.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+  setTimeout(()=>observeReveal(),100);
 }
 
-/* MODAL */
-function openModal(t,d){
-document.getElementById('modal').style.display='flex';
-document.getElementById('mTitle').innerText=t;
-document.getElementById('mText').innerText=d;
+/* ========== SCROLL REVEAL ========== */
+function observeReveal(){
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting) e.target.classList.add('visible');
+    });
+  },{threshold:0.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+}
+observeReveal();
+
+/* ========== MODAL ========== */
+function openModal(tag,title,desc,detail,specs){
+  document.getElementById('mTag').innerText=tag;
+  document.getElementById('mTitle').innerText=title;
+  document.getElementById('mDesc').innerText=desc;
+  document.getElementById('mDetail').innerText=detail||'';
+  document.getElementById('mSpecs').innerHTML=specs||'';
+  document.getElementById('modalOverlay').classList.add('open');
 }
 function closeModal(){
-document.getElementById('modal').style.display='none';
+  document.getElementById('modalOverlay').classList.remove('open');
 }
+document.getElementById('modalOverlay').addEventListener('click',function(e){
+  if(e.target===this) closeModal();
+});
 
-/* 20 UNIQUE PROPERTIES */
-const data=[
-["Dubai Crown Tower","Ultra-luxury skyscraper in Dubai Marina."],
-["Tokyo Sky Residences","High-rise elite living in Tokyo."],
-["London Royal Exchange","Financial district luxury tower."],
-["Monaco Ocean Villas","Private waterfront estates."],
-["Paris Lumière Hotel","5-star luxury hospitality hub."],
-["Singapore Horizon Tower","Tech-luxury hybrid skyscraper."],
-["New York Apex Tower","Manhattan elite commercial tower."],
-["Sydney Harbour Residences","Oceanfront luxury living."],
-["Barcelona Grand Resort","Mediterranean luxury resort."],
-["Rome Imperial Suites","Historic luxury redevelopment."],
-["Zurich Alpine Retreat","Private mountain estate."],
-["Maldives Emerald Isles","Private island villas."],
-["Hong Kong Zenith Tower","Vertical luxury city hub."],
-["Berlin Capital Center","European finance headquarters."],
-["Los Angeles Skyline Residences","Hollywood luxury towers."],
-["Doha Pearl District","Flagship Qatari development."],
-["Istanbul Bridge Towers","Cross-continental luxury hub."],
-["Milan Fashion Residences","Luxury retail living concept."],
-["Seoul Neo Tower","Korean tech luxury skyscraper."],
-["Vienna Royal Suites","Classical European luxury estate."]
+/* ========== MARQUEE ========== */
+const marqueeWords = [
+  'Doha HQ','Dubai Marina','London Mayfair','Tokyo Midtown',
+  'Singapore CBD','New York Midtown','Monaco Waterfront','Paris 8ème',
+  'Zürich Paradeplatz','Sydney Harbour','Barcelona Passeig de Gràcia',
+  'Rome EUR','Hong Kong Peak','Berlin Mitte','Milan Quadrilatero','Seoul Gangnam'
+];
+const inner = document.getElementById('marqueeInner');
+const dbl = [...marqueeWords,...marqueeWords];
+inner.innerHTML = dbl.map((w,i)=>`<span${i%3===0?' class="gold"':''}>◆ ${w}</span>`).join('');
+
+/* ========== PROPERTIES ========== */
+const properties = [
+  {
+    name:"Dubai Crown Tower",
+    loc:"Dubai Marina, UAE",
+    tag:"Luxury Residential",
+    img:"https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=800",
+    desc:"An 82-storey ultra-luxury residential skyscraper anchoring the new Dubai Marina skyline. 340 residences, sky lobbies at levels 40 and 70, and a private beach concession.",
+    detail:"Designed by Pritzker-nominated architects, the tower features floor-to-ceiling panoramic glazing, private pool suites, and a world-class spa spanning three floors. QIG holds the development and management rights.",
+    val:"$2.4B", yield:"6.1%", status:"Completed 2023"
+  },
+  {
+    name:"Tokyo Sky Residences",
+    loc:"Minato-ku, Tokyo",
+    tag:"Luxury Residential",
+    img:"https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?q=80&w=800",
+    desc:"54 ultra-prime residences in Minato-ku, each with private outdoor terraces and views over Tokyo Bay and Mount Fuji.",
+    detail:"Inspired by traditional Japanese spatial philosophy fused with contemporary luxury. Full concierge services, private dining, and a members club.",
+    val:"$890M", yield:"4.8%", status:"Completed 2024"
+  },
+  {
+    name:"London Royal Exchange",
+    loc:"City of London, UK",
+    tag:"Grade-A Commercial",
+    img:"https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?q=80&w=800",
+    desc:"A landmark mixed-use development adjacent to the Bank of England, delivering 220,000 sq ft of Grade-A office space with seven premium retail units at ground level.",
+    detail:"The scheme has received BREEAM Outstanding certification and is anchored by two FTSE 100 tenants on 20-year leases. Fully operational since Q4 2022.",
+    val:"$1.8B", yield:"4.2%", status:"Completed 2022"
+  },
+  {
+    name:"Monaco Ocean Villas",
+    loc:"Fontvieille, Monaco",
+    tag:"Ultra-Prime Residential",
+    img:"https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=800",
+    desc:"Six private waterfront estates on reclaimed land in Fontvieille. Private yacht berths, 24-hour security, and custom bespoke interiors.",
+    detail:"The rarest residential offering in the Principality. Each villa is structurally unique, with exclusive rooftop terraces and direct Mediterranean access.",
+    val:"$680M", yield:"3.5%", status:"Completed 2021"
+  },
+  {
+    name:"Paris Lumière Hotel",
+    loc:"8th Arrondissement, Paris",
+    tag:"Luxury Hospitality",
+    img:"https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=800",
+    desc:"A 90-key ultra-luxury five-star hotel steps from the Champs-Élysées. Michelin-starred restaurant, a rooftop terrace with Eiffel Tower views, and 12 private event salons.",
+    detail:"Managed under an exclusive brand agreement. Consistently achieving 94%+ occupancy, Lumière is among the top-ranked luxury hotels in Paris.",
+    val:"$520M", yield:"5.8%", status:"Operational"
+  },
+  {
+    name:"Singapore Horizon Tower",
+    loc:"Marina Bay, Singapore",
+    tag:"Commercial / Hospitality",
+    img:"https://images.unsplash.com/photo-1525625293386-3f8f99389edd?q=80&w=800",
+    desc:"A 62-storey mixed-use tower delivering Class-A offices, a 180-key business luxury hotel, and curated retail across Marina Bay.",
+    detail:"One of Singapore's most energy-efficient high-rises, targeting BCA Platinum certification. Fully leased on 15-year terms.",
+    val:"$1.1B", yield:"5.3%", status:"Completed 2023"
+  },
+  {
+    name:"New York Apex Tower",
+    loc:"Midtown Manhattan, NYC",
+    tag:"Grade-A Commercial",
+    img:"https://images.unsplash.com/photo-1534430480872-3498386e7856?q=80&w=800",
+    desc:"750,000 sq ft of premium Manhattan office and retail space. Centrally located between Grand Central Terminal and the UN Headquarters.",
+    detail:"LEED Platinum certified. Anchor tenants include two global banks and a leading alternative asset manager. NOI of $62M per annum.",
+    val:"$3.2B", yield:"4.0%", status:"Operational"
+  },
+  {
+    name:"Sydney Harbour Residences",
+    loc:"Circular Quay, Sydney",
+    tag:"Luxury Residential",
+    img:"https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?q=80&w=800",
+    desc:"32 premium residences directly overlooking Sydney Harbour with unobstructed views of the Opera House and Harbour Bridge.",
+    detail:"Each residence spans a full floor. Private lift access, a members-only residents' lounge, and a team of in-house concierge staff.",
+    val:"$620M", yield:"4.5%", status:"Completed 2022"
+  },
+  {
+    name:"Doha Pearl District",
+    loc:"The Pearl, Doha",
+    tag:"Mixed-Use Flagship",
+    img:"https://images.unsplash.com/photo-1559628129-67cf63b72248?q=80&w=800",
+    desc:"QIG's flagship development in its home market — a 1.2M sq ft mixed-use complex featuring residences, a luxury hotel, and a retail promenade on the Arabian Gulf.",
+    detail:"The cornerstone of QIG's Qatari portfolio. Designed by a Pritzker Prize-winning firm, the development is a landmark of modern Qatari identity.",
+    val:"$4.1B", yield:"5.5%", status:"Phase 2 Underway"
+  },
+  {
+    name:"Barcelona Grand Resort",
+    loc:"Barceloneta, Barcelona",
+    tag:"Luxury Hospitality",
+    img:"https://images.unsplash.com/photo-1539037116277-4db20889f2d4?q=80&w=800",
+    desc:"A 220-key five-star beachfront resort. Six restaurants, rooftop infinity pool, and a 3,000 sqm Catalan-inspired spa.",
+    detail:"Fully operated under the QIG Hospitality banner. Luxury travel awards recognise it as Spain's leading urban resort.",
+    val:"$380M", yield:"6.4%", status:"Operational"
+  },
+  {
+    name:"Rome Imperial Suites",
+    loc:"EUR District, Rome",
+    tag:"Luxury Hospitality",
+    img:"https://images.unsplash.com/photo-1529260830199-42c24126f198?q=80&w=800",
+    desc:"A conversion of a historically significant building into 24 palatial suites and 6 penthouse residences. Marble interiors, private courtyards, and a rooftop terrace.",
+    detail:"One of Rome's few new ultra-prime residential launches in a decade. Private members' dining and a curated art collection.",
+    val:"$290M", yield:"4.2%", status:"Completed 2023"
+  },
+  {
+    name:"Zürich Alpine Retreat",
+    loc:"Küsnacht, Zürich",
+    tag:"Ultra-Private Residential",
+    img:"https://images.unsplash.com/photo-1551524559-8af4e6624178?q=80&w=800",
+    desc:"Five private lakeside estates on the Gold Coast of Zürich Lake — one of the most tightly held residential addresses in Europe.",
+    detail:"Developed for ultra-HNWI purchasers. Discreet, off-market sales. No public marketing. Full private office concierge.",
+    val:"$310M", yield:"3.1%", status:"Sold Out"
+  },
+  {
+    name:"Maldives Emerald Isles",
+    loc:"North Malé Atoll, Maldives",
+    tag:"Luxury Hospitality",
+    img:"https://images.unsplash.com/photo-1506929562872-bb421503ef21?q=80&w=800",
+    desc:"A private island resort of 48 overwater villas and beach bungalows. Operated as an exclusive collection for ultra-luxury travellers.",
+    detail:"One of the few fully private island ownership models in the Maldives. ADR consistently above $3,000 per night.",
+    val:"$420M", yield:"7.2%", status:"Operational"
+  },
+  {
+    name:"Hong Kong Zenith Tower",
+    loc:"Central, Hong Kong",
+    tag:"Grade-A Commercial",
+    img:"https://images.unsplash.com/photo-1536599018102-9f803c140fc1?q=80&w=800",
+    desc:"A 48-storey Grade-A commercial tower in Central, Hong Kong. Full-floor financial services tenants with Victoria Harbour views.",
+    detail:"A stabilised core asset producing consistent NOI. BEAM Plus Gold certified. Weighted average lease expiry of 9.2 years.",
+    val:"$1.4B", yield:"4.6%", status:"Operational"
+  },
+  {
+    name:"Istanbul Bridge Towers",
+    loc:"Beşiktaş, Istanbul",
+    tag:"Mixed-Use",
+    img:"https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?q=80&w=800",
+    desc:"Twin 50-storey towers straddling the European and Asian skylines of Istanbul — luxury residences above, premium offices below.",
+    detail:"A symbol of QIG's growing presence in emerging market capitals. Voted most significant new development in Turkey by a leading real estate journal.",
+    val:"$760M", yield:"5.9%", status:"Completed 2024"
+  },
+  {
+    name:"Milan Fashion Residences",
+    loc:"Quadrilatero d'Oro, Milan",
+    tag:"Luxury Residential",
+    img:"https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=800",
+    desc:"18 bespoke residences above Milan's most exclusive shopping district. Each apartment features a private terrace with views over the Duomo.",
+    detail:"Interior design by three separate Milanese ateliers — each floor curated individually. The fashion and design community's preferred private address.",
+    val:"$195M", yield:"3.9%", status:"Completed 2023"
+  },
+  {
+    name:"Seoul Neo Tower",
+    loc:"Gangnam-gu, Seoul",
+    tag:"Luxury Residential / Commercial",
+    img:"https://images.unsplash.com/photo-1601621915196-2621bfb0cd6e?q=80&w=800",
+    desc:"A landmark 68-storey mixed-use tower in Gangnam. Sky residences, a private members club, and a flagship Korean design hotel.",
+    detail:"South Korea's first fully integrated ultra-luxury mixed-use skyscraper. A JV with two Korean conglomerates. Five-star managed residences.",
+    val:"$1.0B", yield:"5.1%", status:"Under Construction"
+  },
+  {
+    name:"Vienna Royal Suites",
+    loc:"Innere Stadt, Vienna",
+    tag:"Luxury Hospitality",
+    img:"https://images.unsplash.com/photo-1516550135131-fe3dcb0bedc3?q=80&w=800",
+    desc:"A 36-suite palace hotel within a restored 18th-century aristocratic mansion in Vienna's First District. Classical grandeur, contemporary luxury.",
+    detail:"Fully restored over four years in partnership with Austrian heritage authorities. Guest list by invitation only for select seasons.",
+    val:"$175M", yield:"4.7%", status:"Operational"
+  },
+  {
+    name:"Berlin Capital Center",
+    loc:"Mitte, Berlin",
+    tag:"Grade-A Commercial",
+    img:"https://images.unsplash.com/photo-1560969184-10fe8719e047?q=80&w=800",
+    desc:"320,000 sq ft of Grade-A office and premium retail in central Berlin Mitte. Fully leased to European tech and media companies.",
+    detail:"DGNB Platinum certification. One of Berlin's most energy-efficient modern office buildings. 15-year WALT.",
+    val:"$620M", yield:"4.3%", status:"Operational"
+  },
+  {
+    name:"Los Angeles Skyline",
+    loc:"Century City, LA",
+    tag:"Luxury Residential",
+    img:"https://images.unsplash.com/photo-1580655653885-65763b2597d0?q=80&w=800",
+    desc:"22 full-floor luxury residences atop a 52-storey tower in Century City, offering unobstructed views from the Pacific to downtown.",
+    detail:"Serviced by a private hotel-style team. Rooftop observatory deck and members' dining exclusive to residents. Developed in JV with a leading US REIT.",
+    val:"$540M", yield:"4.4%", status:"Completed 2024"
+  }
 ];
 
-const grid=document.getElementById("propertiesGrid");
+const propGrid = document.getElementById('propGrid');
+const wideIdx = [0,5,10,15];
 
-data.forEach(p=>{
-grid.innerHTML+=`
-<div class="card glass" onclick="openModal('${p[0]}','${p[0]} is a flagship QIG global development combining luxury architecture, institutional investment structure, and long-term capital appreciation.')">
-<img src="https://source.unsplash.com/800x600/?luxury,building,${p[0]}">
-<div class="card-content">
-<div class="tag">QIG ASSET</div>
-<h3>${p[0]}</h3>
-<p>${p[1]}</p>
-</div>
-</div>`;
+properties.forEach((p,i)=>{
+  const wide = wideIdx.includes(i) ? ' wide' : '';
+  const specs = `
+    <div class="modal-spec"><label>Valuation</label><span>${p.val}</span></div>
+    <div class="modal-spec"><label>Net Yield</label><span>${p.yield}</span></div>
+    <div class="modal-spec"><label>Status</label><span>${p.status}</span></div>
+  `;
+  propGrid.innerHTML += `
+    <div class="prop-card${wide}" onclick="openModal('${p.tag}','${p.name}',\`${p.desc}\`,\`${p.detail}\`,\`${specs}\`)">
+      <img src="${p.img}" alt="${p.name}" loading="lazy">
+      <div class="prop-detail">
+        <h3>${p.name}</h3>
+        <p>${p.desc}</p>
+        <div class="prop-detail-meta">
+          <div><strong>${p.val}</strong><span>Valuation</span></div>
+          <div><strong>${p.yield}</strong><span>Net Yield</span></div>
+        </div>
+      </div>
+      <div class="prop-info">
+        <span class="prop-tag">${p.tag}</span>
+        <div class="prop-name">${p.name}</div>
+        <div class="prop-loc">${p.loc}</div>
+      </div>
+    </div>`;
+});
+
+/* ========== TEAM ========== */
+const team = [
+  {
+    name: "Bobjerf55",
+    title: "Chief Executive Officer",
+    img: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=600",
+    bio: "The visionary founder and CEO of QIG. Bobjerf55 has led the group from its Doha origins to a $48B global institution, cultivating sovereign relationships across the Gulf, Europe, and Asia over 16 years."
+  },
+  {
+    name: "Rania Al-Fakhri",
+    title: "Chief Financial Officer",
+    img: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=600",
+    bio: "Former Goldman Sachs MD and World Bank advisor. Rania architectured QIG's capital structure through three market cycles, consistently delivering above-benchmark returns to institutional LPs."
+  },
+  {
+    name: "Marcus Ehlert",
+    title: "Chief Operating Officer",
+    img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=600",
+    bio: "Responsible for QIG's global operational platform across 40 active development sites. Previously COO at Brookfield Real Estate. Oxford MBA with 24 years of global operational leadership."
+  },
+  {
+    name: "Yuki Hashimoto",
+    title: "Head of Asia-Pacific",
+    img: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=600",
+    bio: "Based in Tokyo, Yuki leads QIG's Asia-Pacific strategy encompassing Japan, South Korea, Singapore, and Australia. Former Nomura Securities MD with deep relationships across Asia's institutional landscape."
+  },
+  {
+    name: "Sophia Lindqvist",
+    title: "Chief Investment Officer",
+    img: "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=600",
+    bio: "Sophia oversees QIG's global investment committee and asset allocation strategy. Previously CIO at a Scandinavian sovereign wealth fund. Known for her contrarian discipline and long-term conviction."
+  },
+  {
+    name: "Tariq Al-Mansoori",
+    title: "Head of Gulf & MENA",
+    img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=600",
+    bio: "A founding team member and Qatari national, Tariq leads all Gulf and MENA operations and maintains QIG's sovereign relationships across the GCC. Instrumental in securing the Pearl District flagship development."
+  },
+  {
+    name: "Helena Voss",
+    title: "General Counsel",
+    img: "https://images.unsplash.com/photo-1598550874175-4d0ef436c909?q=80&w=600",
+    bio: "18 years of international real estate law across London, New York, and Dubai. Helena leads QIG's global legal function, ensuring institutional-grade governance across all jurisdictions of operation."
+  },
+  {
+    name: "Daniel Osei",
+    title: "Chief Marketing Officer",
+    img: "https://images.unsplash.com/photo-1582896911227-c966dc4b1eab?q=80&w=600",
+    bio: "Brand architect responsible for positioning QIG at the pinnacle of the global investment landscape. 20 years building luxury brand equity across real estate, finance, and hospitality."
+  }
+];
+
+const teamGrid = document.getElementById('teamGrid');
+team.forEach(m=>{
+  teamGrid.innerHTML += `
+    <div class="team-card">
+      <div class="team-img-wrap">
+        <img src="${m.img}" alt="${m.name}" loading="lazy">
+      </div>
+      <div class="team-info">
+        <div class="team-name">${m.name}</div>
+        <span class="team-title">${m.title}</span>
+        <p class="team-bio">${m.bio}</p>
+      </div>
+    </div>`;
+});
+
+/* ========== OFFICES ========== */
+const offices = [
+  {
+    city:"Doha",
+    role:"Global Headquarters",
+    address:"QIG Tower, The Pearl District, Doha, Qatar",
+    img:"https://images.unsplash.com/photo-1559628129-67cf63b72248?q=80&w=1200",
+    staff:"220",
+    founded:"2008"
+  },
+  {
+    city:"Dubai",
+    role:"Middle East & Africa Hub",
+    address:"DIFC Gate Building, Gate Avenue, Dubai",
+    img:"https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=1200",
+    staff:"140",
+    founded:"2009"
+  },
+  {
+    city:"London",
+    role:"European Investment Hub",
+    address:"10 Grosvenor Square, Mayfair, London W1K 6JP",
+    img:"https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?q=80&w=1200",
+    staff:"110",
+    founded:"2011"
+  },
+  {
+    city:"Singapore",
+    role:"Asia-Pacific Headquarters",
+    address:"One Marina Boulevard, Marina Bay, Singapore",
+    img:"https://images.unsplash.com/photo-1525625293386-3f8f99389edd?q=80&w=1200",
+    staff:"85",
+    founded:"2015"
+  },
+  {
+    city:"New York",
+    role:"Americas Operations",
+    address:"399 Park Avenue, Midtown, New York, NY 10022",
+    img:"https://images.unsplash.com/photo-1534430480872-3498386e7856?q=80&w=1200",
+    staff:"72",
+    founded:"2016"
+  },
+  {
+    city:"Tokyo",
+    role:"East Asia Capital",
+    address:"Roppongi Hills Mori Tower, Minato-ku, Tokyo",
+    img:"https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?q=80&w=1200",
+    staff:"60",
+    founded:"2018"
+  }
+];
+
+const officesGrid = document.getElementById('officesGrid');
+offices.forEach(o=>{
+  officesGrid.innerHTML += `
+    <div class="office-card">
+      <img src="${o.img}" alt="${o.city}" loading="lazy">
+      <div class="office-content">
+        <div class="office-city">${o.city}</div>
+        <span class="office-role">${o.role}</span>
+        <div class="office-address">${o.address}</div>
+        <div class="office-detail">
+          <div><strong>${o.staff}</strong> Staff</div>
+          <div><strong>Est. ${o.founded}</strong></div>
+        </div>
+      </div>
+    </div>`;
+});
+
+/* ========== NEWS ========== */
+const news = [
+  {
+    cat:"Deal Flow",
+    title:"QIG acquires landmark Tokyo tower for $890M, marking largest Japan transaction of 2024",
+    excerpt:"The Sky Residences acquisition cements QIG's position as the leading Gulf sovereign investor in Japan's ultra-prime residential segment.",
+    date:"12 November 2024",
+    img:"https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?q=80&w=1200",
+    featured:true
+  },
+  {
+    cat:"Markets",
+    title:"European institutional allocation to QIG assets rises 22% year-on-year",
+    excerpt:"A surge of European pension capital is driving record inflows into QIG's stabilised European portfolio.",
+    date:"3 November 2024",
+    img:"https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=800"
+  },
+  {
+    cat:"Awards",
+    title:"QIG named Best Global Real Estate Group at the 2024 Sovereign Investor Awards",
+    excerpt:"For the third consecutive year, QIG has been recognised by the investment community's most prestigious institutional awards.",
+    date:"28 October 2024",
+    img:"https://images.unsplash.com/photo-1448932223592-d1fc686e76ea?q=80&w=800"
+  },
+  {
+    cat:"Development",
+    title:"Doha Pearl District Phase 2 breaks ground",
+    excerpt:"QIG's flagship $4.1B development enters its second phase with a new waterfront promenade and 180 additional residences.",
+    date:"18 October 2024",
+    img:"https://images.unsplash.com/photo-1559628129-67cf63b72248?q=80&w=800"
+  },
+  {
+    cat:"ESG",
+    title:"QIG achieves Net Zero commitment across European portfolio",
+    excerpt:"All six European assets now operate at net zero carbon, ahead of the 2026 target set in QIG's ESG charter.",
+    date:"9 October 2024",
+    img:"https://images.unsplash.com/photo-1504711434969-e33886168f5c?q=80&w=800"
+  }
+];
+
+const newsGrid = document.getElementById('newsGrid');
+news.forEach(n=>{
+  const featClass = n.featured ? ' featured' : '';
+  newsGrid.innerHTML += `
+    <div class="news-card${featClass}">
+      <img src="${n.img}" alt="${n.title}" loading="lazy">
+      <div class="news-card-content">
+        <span class="news-cat">${n.cat}</span>
+        <h3>${n.title}</h3>
+        ${n.featured ? `<p>${n.excerpt}</p>` : ''}
+        <span class="news-date">${n.date}</span>
+      </div>
+    </div>`;
 });
 
 </script>
-
 </body>
 </html>
