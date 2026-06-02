@@ -4,1841 +4,2805 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Qatari Investment Group — Global Real Estate & Investment</title>
+<meta name="description" content="A global investment and real estate group shaping the future through luxury developments, strategic investments, and international growth.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Didact+Gothic&family=Cinzel:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --black: #080808;
-    --charcoal: #111111;
-    --dark: #1a1a1a;
-    --mid: #2a2a2a;
-    --surface: #181818;
-    --gold: #c9a84c;
-    --gold-light: #e8c97a;
-    --gold-dim: #8a6f32;
-    --platinum: #b8b8b8;
-    --silver: #d4d4d4;
-    --white: #f5f5f0;
-    --pure: #ffffff;
-    --text-muted: #6a6a6a;
-    --border: rgba(201,168,76,0.15);
-    --border-subtle: rgba(255,255,255,0.06);
-  }
+:root {
+  --black: #0a0a0a;
+  --charcoal: #111111;
+  --dark: #161616;
+  --mid: #1e1e1e;
+  --surface: #242424;
+  --border: rgba(255,255,255,0.08);
+  --gold: #c9a96e;
+  --gold-light: #e2c99a;
+  --gold-dim: rgba(201,169,110,0.3);
+  --platinum: #d4d4d4;
+  --white: #f5f3ef;
+  --white-dim: rgba(245,243,239,0.6);
+  --white-faint: rgba(245,243,239,0.12);
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  --sans: 'Didact Gothic', 'Helvetica Neue', sans-serif;
+  --display: 'Cinzel', serif;
+  --nav-height: 80px;
+  --transition: 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
 
-  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  html { scroll-behavior: smooth; font-size: 16px; }
+html { scroll-behavior: smooth; font-size: 16px; }
 
-  body {
-    background: var(--black);
-    color: var(--white);
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 300;
-    line-height: 1.6;
-    overflow-x: hidden;
-    cursor: default;
-  }
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: var(--sans);
+  overflow-x: hidden;
+  cursor: default;
+  -webkit-font-smoothing: antialiased;
+}
 
-  /* ── LOADING SCREEN ── */
-  #loader {
-    position: fixed; inset: 0; z-index: 9999;
-    background: var(--black);
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    transition: opacity 0.8s ease, visibility 0.8s ease;
-  }
-  #loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
-  .loader-logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2.2rem;
-    font-weight: 300;
-    letter-spacing: 0.3em;
-    color: var(--white);
-    opacity: 0;
-    animation: fadeUp 0.8s 0.3s ease forwards;
-  }
-  .loader-sub {
-    font-size: 0.55rem;
-    letter-spacing: 0.45em;
-    color: var(--gold);
-    text-transform: uppercase;
-    margin-top: 0.5rem;
-    opacity: 0;
-    animation: fadeUp 0.8s 0.6s ease forwards;
-  }
-  .loader-line {
-    width: 0; height: 1px;
-    background: linear-gradient(90deg, transparent, var(--gold), transparent);
-    margin-top: 2.5rem;
-    animation: lineExpand 1.5s 0.9s ease forwards;
-  }
-  @keyframes lineExpand { to { width: 180px; } }
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(14px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+/* ─── CUSTOM CURSOR ─── */
+.cursor {
+  position: fixed;
+  width: 8px; height: 8px;
+  background: var(--gold);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate(-50%,-50%);
+  transition: width 0.2s, height 0.2s, opacity 0.2s;
+  mix-blend-mode: normal;
+}
+.cursor-ring {
+  position: fixed;
+  width: 32px; height: 32px;
+  border: 1px solid rgba(201,169,110,0.5);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99998;
+  transform: translate(-50%,-50%);
+  transition: all 0.12s var(--ease);
+}
 
-  /* ── NAV ── */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-    padding: 1.6rem 5%;
-    display: flex; align-items: center; justify-content: space-between;
-    transition: background 0.4s, backdrop-filter 0.4s, padding 0.4s;
-  }
-  nav.scrolled {
-    background: rgba(8,8,8,0.92);
-    backdrop-filter: blur(20px);
-    padding: 1.1rem 5%;
-    border-bottom: 1px solid var(--border-subtle);
-  }
-  .nav-logo {
-    display: flex; flex-direction: column;
-    text-decoration: none;
-  }
-  .nav-logo-main {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.35rem; font-weight: 400;
-    letter-spacing: 0.12em; color: var(--white);
-    line-height: 1.1;
-  }
-  .nav-logo-sub {
-    font-size: 0.48rem; font-weight: 500;
-    letter-spacing: 0.45em; color: var(--gold);
-    text-transform: uppercase; margin-top: 2px;
-  }
-  .nav-links {
-    display: flex; gap: 2.5rem; list-style: none;
-    align-items: center;
-  }
-  .nav-links a {
-    text-decoration: none; color: var(--platinum);
-    font-size: 0.65rem; font-weight: 400;
-    letter-spacing: 0.2em; text-transform: uppercase;
-    transition: color 0.3s;
-    position: relative;
-  }
-  .nav-links a::after {
-    content: ''; position: absolute; bottom: -4px; left: 0;
-    width: 0; height: 1px; background: var(--gold);
-    transition: width 0.3s;
-  }
-  .nav-links a:hover { color: var(--white); }
-  .nav-links a:hover::after { width: 100%; }
-  .nav-cta {
-    background: transparent;
-    border: 1px solid var(--gold);
-    color: var(--gold) !important;
-    padding: 0.55rem 1.4rem;
-    font-size: 0.6rem !important;
-    letter-spacing: 0.2em !important;
-    transition: background 0.3s, color 0.3s !important;
-  }
-  .nav-cta::after { display: none !important; }
-  .nav-cta:hover { background: var(--gold) !important; color: var(--black) !important; }
+/* ─── PAGE SYSTEM ─── */
+.page { display: none; min-height: 100vh; }
+.page.active { display: block; }
 
-  /* ── HERO ── */
-  #hero {
-    height: 100vh; min-height: 700px;
-    position: relative;
-    display: flex; align-items: center; justify-content: center;
-    text-align: center;
-    overflow: hidden;
-  }
-  .hero-bg {
-    position: absolute; inset: 0; z-index: 0;
-    background: 
-      radial-gradient(ellipse at 20% 50%, rgba(201,168,76,0.06) 0%, transparent 60%),
-      radial-gradient(ellipse at 80% 20%, rgba(201,168,76,0.04) 0%, transparent 50%),
-      linear-gradient(180deg, #0d0d0d 0%, #080808 40%, #0a0c0a 100%);
-  }
-  .hero-grid {
-    position: absolute; inset: 0; z-index: 1;
-    background-image: 
-      linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
-    background-size: 80px 80px;
-    mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
-  }
-  .hero-skyline {
-    position: absolute; bottom: 0; left: 0; right: 0; z-index: 2;
-    height: 35%;
-    background: linear-gradient(to top, rgba(8,8,8,0.95) 0%, transparent 100%);
-  }
-  .hero-skyline-svg {
-    position: absolute; bottom: 0; left: 0; right: 0;
-    width: 100%; opacity: 0.07;
-  }
-  .hero-content {
-    position: relative; z-index: 10;
-    max-width: 900px; padding: 0 2rem;
-  }
-  .hero-eyebrow {
-    font-size: 0.58rem; font-weight: 500;
-    letter-spacing: 0.5em; text-transform: uppercase;
-    color: var(--gold); margin-bottom: 2rem;
-    opacity: 0; animation: fadeUp 0.8s 1.5s ease forwards;
-  }
-  .hero-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(3rem, 6vw, 5.5rem);
-    font-weight: 300; line-height: 1.1;
-    color: var(--white); margin-bottom: 1.5rem;
-    opacity: 0; animation: fadeUp 0.9s 1.7s ease forwards;
-  }
-  .hero-title em { font-style: italic; color: var(--gold-light); }
-  .hero-subtitle {
-    font-size: clamp(0.8rem, 1.2vw, 1rem);
-    font-weight: 300; color: var(--platinum);
-    max-width: 580px; margin: 0 auto 3rem;
-    line-height: 1.8; letter-spacing: 0.05em;
-    opacity: 0; animation: fadeUp 0.9s 1.9s ease forwards;
-  }
-  .hero-ctas {
-    display: flex; gap: 1.2rem; justify-content: center;
-    opacity: 0; animation: fadeUp 0.9s 2.1s ease forwards;
-  }
-  .btn-primary {
-    display: inline-block; text-decoration: none;
-    padding: 1rem 2.8rem;
-    background: var(--gold);
-    color: var(--black);
-    font-size: 0.6rem; font-weight: 600;
-    letter-spacing: 0.25em; text-transform: uppercase;
-    transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
-    border: none; cursor: pointer;
-  }
-  .btn-primary:hover {
-    background: var(--gold-light);
-    transform: translateY(-2px);
-    box-shadow: 0 12px 40px rgba(201,168,76,0.3);
-  }
-  .btn-secondary {
-    display: inline-block; text-decoration: none;
-    padding: 1rem 2.8rem;
-    background: transparent;
-    color: var(--white);
-    font-size: 0.6rem; font-weight: 400;
-    letter-spacing: 0.25em; text-transform: uppercase;
-    border: 1px solid rgba(255,255,255,0.3);
-    transition: border-color 0.3s, color 0.3s, transform 0.3s;
-  }
-  .btn-secondary:hover {
-    border-color: var(--gold);
-    color: var(--gold);
-    transform: translateY(-2px);
-  }
-  .hero-scroll {
-    position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
-    z-index: 10; display: flex; flex-direction: column; align-items: center;
-    gap: 0.5rem; opacity: 0; animation: fadeUp 0.8s 2.4s ease forwards;
-  }
-  .hero-scroll span {
-    font-size: 0.5rem; letter-spacing: 0.4em;
-    text-transform: uppercase; color: var(--text-muted);
-  }
-  .scroll-line {
-    width: 1px; height: 50px;
-    background: linear-gradient(to bottom, var(--gold), transparent);
-    animation: scrollPulse 2s infinite;
-  }
-  @keyframes scrollPulse {
-    0%, 100% { opacity: 0.3; } 50% { opacity: 1; }
-  }
+/* ─── NAVIGATION ─── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--nav-height);
+  z-index: 1000;
+  transition: background 0.4s var(--ease), backdrop-filter 0.4s, border-color 0.4s;
+  border-bottom: 1px solid transparent;
+}
+nav.scrolled {
+  background: rgba(10,10,10,0.88);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border-color: var(--border);
+}
+.nav-inner {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 48px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-logo {
+  font-family: var(--display);
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  color: var(--white);
+  text-decoration: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+  gap: 3px;
+}
+.nav-logo span:first-child { color: var(--gold); font-size: 11px; letter-spacing: 0.3em; }
+.nav-logo span:last-child { font-size: 14px; letter-spacing: 0.22em; }
 
-  /* ── SECTION SHARED ── */
-  section { padding: 9rem 5%; }
-  .section-label {
-    font-size: 0.52rem; font-weight: 500;
-    letter-spacing: 0.55em; text-transform: uppercase;
-    color: var(--gold); margin-bottom: 1.2rem;
-    display: flex; align-items: center; gap: 1rem;
-  }
-  .section-label::before {
-    content: ''; display: inline-block;
-    width: 24px; height: 1px; background: var(--gold);
-  }
-  .section-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2.2rem, 4vw, 3.6rem);
-    font-weight: 300; line-height: 1.15;
-    color: var(--white); margin-bottom: 1.5rem;
-  }
-  .section-title em { font-style: italic; color: var(--gold-light); }
-  .section-body {
-    font-size: 0.9rem; color: var(--platinum);
-    max-width: 560px; line-height: 1.9;
-  }
-  .divider {
-    width: 100%; height: 1px;
-    background: linear-gradient(90deg, transparent, var(--border), transparent);
-    margin: 0;
-  }
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+  list-style: none;
+}
+.nav-links a {
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--white-dim);
+  text-decoration: none;
+  transition: color 0.3s;
+  cursor: pointer;
+  padding: 4px 0;
+  position: relative;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px; left: 0;
+  width: 0; height: 1px;
+  background: var(--gold);
+  transition: width 0.3s var(--ease);
+}
+.nav-links a:hover, .nav-links a.active-link { color: var(--white); }
+.nav-links a:hover::after, .nav-links a.active-link::after { width: 100%; }
 
-  /* ── STATS STRIP ── */
-  #stats {
-    padding: 4rem 5%;
-    background: var(--surface);
-    border-top: 1px solid var(--border-subtle);
-    border-bottom: 1px solid var(--border-subtle);
-  }
-  .stats-grid {
-    display: grid; grid-template-columns: repeat(4, 1fr);
-    gap: 0;
-  }
-  .stat-item {
-    padding: 2rem 3rem;
-    border-right: 1px solid var(--border-subtle);
-    text-align: center;
-  }
-  .stat-item:last-child { border-right: none; }
-  .stat-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2.5rem, 4vw, 3.8rem);
-    font-weight: 300; color: var(--gold);
-    line-height: 1; display: block;
-  }
-  .stat-label {
-    font-size: 0.55rem; font-weight: 500;
-    letter-spacing: 0.3em; text-transform: uppercase;
-    color: var(--platinum); margin-top: 0.6rem;
-    display: block;
-  }
+.nav-invest {
+  font-family: var(--display);
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid var(--gold);
+  padding: 11px 24px;
+  text-decoration: none;
+  transition: all 0.3s var(--ease);
+  cursor: pointer;
+}
+.nav-invest:hover {
+  background: var(--gold);
+  color: var(--black);
+}
 
-  /* ── GLOBAL PRESENCE ── */
-  #presence { background: var(--black); }
-  .presence-inner {
-    display: grid; grid-template-columns: 1fr 1.4fr;
-    gap: 7rem; align-items: center;
-  }
-  .world-map-container {
-    position: relative; aspect-ratio: 16/9;
-    background: var(--surface);
-    border: 1px solid var(--border-subtle);
-    overflow: hidden;
-  }
-  .world-map-svg { width: 100%; height: 100%; opacity: 0.7; }
-  .map-pulse {
-    position: absolute; border-radius: 50%;
-    animation: pulse 2s infinite;
-  }
-  @keyframes pulse {
-    0% { box-shadow: 0 0 0 0 rgba(201,168,76,0.6); }
-    70% { box-shadow: 0 0 0 12px rgba(201,168,76,0); }
-    100% { box-shadow: 0 0 0 0 rgba(201,168,76,0); }
-  }
-  .region-tags {
-    display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 2rem;
-  }
-  .region-tag {
-    padding: 0.35rem 0.9rem;
-    border: 1px solid var(--border);
-    font-size: 0.58rem; letter-spacing: 0.15em;
-    color: var(--gold); text-transform: uppercase;
-  }
+/* Mobile nav toggle */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 4px;
+}
+.nav-toggle span {
+  display: block;
+  width: 24px; height: 1px;
+  background: var(--white);
+  transition: all 0.3s;
+}
 
-  /* ── PROPERTIES ── */
-  #properties { background: var(--charcoal); }
-  .properties-header {
-    display: flex; justify-content: space-between;
-    align-items: flex-end; margin-bottom: 4rem;
-  }
-  .property-filter {
-    display: flex; gap: 0; border: 1px solid var(--border-subtle);
-  }
-  .filter-btn {
-    padding: 0.6rem 1.2rem;
-    background: transparent; border: none;
-    color: var(--text-muted);
-    font-family: 'Montserrat', sans-serif;
-    font-size: 0.58rem; font-weight: 400;
-    letter-spacing: 0.15em; text-transform: uppercase;
-    cursor: pointer; transition: all 0.3s;
-    border-right: 1px solid var(--border-subtle);
-  }
-  .filter-btn:last-child { border-right: none; }
-  .filter-btn.active, .filter-btn:hover {
-    background: var(--gold); color: var(--black);
-  }
-  .properties-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr);
-    gap: 1.5px; background: var(--border-subtle);
-  }
-  .prop-card {
-    background: var(--charcoal);
-    position: relative; overflow: hidden;
-    cursor: pointer;
-    aspect-ratio: 3/4;
-  }
-  .prop-card:first-child { grid-row: span 2; aspect-ratio: auto; }
-  .prop-bg {
-    position: absolute; inset: 0;
-    transition: transform 0.7s ease;
-    background-size: cover; background-position: center;
-  }
-  .prop-card:hover .prop-bg { transform: scale(1.05); }
-  .prop-overlay {
-    position: absolute; inset: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 60%, transparent 100%);
-    transition: opacity 0.4s;
-  }
-  .prop-card:hover .prop-overlay { opacity: 1.2; }
-  .prop-info {
-    position: absolute; bottom: 0; left: 0; right: 0;
-    padding: 2rem;
-    transform: translateY(20px); transition: transform 0.4s;
-  }
-  .prop-card:hover .prop-info { transform: translateY(0); }
-  .prop-category {
-    font-size: 0.5rem; font-weight: 500;
-    letter-spacing: 0.35em; text-transform: uppercase;
-    color: var(--gold); margin-bottom: 0.5rem;
-  }
-  .prop-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.5rem; font-weight: 400;
-    color: var(--white); line-height: 1.2;
-    margin-bottom: 0.3rem;
-  }
-  .prop-location {
-    font-size: 0.6rem; color: var(--platinum);
-    letter-spacing: 0.1em;
-    display: flex; align-items: center; gap: 0.4rem;
-  }
-  .prop-location::before {
-    content: ''; display: inline-block;
-    width: 16px; height: 1px; background: var(--gold);
-  }
+/* ─── HERO ─── */
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 700px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background: url('https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=2400&q=80') center/cover no-repeat;
+  transform: scale(1.08);
+  animation: heroZoom 18s ease-out forwards;
+}
+@keyframes heroZoom {
+  from { transform: scale(1.08); }
+  to { transform: scale(1.0); }
+}
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(10,10,10,0.82) 0%, rgba(10,10,10,0.5) 50%, rgba(10,10,10,0.3) 100%);
+}
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 48px;
+  padding-top: var(--nav-height);
+}
+.hero-label {
+  font-family: var(--display);
+  font-size: 10px;
+  letter-spacing: 0.4em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 28px;
+  opacity: 0;
+  animation: fadeUp 1s var(--ease) 0.3s forwards;
+}
+.hero-title {
+  font-family: var(--serif);
+  font-size: clamp(48px, 6vw, 96px);
+  font-weight: 300;
+  line-height: 1.08;
+  color: var(--white);
+  max-width: 900px;
+  margin-bottom: 32px;
+  opacity: 0;
+  animation: fadeUp 1s var(--ease) 0.5s forwards;
+}
+.hero-title em {
+  font-style: italic;
+  color: var(--gold-light);
+}
+.hero-sub {
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--white-dim);
+  max-width: 560px;
+  margin-bottom: 52px;
+  opacity: 0;
+  animation: fadeUp 1s var(--ease) 0.7s forwards;
+  letter-spacing: 0.03em;
+}
+.hero-ctas {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  opacity: 0;
+  animation: fadeUp 1s var(--ease) 0.9s forwards;
+}
+.btn-primary {
+  font-family: var(--display);
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  background: var(--gold);
+  color: var(--black);
+  padding: 16px 36px;
+  text-decoration: none;
+  transition: all 0.3s var(--ease);
+  cursor: pointer;
+  display: inline-block;
+  border: 1px solid var(--gold);
+}
+.btn-primary:hover { background: var(--gold-light); border-color: var(--gold-light); }
+.btn-ghost {
+  font-family: var(--display);
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--white);
+  padding: 16px 36px;
+  text-decoration: none;
+  border: 1px solid rgba(255,255,255,0.3);
+  transition: all 0.3s var(--ease);
+  cursor: pointer;
+  display: inline-block;
+}
+.btn-ghost:hover { border-color: var(--white); background: rgba(255,255,255,0.05); }
 
-  /* ── INVESTMENT ── */
-  #investment {
-    background: var(--black);
-    position: relative; overflow: hidden;
-  }
-  #investment::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: radial-gradient(ellipse at 70% 50%, rgba(201,168,76,0.05) 0%, transparent 60%);
-  }
-  .investment-inner {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 7rem; align-items: center; position: relative;
-  }
-  .invest-reasons {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 1px; background: var(--border-subtle);
-    margin-top: 2.5rem;
-  }
-  .invest-reason {
-    background: var(--black);
-    padding: 1.8rem; transition: background 0.3s;
-  }
-  .invest-reason:hover { background: var(--surface); }
-  .reason-icon {
-    width: 32px; height: 32px; margin-bottom: 1rem;
-    border: 1px solid var(--gold);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 0.9rem;
-  }
-  .reason-title {
-    font-size: 0.68rem; font-weight: 500;
-    letter-spacing: 0.1em; color: var(--white);
-    margin-bottom: 0.4rem;
-  }
-  .reason-desc {
-    font-size: 0.62rem; color: var(--text-muted); line-height: 1.7;
-  }
-  .dividend-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    padding: 3.5rem;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-  .dividend-card::before {
-    content: '';
-    position: absolute; top: 0; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--gold), transparent);
-  }
-  .dividend-pct {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 7rem; font-weight: 300;
-    color: var(--gold); line-height: 1;
-    display: block;
-  }
-  .dividend-label {
-    font-size: 0.58rem; font-weight: 500;
-    letter-spacing: 0.4em; text-transform: uppercase;
-    color: var(--platinum); margin-top: 0.5rem;
-  }
-  .dividend-desc {
-    font-size: 0.75rem; color: var(--text-muted);
-    margin-top: 1.5rem; line-height: 1.8;
-    max-width: 280px; margin-left: auto; margin-right: auto;
-  }
-  .dividend-cta { margin-top: 2rem; }
+.hero-scroll {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  opacity: 0;
+  animation: fadeIn 1s ease 1.5s forwards;
+}
+.hero-scroll span {
+  font-family: var(--display);
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  color: var(--gold);
+  text-transform: uppercase;
+}
+.scroll-line {
+  width: 1px;
+  height: 48px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+  animation: scrollPulse 2s ease infinite;
+}
+@keyframes scrollPulse {
+  0%, 100% { opacity: 1; transform: scaleY(1); }
+  50% { opacity: 0.4; transform: scaleY(0.7); }
+}
 
-  /* ── LEADERSHIP ── */
-  #leadership { background: var(--charcoal); }
-  .leadership-grid {
-    display: grid; grid-template-columns: repeat(4, 1fr);
-    gap: 1.5px; background: var(--border-subtle);
-    margin-top: 3.5rem;
-  }
-  .leader-card {
-    background: var(--charcoal);
-    position: relative; overflow: hidden;
-    cursor: pointer;
-  }
-  .leader-portrait {
-    aspect-ratio: 3/4;
-    background: var(--mid);
-    position: relative;
-    overflow: hidden;
-  }
-  .leader-portrait-bg {
-    position: absolute; inset: 0;
-    background-size: cover; background-position: top center;
-    transition: transform 0.6s ease;
-    filter: grayscale(30%);
-  }
-  .leader-card:hover .leader-portrait-bg { transform: scale(1.04); filter: grayscale(0%); }
-  .leader-portrait-overlay {
-    position: absolute; inset: 0;
-    background: linear-gradient(to top, rgba(17,17,17,0.9) 0%, transparent 60%);
-  }
-  .leader-info {
-    padding: 1.6rem 1.4rem;
-    border-top: 1px solid var(--border-subtle);
-  }
-  .leader-role {
-    font-size: 0.5rem; font-weight: 500;
-    letter-spacing: 0.35em; text-transform: uppercase;
-    color: var(--gold); margin-bottom: 0.4rem;
-  }
-  .leader-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.3rem; font-weight: 400; color: var(--white);
-    margin-bottom: 0.6rem;
-  }
-  .leader-bio {
-    font-size: 0.62rem; color: var(--text-muted);
-    line-height: 1.7;
-  }
+/* ─── STATS BAR ─── */
+.stats-bar {
+  background: var(--charcoal);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 36px 0;
+}
+.stats-inner {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 48px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+}
+.stat-item {
+  padding: 0 48px;
+  border-right: 1px solid var(--border);
+  text-align: center;
+}
+.stat-item:first-child { padding-left: 0; text-align: left; }
+.stat-item:last-child { border-right: none; padding-right: 0; text-align: right; }
+.stat-num {
+  font-family: var(--serif);
+  font-size: clamp(32px, 3.5vw, 52px);
+  font-weight: 300;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.stat-label {
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--white-dim);
+}
 
-  /* ── SUSTAINABILITY ── */
-  #sustainability { background: var(--black); }
-  .sustain-inner {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 7rem; align-items: center;
-  }
-  .sustain-pillars {
-    display: flex; flex-direction: column; gap: 0;
-    margin-top: 2.5rem;
-  }
-  .sustain-pillar {
-    padding: 1.6rem 0;
-    border-bottom: 1px solid var(--border-subtle);
-    display: flex; gap: 1.5rem; align-items: flex-start;
-    transition: background 0.3s;
-    cursor: default;
-  }
-  .pillar-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.2rem; color: var(--gold);
-    font-weight: 300; min-width: 24px;
-  }
-  .pillar-content h4 {
-    font-size: 0.72rem; font-weight: 500;
-    color: var(--white); letter-spacing: 0.08em;
-    margin-bottom: 0.3rem;
-  }
-  .pillar-content p {
-    font-size: 0.62rem; color: var(--text-muted);
-    line-height: 1.7;
-  }
-  .sustain-visual {
-    position: relative;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .esg-ring {
-    width: 380px; height: 380px;
-    border-radius: 50%;
-    border: 1px solid var(--border);
-    display: flex; align-items: center; justify-content: center;
-    position: relative;
-  }
-  .esg-ring::before {
-    content: '';
-    position: absolute; inset: 20px;
-    border-radius: 50%;
-    border: 1px solid var(--border-subtle);
-  }
-  .esg-center {
-    text-align: center;
-  }
-  .esg-center-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.2rem; color: var(--gold);
-    letter-spacing: 0.1em;
-  }
-  .esg-center-sub {
-    font-size: 0.55rem; letter-spacing: 0.3em;
-    text-transform: uppercase; color: var(--platinum);
-    margin-top: 0.3rem;
-  }
-  .esg-node {
-    position: absolute; display: flex;
-    flex-direction: column; align-items: center;
-    text-align: center; gap: 0.4rem;
-  }
-  .esg-node-dot {
-    width: 8px; height: 8px; border-radius: 50%;
-    background: var(--gold);
-  }
-  .esg-node-label {
-    font-size: 0.5rem; letter-spacing: 0.2em;
-    text-transform: uppercase; color: var(--platinum);
-  }
+/* ─── SECTIONS ─── */
+.section {
+  padding: 140px 0;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding-left: 48px;
+  padding-right: 48px;
+}
+.section-label {
+  font-family: var(--display);
+  font-size: 9px;
+  letter-spacing: 0.45em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.section-label::before {
+  content: '';
+  width: 32px;
+  height: 1px;
+  background: var(--gold);
+}
+.section-title {
+  font-family: var(--serif);
+  font-size: clamp(36px, 4vw, 64px);
+  font-weight: 300;
+  line-height: 1.1;
+  color: var(--white);
+}
+.section-title em { font-style: italic; color: var(--gold-light); }
+.section-body {
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--white-dim);
+  max-width: 540px;
+  letter-spacing: 0.02em;
+}
 
-  /* ── TIMELINE ── */
-  #timeline { background: var(--charcoal); }
-  .timeline-track {
-    position: relative; margin-top: 4rem;
-    padding-bottom: 2rem;
-  }
-  .timeline-track::before {
-    content: '';
-    position: absolute; top: 12px; left: 0; right: 0;
-    height: 1px; background: var(--border-subtle);
-  }
-  .timeline-items {
-    display: grid; grid-template-columns: repeat(6, 1fr);
-    gap: 0; position: relative;
-  }
-  .timeline-item {
-    padding: 2.5rem 1.5rem 0;
-    position: relative;
-    opacity: 0; transform: translateY(20px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-  }
-  .timeline-item.visible { opacity: 1; transform: none; }
-  .timeline-dot {
-    position: absolute; top: -18px; left: 1.5rem;
-    width: 12px; height: 12px; border-radius: 50%;
-    background: var(--charcoal);
-    border: 2px solid var(--gold);
-  }
-  .timeline-year {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.5rem; color: var(--gold);
-    font-weight: 300; line-height: 1; margin-bottom: 0.5rem;
-  }
-  .timeline-event {
-    font-size: 0.65rem; font-weight: 500;
-    color: var(--white); margin-bottom: 0.4rem;
-    line-height: 1.4;
-  }
-  .timeline-desc {
-    font-size: 0.58rem; color: var(--text-muted);
-    line-height: 1.7;
-  }
+/* ─── EDITORIAL GRID ─── */
+.editorial-block {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  align-items: center;
+  min-height: 640px;
+  margin-bottom: 2px;
+  overflow: hidden;
+}
+.editorial-block.reverse { direction: rtl; }
+.editorial-block.reverse > * { direction: ltr; }
+.editorial-img {
+  width: 100%;
+  height: 640px;
+  object-fit: cover;
+  display: block;
+  filter: brightness(0.92) saturate(0.9);
+  transition: filter 0.6s, transform 0.8s var(--ease);
+}
+.editorial-img:hover { filter: brightness(1) saturate(1); transform: scale(1.02); }
+.editorial-text {
+  background: var(--charcoal);
+  padding: 80px 80px;
+  height: 640px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.editorial-block.reverse .editorial-text { background: var(--dark); }
 
-  /* ── INVESTOR RELATIONS ── */
-  #investor-relations { background: var(--black); }
-  .ir-inner {
-    display: grid; grid-template-columns: 1fr 1fr 1fr;
-    gap: 1.5px; background: var(--border-subtle);
-    margin-top: 3.5rem;
-  }
-  .ir-card {
-    background: var(--black);
-    padding: 2.5rem; transition: background 0.3s;
-  }
-  .ir-card:hover { background: var(--surface); }
-  .ir-card-icon {
-    font-size: 1.5rem; margin-bottom: 1.2rem;
-    display: block;
-  }
-  .ir-card-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.3rem; color: var(--white);
-    margin-bottom: 0.8rem;
-  }
-  .ir-card-text {
-    font-size: 0.65rem; color: var(--text-muted);
-    line-height: 1.8;
-  }
-  .ir-card-link {
-    display: inline-flex; align-items: center; gap: 0.5rem;
-    margin-top: 1.2rem;
-    font-size: 0.58rem; font-weight: 500;
-    letter-spacing: 0.15em; text-transform: uppercase;
-    color: var(--gold); text-decoration: none;
-    transition: gap 0.3s;
-  }
-  .ir-card-link:hover { gap: 0.8rem; }
+/* ─── DIVIDER ─── */
+.divider {
+  width: 100%;
+  height: 1px;
+  background: var(--border);
+  margin: 0 auto;
+  max-width: 1600px;
+  margin-left: 48px;
+  margin-right: 48px;
+  width: calc(100% - 96px);
+}
+.divider-gold {
+  width: 80px;
+  height: 1px;
+  background: var(--gold);
+  margin: 24px 0;
+}
 
-  /* ── NEWS ── */
-  #news { background: var(--charcoal); }
-  .news-grid {
-    display: grid; grid-template-columns: 1.5fr 1fr 1fr;
-    gap: 1.5px; background: var(--border-subtle);
-    margin-top: 3.5rem;
-  }
-  .news-card {
-    background: var(--charcoal);
-    overflow: hidden; cursor: pointer;
-  }
-  .news-card-img {
-    aspect-ratio: 16/9;
-    background: var(--mid);
-    position: relative; overflow: hidden;
-  }
-  .news-card-img-bg {
-    position: absolute; inset: 0;
-    background-size: cover; background-position: center;
-    transition: transform 0.6s ease;
-  }
-  .news-card:hover .news-card-img-bg { transform: scale(1.04); }
-  .news-card:first-child .news-card-img { aspect-ratio: 16/10; }
-  .news-card-body { padding: 1.8rem; }
-  .news-tag {
-    font-size: 0.5rem; font-weight: 500;
-    letter-spacing: 0.35em; text-transform: uppercase;
-    color: var(--gold); margin-bottom: 0.7rem;
-  }
-  .news-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.15rem; font-weight: 400;
-    color: var(--white); line-height: 1.3;
-    margin-bottom: 0.6rem;
-  }
-  .news-excerpt {
-    font-size: 0.62rem; color: var(--text-muted);
-    line-height: 1.7; margin-bottom: 1rem;
-  }
-  .news-date {
-    font-size: 0.55rem; color: var(--text-muted);
-    letter-spacing: 0.1em;
-  }
+/* ─── PORTFOLIO GRID ─── */
+.portfolio-hero-img {
+  width: 100%;
+  height: 60vh;
+  object-fit: cover;
+  filter: brightness(0.7) saturate(0.85);
+}
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  margin-top: 2px;
+}
+.portfolio-card {
+  position: relative;
+  overflow: hidden;
+  height: 480px;
+  cursor: pointer;
+}
+.portfolio-card:first-child { grid-column: span 2; height: 560px; }
+.portfolio-card img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s var(--ease), filter 0.6s;
+  filter: brightness(0.75) saturate(0.85);
+}
+.portfolio-card:hover img { transform: scale(1.06); filter: brightness(0.85) saturate(1); }
+.portfolio-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 55%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 36px 40px;
+  transition: background 0.4s;
+}
+.portfolio-card:hover .portfolio-card-overlay {
+  background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.1) 55%);
+}
+.portfolio-card-cat {
+  font-family: var(--display);
+  font-size: 9px;
+  letter-spacing: 0.35em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.portfolio-card-title {
+  font-family: var(--serif);
+  font-size: 26px;
+  font-weight: 300;
+  color: var(--white);
+  line-height: 1.2;
+}
+.portfolio-card-loc {
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  color: var(--white-dim);
+  margin-top: 8px;
+}
+.portfolio-card-arrow {
+  position: absolute;
+  top: 32px; right: 32px;
+  width: 40px; height: 40px;
+  border: 1px solid rgba(255,255,255,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: all 0.4s var(--ease);
+  color: var(--white);
+  font-size: 18px;
+}
+.portfolio-card:hover .portfolio-card-arrow { opacity: 1; transform: translateY(0); }
 
-  /* ── CONTACT ── */
-  #contact { background: var(--black); }
-  .contact-inner {
-    display: grid; grid-template-columns: 1fr 1.2fr;
-    gap: 7rem; align-items: start;
-  }
-  .contact-form {
-    display: flex; flex-direction: column; gap: 1.2rem;
-    margin-top: 2.5rem;
-  }
-  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
-  .form-group {
-    display: flex; flex-direction: column; gap: 0.5rem;
-  }
-  .form-group label {
-    font-size: 0.52rem; font-weight: 500;
-    letter-spacing: 0.3em; text-transform: uppercase;
-    color: var(--text-muted);
-  }
-  .form-group input, .form-group textarea, .form-group select {
-    background: var(--surface);
-    border: 1px solid var(--border-subtle);
-    color: var(--white);
-    padding: 0.85rem 1rem;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 0.72rem; font-weight: 300;
-    outline: none; transition: border-color 0.3s;
-    -webkit-appearance: none;
-  }
-  .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
-    border-color: var(--gold);
-  }
-  .form-group textarea { height: 120px; resize: vertical; }
-  .form-group select option { background: var(--surface); }
-  .offices {
-    margin-top: 2.5rem;
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 1px; background: var(--border-subtle);
-  }
-  .office {
-    background: var(--black);
-    padding: 2rem; transition: background 0.3s;
-  }
-  .office:hover { background: var(--surface); }
-  .office-city {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.2rem; color: var(--gold);
-    margin-bottom: 0.6rem;
-  }
-  .office-detail {
-    font-size: 0.6rem; color: var(--text-muted);
-    line-height: 1.8;
-  }
+/* ─── INVESTMENTS PAGE ─── */
+.invest-hero {
+  height: 55vh;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+}
+.invest-hero img {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: brightness(0.4) saturate(0.7);
+}
+.invest-hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 48px 64px;
+  width: 100%;
+}
+.dividend-box {
+  background: var(--charcoal);
+  border: 1px solid var(--gold-dim);
+  padding: 72px 80px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  margin-bottom: 2px;
+}
+.dividend-num {
+  font-family: var(--serif);
+  font-size: clamp(72px, 10vw, 140px);
+  font-weight: 300;
+  color: var(--gold);
+  line-height: 1;
+}
+.dividend-sup { font-size: 0.45em; vertical-align: super; color: var(--gold-light); }
 
-  /* ── FOOTER ── */
-  footer {
-    background: var(--charcoal);
-    border-top: 1px solid var(--border-subtle);
-    padding: 5rem 5% 2.5rem;
-  }
-  .footer-top {
-    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
-    gap: 4rem; margin-bottom: 4rem;
-    padding-bottom: 4rem;
-    border-bottom: 1px solid var(--border-subtle);
-  }
-  .footer-brand {}
-  .footer-brand-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.5rem; font-weight: 400;
-    color: var(--white); letter-spacing: 0.1em;
-    margin-bottom: 0.4rem;
-  }
-  .footer-brand-sub {
-    font-size: 0.5rem; letter-spacing: 0.4em;
-    text-transform: uppercase; color: var(--gold);
-    margin-bottom: 1.2rem;
-  }
-  .footer-brand-text {
-    font-size: 0.65rem; color: var(--text-muted);
-    line-height: 1.8; max-width: 280px;
-  }
-  .footer-col-title {
-    font-size: 0.55rem; font-weight: 600;
-    letter-spacing: 0.3em; text-transform: uppercase;
-    color: var(--platinum); margin-bottom: 1.5rem;
-  }
-  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; }
-  .footer-col ul a {
-    text-decoration: none; color: var(--text-muted);
-    font-size: 0.65rem; transition: color 0.3s;
-  }
-  .footer-col ul a:hover { color: var(--gold); }
-  .footer-bottom {
-    display: flex; justify-content: space-between; align-items: center;
-  }
-  .footer-copy {
-    font-size: 0.58rem; color: var(--text-muted);
-    letter-spacing: 0.05em;
-  }
-  .footer-legal {
-    display: flex; gap: 2rem;
-  }
-  .footer-legal a {
-    font-size: 0.58rem; color: var(--text-muted);
-    text-decoration: none; transition: color 0.3s;
-  }
-  .footer-legal a:hover { color: var(--gold); }
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+.feature-card {
+  background: var(--charcoal);
+  padding: 56px 48px;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.3s, background 0.3s;
+}
+.feature-card:hover { background: var(--dark); border-color: var(--gold); }
+.feature-icon {
+  width: 40px; height: 40px;
+  border: 1px solid var(--gold-dim);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 28px;
+  font-size: 16px;
+  color: var(--gold);
+}
+.feature-title {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--white);
+  margin-bottom: 16px;
+  line-height: 1.3;
+}
+.feature-text {
+  font-family: var(--sans);
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--white-dim);
+}
 
-  /* ── SCROLL ANIMATIONS ── */
-  .reveal {
-    opacity: 0; transform: translateY(30px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-  }
-  .reveal.visible { opacity: 1; transform: none; }
-  .reveal-delay-1 { transition-delay: 0.1s; }
-  .reveal-delay-2 { transition-delay: 0.2s; }
-  .reveal-delay-3 { transition-delay: 0.3s; }
-  .reveal-delay-4 { transition-delay: 0.4s; }
+/* ─── CHART ─── */
+.chart-section {
+  background: var(--charcoal);
+  padding: 80px;
+  margin: 2px 0;
+}
+.chart-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 20px;
+  height: 200px;
+  margin-top: 48px;
+  padding-top: 20px;
+  border-bottom: 1px solid var(--border);
+}
+.chart-bar {
+  flex: 1;
+  background: linear-gradient(to top, var(--gold), var(--gold-light));
+  opacity: 0.7;
+  transition: opacity 0.3s;
+  position: relative;
+  min-height: 20px;
+}
+.chart-bar:hover { opacity: 1; }
+.chart-bar::after {
+  content: attr(data-val);
+  position: absolute;
+  bottom: -28px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--sans);
+  font-size: 10px;
+  color: var(--white-dim);
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+.chart-bar::before {
+  content: attr(data-label);
+  position: absolute;
+  top: -28px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--serif);
+  font-size: 14px;
+  color: var(--gold);
+  white-space: nowrap;
+}
 
-  /* ── MOBILE ── */
-  @media (max-width: 1024px) {
-    .stats-grid { grid-template-columns: repeat(2,1fr); }
-    .presence-inner, .investment-inner, .sustain-inner, .contact-inner { grid-template-columns: 1fr; gap: 4rem; }
-    .leadership-grid { grid-template-columns: repeat(2,1fr); }
-    .properties-grid { grid-template-columns: repeat(2,1fr); }
-    .prop-card:first-child { grid-row: span 1; }
-    .news-grid { grid-template-columns: 1fr; }
-    .ir-inner { grid-template-columns: 1fr; }
-    .timeline-items { grid-template-columns: repeat(3,1fr); }
-    .footer-top { grid-template-columns: 1fr 1fr; gap: 3rem; }
-    nav { padding: 1.2rem 5%; }
-    .nav-links { display: none; }
-    section { padding: 6rem 5%; }
-    .esg-ring { width: 280px; height: 280px; }
-  }
-  @media (max-width: 640px) {
-    .stats-grid { grid-template-columns: 1fr 1fr; }
-    .form-row { grid-template-columns: 1fr; }
-    .hero-ctas { flex-direction: column; align-items: center; }
-    .properties-grid { grid-template-columns: 1fr; }
-    .leadership-grid { grid-template-columns: 1fr; }
-    .timeline-items { grid-template-columns: 1fr 1fr; }
-    .footer-top { grid-template-columns: 1fr; }
-    .offices { grid-template-columns: 1fr; }
-  }
+/* ─── LEADERSHIP ─── */
+.leadership-hero {
+  height: 45vh;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+}
+.leadership-hero img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: brightness(0.3) saturate(0.5);
+}
+.leaders-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  margin-top: 2px;
+}
+.leader-card {
+  position: relative;
+  overflow: hidden;
+  background: var(--charcoal);
+}
+.leader-card:first-child { grid-column: span 3; display: grid; grid-template-columns: 400px 1fr; }
+.leader-img {
+  width: 100%; height: 480px;
+  object-fit: cover;
+  object-position: top;
+  filter: grayscale(20%) brightness(0.9);
+  transition: filter 0.5s;
+  display: block;
+}
+.leader-card:first-child .leader-img { height: 520px; }
+.leader-card:hover .leader-img { filter: grayscale(0%) brightness(1); }
+.leader-info {
+  padding: 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background: var(--charcoal);
+}
+.leader-card:first-child .leader-info { padding: 64px; justify-content: center; background: var(--dark); }
+.leader-title {
+  font-family: var(--display);
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.leader-name {
+  font-family: var(--serif);
+  font-size: 28px;
+  font-weight: 300;
+  color: var(--white);
+  margin-bottom: 16px;
+  line-height: 1.2;
+}
+.leader-card:first-child .leader-name { font-size: 42px; }
+.leader-bio {
+  font-family: var(--sans);
+  font-size: 13px;
+  line-height: 1.85;
+  color: var(--white-dim);
+}
 
-  /* ── GRADIENT COLORS FOR CARDS ── */
-  .prop-bg-1 { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><rect width="100" height="100" fill="%23111"/><text y="60" font-size="50">🏙️</text></svg>'); }
-  .bg-dubai { background: linear-gradient(160deg, #0d0d1a 0%, #1a1408 40%, #2a1e05 100%); }
-  .bg-japan { background: linear-gradient(160deg, #0d1a0d 0%, #0a1a1a 60%, #051a2a 100%); }
-  .bg-resort { background: linear-gradient(160deg, #051a1a 0%, #0a1520 60%, #0d1a25 100%); }
-  .bg-tower { background: linear-gradient(160deg, #1a0d0d 0%, #1a1008 50%, #2a180d 100%); }
-  .bg-tunisa { background: linear-gradient(160deg, #0a0d1a 0%, #0d1510 60%, #0a1a15 100%); }
-  .bg-london { background: linear-gradient(160deg, #0d0a1a 0%, #1a0d1a 50%, #1a1020 100%); }
+/* ─── INVESTOR RELATIONS ─── */
+.ir-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  margin-top: 2px;
+}
+.ir-card {
+  background: var(--charcoal);
+  padding: 64px;
+  transition: background 0.3s;
+}
+.ir-card:hover { background: var(--dark); }
+.ir-card.full { grid-column: span 2; }
+.ir-card-icon {
+  font-size: 28px;
+  margin-bottom: 24px;
+  color: var(--gold);
+}
+.ir-card-title {
+  font-family: var(--serif);
+  font-size: 28px;
+  font-weight: 300;
+  color: var(--white);
+  margin-bottom: 16px;
+}
+.ir-card-text {
+  font-family: var(--sans);
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--white-dim);
+  margin-bottom: 32px;
+}
+.ir-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.ir-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--border);
+  font-family: var(--sans);
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  color: var(--white-dim);
+}
+.ir-list li span:first-child { color: var(--white); }
+.ir-list li a {
+  font-family: var(--display);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-decoration: none;
+  border-bottom: 1px solid var(--gold-dim);
+  padding-bottom: 2px;
+  transition: color 0.3s, border-color 0.3s;
+}
+.ir-list li a:hover { color: var(--gold-light); border-color: var(--gold-light); }
 
-  .leader-bg-1 { background: linear-gradient(160deg, #1a1408 30%, #2a1e05 100%); }
-  .leader-bg-2 { background: linear-gradient(160deg, #0d0d1a 30%, #16213e 100%); }
-  .leader-bg-3 { background: linear-gradient(160deg, #0d1a0d 30%, #051a2a 100%); }
-  .leader-bg-4 { background: linear-gradient(160deg, #1a0d0d 30%, #2a0d0d 100%); }
+/* ─── SUSTAINABILITY ─── */
+.sustain-hero {
+  height: 65vh;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+.sustain-hero img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: brightness(0.4) saturate(0.6) hue-rotate(-10deg);
+}
+.pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+  margin-top: 2px;
+}
+.pillar-card {
+  background: var(--charcoal);
+  padding: 56px 40px;
+  text-align: center;
+  border-top: 2px solid transparent;
+  transition: border-color 0.3s, background 0.3s;
+}
+.pillar-card:hover { background: var(--dark); border-color: var(--gold); }
+.pillar-icon { font-size: 36px; margin-bottom: 24px; }
+.pillar-title {
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--white);
+  margin-bottom: 16px;
+}
+.pillar-text {
+  font-family: var(--sans);
+  font-size: 12px;
+  line-height: 1.8;
+  color: var(--white-dim);
+}
 
-  .news-bg-1 { background: linear-gradient(135deg, #1a1408 0%, #2a1e05 100%); }
-  .news-bg-2 { background: linear-gradient(135deg, #0d0d1a 0%, #0f3460 100%); }
-  .news-bg-3 { background: linear-gradient(135deg, #0d1a0d 0%, #051a2a 100%); }
+/* ─── NEWS ─── */
+.news-hero {
+  height: 50vh;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+}
+.news-hero img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: brightness(0.35) saturate(0.7);
+}
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  margin-top: 2px;
+}
+.news-card {
+  background: var(--charcoal);
+  transition: background 0.3s;
+  cursor: pointer;
+}
+.news-card:hover { background: var(--dark); }
+.news-card:first-child { grid-column: span 3; display: grid; grid-template-columns: 1fr 1fr; }
+.news-card-img {
+  height: 280px;
+  overflow: hidden;
+}
+.news-card:first-child .news-card-img { height: 420px; }
+.news-card-img img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s var(--ease);
+  filter: brightness(0.85);
+}
+.news-card:hover .news-card-img img { transform: scale(1.04); }
+.news-card-body { padding: 36px 40px; }
+.news-card:first-child .news-card-body {
+  padding: 48px 56px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.news-cat {
+  font-family: var(--display);
+  font-size: 9px;
+  letter-spacing: 0.35em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.news-date {
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.35);
+  margin-bottom: 16px;
+}
+.news-title {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 300;
+  color: var(--white);
+  line-height: 1.35;
+  margin-bottom: 16px;
+}
+.news-card:first-child .news-title { font-size: 34px; }
+.news-excerpt {
+  font-family: var(--sans);
+  font-size: 12px;
+  line-height: 1.8;
+  color: var(--white-dim);
+}
+.news-read-more {
+  font-family: var(--display);
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-decoration: none;
+  margin-top: 24px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid var(--gold-dim);
+  padding-bottom: 4px;
+}
+.news-read-more:hover { color: var(--gold-light); }
 
-  /* Decorative text overlays on image placeholders */
-  .img-label {
-    position: absolute; inset: 0;
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    gap: 0.5rem; opacity: 0.35;
-  }
-  .img-label-icon { font-size: 2.5rem; }
-  .img-label-text {
-    font-size: 0.5rem; letter-spacing: 0.3em;
-    text-transform: uppercase; color: var(--gold);
-  }
+/* ─── CONTACT ─── */
+.contact-hero {
+  height: 50vh;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+.contact-hero img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: brightness(0.3) saturate(0.5);
+}
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  margin-top: 2px;
+}
+.contact-info {
+  background: var(--dark);
+  padding: 80px;
+}
+.contact-form-wrap {
+  background: var(--charcoal);
+  padding: 80px;
+}
+.contact-info-item {
+  margin-bottom: 48px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid var(--border);
+}
+.contact-info-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+.contact-info-label {
+  font-family: var(--display);
+  font-size: 9px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+.contact-info-text {
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 300;
+  color: var(--white);
+  line-height: 1.6;
+}
+.contact-info-sub {
+  font-family: var(--sans);
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  color: var(--white-dim);
+  margin-top: 6px;
+}
+.contact-email-link {
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--gold);
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  transition: color 0.3s;
+}
+.contact-email-link:hover { color: var(--gold-light); }
+
+.form-group {
+  margin-bottom: 28px;
+}
+.form-label {
+  font-family: var(--display);
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--white-dim);
+  display: block;
+  margin-bottom: 10px;
+}
+.form-input, .form-select, .form-textarea {
+  width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--white);
+  font-family: var(--sans);
+  font-size: 13px;
+  padding: 16px 20px;
+  outline: none;
+  transition: border-color 0.3s;
+  letter-spacing: 0.03em;
+}
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  border-color: var(--gold-dim);
+}
+.form-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23c9a96e' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 20px center;
+  cursor: pointer;
+}
+.form-select option { background: var(--dark); }
+.form-textarea { min-height: 120px; resize: vertical; }
+.form-submit {
+  width: 100%;
+  font-family: var(--display);
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  background: var(--gold);
+  color: var(--black);
+  border: none;
+  padding: 18px;
+  cursor: pointer;
+  transition: background 0.3s;
+  margin-top: 8px;
+}
+.form-submit:hover { background: var(--gold-light); }
+
+/* ─── ABOUT ─── */
+.about-hero {
+  height: 55vh;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+}
+.about-hero img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: brightness(0.35) saturate(0.7);
+}
+.timeline {
+  position: relative;
+  padding: 80px 0;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0; bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, var(--gold-dim), var(--gold), var(--gold-dim), transparent);
+  transform: translateX(-50%);
+}
+.timeline-item {
+  display: grid;
+  grid-template-columns: 1fr 80px 1fr;
+  align-items: start;
+  gap: 0;
+  margin-bottom: 64px;
+}
+.timeline-item:nth-child(even) .timeline-content { text-align: right; }
+.timeline-item:nth-child(odd) .timeline-content-right { display: block; }
+.timeline-dot {
+  width: 12px; height: 12px;
+  background: var(--gold);
+  border-radius: 50%;
+  margin: 8px auto;
+  position: relative;
+}
+.timeline-dot::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border: 1px solid var(--gold-dim);
+  border-radius: 50%;
+}
+.timeline-year {
+  font-family: var(--serif);
+  font-size: 13px;
+  color: var(--gold);
+  margin-bottom: 8px;
+  letter-spacing: 0.1em;
+}
+.timeline-title {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 300;
+  color: var(--white);
+  margin-bottom: 10px;
+}
+.timeline-text {
+  font-family: var(--sans);
+  font-size: 12px;
+  line-height: 1.8;
+  color: var(--white-dim);
+  max-width: 360px;
+}
+.timeline-item:nth-child(even) .timeline-text { margin-left: auto; }
+
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+}
+.value-card {
+  background: var(--charcoal);
+  padding: 56px 40px;
+  border-top: 2px solid var(--gold);
+}
+.value-num {
+  font-family: var(--serif);
+  font-size: 52px;
+  font-weight: 300;
+  color: var(--gold-dim);
+  line-height: 1;
+  margin-bottom: 20px;
+}
+.value-title {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--white);
+  margin-bottom: 16px;
+}
+.value-text {
+  font-family: var(--sans);
+  font-size: 12px;
+  line-height: 1.8;
+  color: var(--white-dim);
+}
+
+/* ─── PAGE HEADERS ─── */
+.page-header {
+  position: relative;
+  z-index: 2;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 48px 64px;
+  width: 100%;
+}
+.page-header .section-label { color: rgba(201,169,110,0.7); }
+.page-header .section-title { font-size: clamp(40px, 5vw, 72px); }
+
+/* ─── FOOTER ─── */
+footer {
+  background: var(--charcoal);
+  border-top: 1px solid var(--border);
+  padding: 80px 0 40px;
+}
+.footer-inner {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 64px;
+  padding-bottom: 64px;
+  border-bottom: 1px solid var(--border);
+}
+.footer-brand .nav-logo { margin-bottom: 24px; display: inline-flex; }
+.footer-tagline {
+  font-family: var(--sans);
+  font-size: 12px;
+  line-height: 1.8;
+  color: var(--white-dim);
+  max-width: 320px;
+  margin-bottom: 28px;
+}
+.footer-col-title {
+  font-family: var(--display);
+  font-size: 9px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 24px;
+}
+.footer-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.footer-links a {
+  font-family: var(--sans);
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  color: var(--white-dim);
+  text-decoration: none;
+  transition: color 0.3s;
+  cursor: pointer;
+}
+.footer-links a:hover { color: var(--white); }
+.footer-bottom {
+  padding-top: 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer-copy {
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.3);
+}
+.footer-invest {
+  font-family: var(--display);
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-decoration: none;
+  border: 1px solid var(--gold-dim);
+  padding: 10px 20px;
+  transition: all 0.3s;
+}
+.footer-invest:hover { background: var(--gold); color: var(--black); }
+
+/* ─── SCROLL ANIMATIONS ─── */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ─── MARQUEE ─── */
+.marquee-wrap {
+  overflow: hidden;
+  background: var(--gold);
+  padding: 16px 0;
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 30s linear infinite;
+}
+.marquee-item {
+  font-family: var(--display);
+  font-size: 10px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--black);
+  padding: 0 48px;
+  white-space: nowrap;
+}
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ─── MAP SECTION ─── */
+.world-presence {
+  background: var(--dark);
+  padding: 120px 48px;
+  max-width: 100%;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.world-presence::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, rgba(201,169,110,0.04) 0%, transparent 70%);
+}
+.world-stats {
+  display: flex;
+  justify-content: center;
+  gap: 80px;
+  margin-top: 64px;
+  flex-wrap: wrap;
+}
+.world-stat {
+  text-align: center;
+}
+.world-stat-num {
+  font-family: var(--serif);
+  font-size: clamp(40px, 5vw, 72px);
+  font-weight: 300;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.world-stat-label {
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--white-dim);
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 1200px) {
+  .nav-inner { padding: 0 32px; }
+  .section { padding: 100px 32px; }
+  .editorial-text { padding: 60px; }
+  .dividend-box { padding: 56px; gap: 56px; }
+  .contact-info, .contact-form-wrap { padding: 56px; }
+}
+
+@media (max-width: 900px) {
+  .nav-links, .nav-invest { display: none; }
+  .nav-toggle { display: flex; }
+  .editorial-block { grid-template-columns: 1fr; }
+  .editorial-block.reverse { direction: ltr; }
+  .editorial-img { height: 400px; }
+  .editorial-text { height: auto; padding: 48px; }
+  .portfolio-grid { grid-template-columns: 1fr; }
+  .portfolio-card { height: 360px; }
+  .portfolio-card:first-child { grid-column: 1; height: 400px; }
+  .features-grid { grid-template-columns: 1fr; }
+  .dividend-box { grid-template-columns: 1fr; gap: 32px; }
+  .ir-grid { grid-template-columns: 1fr; }
+  .ir-card.full { grid-column: 1; }
+  .leaders-grid { grid-template-columns: 1fr; }
+  .leader-card:first-child { grid-column: 1; grid-template-columns: 1fr; }
+  .leader-card:first-child .leader-img { height: 380px; }
+  .pillars-grid { grid-template-columns: 1fr 1fr; }
+  .news-grid { grid-template-columns: 1fr; }
+  .news-card:first-child { grid-column: 1; grid-template-columns: 1fr; }
+  .contact-grid { grid-template-columns: 1fr; }
+  .stats-inner { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .stat-item { padding: 0; border: none; text-align: center !important; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+  .timeline::before { left: 24px; }
+  .timeline-item { grid-template-columns: 1fr; padding-left: 48px; }
+  .timeline-dot { display: none; }
+  .timeline-item:nth-child(even) .timeline-content { text-align: left; }
+  .values-grid { grid-template-columns: 1fr 1fr; }
+  .world-stats { gap: 40px; }
+  .hero-content { padding: 0 24px; padding-top: var(--nav-height); }
+  .section { padding: 72px 24px; }
+  .chart-section { padding: 48px 24px; }
+  .world-presence { padding: 72px 24px; }
+  .page-header { padding: 0 24px 48px; }
+}
+
+@media (max-width: 600px) {
+  :root { --nav-height: 64px; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .pillars-grid { grid-template-columns: 1fr; }
+  .values-grid { grid-template-columns: 1fr; }
+  .hero-title { font-size: 36px; }
+  .hero-ctas { flex-direction: column; align-items: flex-start; }
+  .news-grid { grid-template-columns: 1fr; }
+  .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+  .chart-bars { gap: 10px; }
+}
+
+/* Mobile Nav Overlay */
+.mobile-nav {
+  position: fixed;
+  inset: 0;
+  background: rgba(10,10,10,0.97);
+  z-index: 999;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 36px;
+}
+.mobile-nav.open { display: flex; }
+.mobile-nav a {
+  font-family: var(--serif);
+  font-size: 32px;
+  font-weight: 300;
+  color: var(--white-dim);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.mobile-nav a:hover { color: var(--gold); }
+.mobile-close {
+  position: absolute;
+  top: 24px; right: 24px;
+  font-size: 28px;
+  color: var(--white);
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+/* Page transition */
+.page-transition {
+  position: fixed;
+  inset: 0;
+  background: var(--black);
+  z-index: 9999;
+  transform: scaleY(0);
+  transform-origin: top;
+  pointer-events: none;
+}
+.page-transition.entering {
+  animation: ptEnter 0.4s var(--ease) forwards;
+}
+.page-transition.leaving {
+  animation: ptLeave 0.4s var(--ease) forwards;
+}
+@keyframes ptEnter {
+  from { transform: scaleY(0); transform-origin: top; }
+  to { transform: scaleY(1); transform-origin: top; }
+}
+@keyframes ptLeave {
+  from { transform: scaleY(1); transform-origin: bottom; }
+  to { transform: scaleY(0); transform-origin: bottom; }
+}
+
+.gold-rule {
+  width: 60px;
+  height: 1px;
+  background: var(--gold);
+  margin: 32px 0;
+}
+.mt-32 { margin-top: 32px; }
+.mt-48 { margin-top: 48px; }
+.mt-64 { margin-top: 64px; }
+.mb-0 { margin-bottom: 0; }
+
+/* background section alternate */
+.bg-charcoal { background: var(--charcoal); }
+.bg-dark { background: var(--dark); }
+.full-width { max-width: 100%; padding-left: 0; padding-right: 0; }
+
+/* Quote block */
+.blockquote {
+  background: var(--dark);
+  border-left: 2px solid var(--gold);
+  padding: 48px 64px;
+  margin: 0;
+}
+.blockquote p {
+  font-family: var(--serif);
+  font-size: clamp(22px, 2.5vw, 36px);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--white);
+  line-height: 1.5;
+}
+.blockquote cite {
+  font-family: var(--display);
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-top: 20px;
+  display: block;
+  font-style: normal;
+}
+
+/* ─── ABOUT: Presence section ─── */
+.presence-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 2px;
+}
+.presence-item {
+  background: var(--charcoal);
+  padding: 36px 32px;
+  text-align: center;
+  transition: background 0.3s;
+  cursor: default;
+}
+.presence-item:hover { background: var(--dark); }
+.presence-flag { font-size: 28px; margin-bottom: 12px; }
+.presence-country {
+  font-family: var(--serif);
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--white);
+  margin-bottom: 4px;
+}
+.presence-type {
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: var(--gold);
+  text-transform: uppercase;
+}
+@media (max-width: 900px) {
+  .presence-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .blockquote { padding: 32px; }
+  .blockquote p { font-size: 20px; }
+}
+
+/* Loading screen */
+#loading {
+  position: fixed;
+  inset: 0;
+  background: var(--black);
+  z-index: 99999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.8s var(--ease);
+}
+#loading.hidden { opacity: 0; pointer-events: none; }
+.loading-logo {
+  font-family: var(--display);
+  font-size: 11px;
+  letter-spacing: 0.4em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 40px;
+  text-align: center;
+}
+.loading-logo span {
+  display: block;
+  font-size: 9px;
+  letter-spacing: 0.6em;
+  color: rgba(201,169,110,0.5);
+  margin-bottom: 6px;
+}
+.loading-bar-wrap {
+  width: 200px;
+  height: 1px;
+  background: rgba(201,169,110,0.15);
+  overflow: hidden;
+}
+.loading-bar {
+  height: 100%;
+  background: var(--gold);
+  width: 0;
+  animation: loadBar 1.4s var(--ease) forwards;
+}
+@keyframes loadBar {
+  to { width: 100%; }
+}
 </style>
 </head>
 <body>
 
-<!-- LOADING SCREEN -->
-<div id="loader">
-  <div class="loader-logo">The Qatari Investment Group</div>
-  <div class="loader-sub">Global Real Estate &amp; Investment</div>
-  <div class="loader-line"></div>
+<!-- Loading Screen -->
+<div id="loading">
+  <div class="loading-logo">
+    <span>Established 1995</span>
+    The Qatari Investment Group
+  </div>
+  <div class="loading-bar-wrap">
+    <div class="loading-bar"></div>
+  </div>
 </div>
 
-<!-- NAV -->
-<nav id="nav">
-  <a href="#hero" class="nav-logo">
-    <span class="nav-logo-main">QIG</span>
-    <span class="nav-logo-sub">The Qatari Investment Group</span>
-  </a>
-  <ul class="nav-links">
-    <li><a href="#presence">Global Presence</a></li>
-    <li><a href="#properties">Portfolio</a></li>
-    <li><a href="#investment">Investors</a></li>
-    <li><a href="#leadership">Leadership</a></li>
-    <li><a href="#news">Insights</a></li>
-    <li><a href="https://www.thesharegame.com/company/QA0000000309" class="nav-cta">Invest Now</a></li>
-  </ul>
+<!-- Custom Cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- Page Transition -->
+<div class="page-transition" id="pageTransition"></div>
+
+<!-- Mobile Nav -->
+<div class="mobile-nav" id="mobileNav">
+  <button class="mobile-close" id="mobileClose">✕</button>
+  <a onclick="navigate('home')">Home</a>
+  <a onclick="navigate('about')">About</a>
+  <a onclick="navigate('portfolio')">Portfolio</a>
+  <a onclick="navigate('investments')">Investments</a>
+  <a onclick="navigate('leadership')">Leadership</a>
+  <a onclick="navigate('investor-relations')">Investor Relations</a>
+  <a onclick="navigate('sustainability')">Sustainability</a>
+  <a onclick="navigate('news')">News</a>
+  <a onclick="navigate('contact')">Contact</a>
+  <a href="https://www.thesharegame.com/company/QA0000000309" target="_blank" style="color:var(--gold)">Invest Now</a>
+</div>
+
+<!-- Navigation -->
+<nav id="mainNav">
+  <div class="nav-inner">
+    <div class="nav-logo" onclick="navigate('home')" style="cursor:pointer">
+      <span>Est. 1995</span>
+      <span>The Qatari Investment Group</span>
+    </div>
+    <ul class="nav-links">
+      <li><a onclick="navigate('home')" data-page="home">Home</a></li>
+      <li><a onclick="navigate('about')" data-page="about">About</a></li>
+      <li><a onclick="navigate('portfolio')" data-page="portfolio">Portfolio</a></li>
+      <li><a onclick="navigate('investments')" data-page="investments">Investments</a></li>
+      <li><a onclick="navigate('leadership')" data-page="leadership">Leadership</a></li>
+      <li><a onclick="navigate('investor-relations')" data-page="investor-relations">Investor Relations</a></li>
+      <li><a onclick="navigate('news')" data-page="news">News</a></li>
+      <li><a onclick="navigate('contact')" data-page="contact">Contact</a></li>
+    </ul>
+    <a href="https://www.thesharegame.com/company/QA0000000309" target="_blank" class="nav-invest">Invest Now</a>
+    <div class="nav-toggle" id="navToggle">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
 </nav>
 
-<!-- HERO -->
-<section id="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-grid"></div>
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- HOME PAGE -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div class="page active" id="page-home">
 
-  <!-- Stylized skyline SVG -->
-  <div class="hero-skyline">
-    <svg class="hero-skyline-svg" viewBox="0 0 1400 200" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- Dubai-inspired skyline silhouette -->
-      <rect x="0" y="150" width="40" height="50" fill="#c9a84c"/>
-      <rect x="45" y="120" width="30" height="80" fill="#c9a84c"/>
-      <rect x="80" y="100" width="25" height="100" fill="#c9a84c"/>
-      <polygon points="93,100 92,70 94,70" fill="#c9a84c"/>
-      <rect x="110" y="130" width="35" height="70" fill="#c9a84c"/>
-      <rect x="150" y="80" width="20" height="120" fill="#c9a84c"/>
-      <polygon points="160,80 159,50 161,50" fill="#c9a84c"/>
-      <rect x="175" y="110" width="45" height="90" fill="#c9a84c"/>
-      <rect x="225" y="90" width="15" height="110" fill="#c9a84c"/>
-      <rect x="245" y="60" width="35" height="140" fill="#c9a84c"/>
-      <polygon points="263,60 261,20 265,20" fill="#c9a84c"/>
-      <rect x="285" y="100" width="25" height="100" fill="#c9a84c"/>
-      <rect x="315" y="70" width="30" height="130" fill="#c9a84c"/>
-      <rect x="350" y="120" width="50" height="80" fill="#c9a84c"/>
-      <rect x="405" y="85" width="20" height="115" fill="#c9a84c"/>
-      <!-- Burj Khalifa inspired -->
-      <rect x="430" y="10" width="18" height="190" fill="#c9a84c"/>
-      <polygon points="439,10 438,0 440,0" fill="#c9a84c"/>
-      <rect x="425" y="40" width="28" height="10" fill="#c9a84c"/>
-      <rect x="422" y="80" width="34" height="10" fill="#c9a84c"/>
-      <rect x="419" y="120" width="40" height="10" fill="#c9a84c"/>
-      <rect x="455" y="80" width="25" height="120" fill="#c9a84c"/>
-      <rect x="485" y="60" width="20" height="140" fill="#c9a84c"/>
-      <rect x="510" y="100" width="40" height="100" fill="#c9a84c"/>
-      <rect x="555" y="75" width="22" height="125" fill="#c9a84c"/>
-      <rect x="582" y="50" width="15" height="150" fill="#c9a84c"/>
-      <polygon points="590,50 589,25 591,25" fill="#c9a84c"/>
-      <rect x="602" y="110" width="55" height="90" fill="#c9a84c"/>
-      <rect x="662" y="85" width="18" height="115" fill="#c9a84c"/>
-      <rect x="685" y="65" width="30" height="135" fill="#c9a84c"/>
-      <rect x="720" y="95" width="25" height="105" fill="#c9a84c"/>
-      <rect x="750" y="45" width="20" height="155" fill="#c9a84c"/>
-      <polygon points="760,45 759,10 761,10" fill="#c9a84c"/>
-      <rect x="775" y="80" width="35" height="120" fill="#c9a84c"/>
-      <rect x="815" y="115" width="45" height="85" fill="#c9a84c"/>
-      <rect x="865" y="90" width="22" height="110" fill="#c9a84c"/>
-      <rect x="892" y="55" width="18" height="145" fill="#c9a84c"/>
-      <rect x="915" y="120" width="40" height="80" fill="#c9a84c"/>
-      <rect x="960" y="75" width="28" height="125" fill="#c9a84c"/>
-      <rect x="993" y="95" width="20" height="105" fill="#c9a84c"/>
-      <rect x="1018" y="50" width="25" height="150" fill="#c9a84c"/>
-      <polygon points="1031,50 1030,18 1032,18" fill="#c9a84c"/>
-      <rect x="1048" y="100" width="50" height="100" fill="#c9a84c"/>
-      <rect x="1103" y="80" width="20" height="120" fill="#c9a84c"/>
-      <rect x="1128" y="60" width="30" height="140" fill="#c9a84c"/>
-      <rect x="1163" y="110" width="35" height="90" fill="#c9a84c"/>
-      <rect x="1203" y="75" width="22" height="125" fill="#c9a84c"/>
-      <rect x="1230" y="40" width="18" height="160" fill="#c9a84c"/>
-      <polygon points="1239,40 1238,8 1240,8" fill="#c9a84c"/>
-      <rect x="1253" y="95" width="40" height="105" fill="#c9a84c"/>
-      <rect x="1298" y="70" width="30" height="130" fill="#c9a84c"/>
-      <rect x="1333" y="120" width="35" height="80" fill="#c9a84c"/>
-      <rect x="1373" y="90" width="27" height="110" fill="#c9a84c"/>
-    </svg>
-  </div>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-label">Global Real Estate &amp; Investment</div>
+      <h1 class="hero-title">Investing in <em>Landmark</em> Assets<br>Across the World.</h1>
+      <p class="hero-sub">A global investment and real estate group shaping the future through luxury developments, strategic investments, and international growth.</p>
+      <div class="hero-ctas">
+        <a class="btn-primary" onclick="navigate('portfolio')" style="cursor:pointer">Explore Portfolio</a>
+        <a class="btn-ghost" href="https://www.thesharegame.com/company/QA0000000309" target="_blank">Invest Now</a>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
 
-  <div class="hero-content">
-    <div class="hero-eyebrow">Established · Qatar · Global Investment Group</div>
-    <h1 class="hero-title">
-      Investing in the<br><em>Future of Global</em><br>Real Estate
-    </h1>
-    <p class="hero-subtitle">A world-leading investment group with luxury developments and strategic assets across more than 100 countries.</p>
-    <div class="hero-ctas">
-      <a href="https://www.thesharegame.com/company/QA0000000309" class="btn-primary" target="_blank" rel="noopener">Invest Now</a>
-      <a href="#properties" class="btn-secondary">Explore Portfolio</a>
+  <!-- Marquee -->
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <span class="marquee-item">Luxury Hotels</span>
+      <span class="marquee-item">·</span>
+      <span class="marquee-item">Global Infrastructure</span>
+      <span class="marquee-item">·</span>
+      <span class="marquee-item">Commercial Real Estate</span>
+      <span class="marquee-item">·</span>
+      <span class="marquee-item">Mixed-Use Developments</span>
+      <span class="marquee-item">·</span>
+      <span class="marquee-item">5% Annual Dividend</span>
+      <span class="marquee-item">·</span>
+      <span class="marquee-item">100+ Countries</span>
+      <span class="marquee-item">·</span>
+      <span class="marquee-item">Luxury Hotels</span>
+      <span class="marquee-item">·</span>
+      <span class="marquee-item">Global Infrastructure</span>
+      <span class="marquee-item">·</span>
+      <span class="marquee-item">Commercial Real Estate</span>
+      <span class="marquee-item">·</span>
+      <span class="marquee-item">Mixed-Use Developments</span>
+      <span class="marquee-item">·</span>
+      <span class="marquee-item">5% Annual Dividend</span>
+      <span class="marquee-item">·</span>
+      <span class="marquee-item">100+ Countries</span>
+      <span class="marquee-item">·</span>
     </div>
   </div>
 
-  <div class="hero-scroll">
-    <span>Scroll</span>
-    <div class="scroll-line"></div>
+  <!-- Stats Bar -->
+  <div class="stats-bar">
+    <div class="stats-inner">
+      <div class="stat-item reveal">
+        <div class="stat-num">100+</div>
+        <div class="stat-label">Countries Worldwide</div>
+      </div>
+      <div class="stat-item reveal reveal-delay-1">
+        <div class="stat-num">$280B</div>
+        <div class="stat-label">Assets Under Management</div>
+      </div>
+      <div class="stat-item reveal reveal-delay-2">
+        <div class="stat-num">5%</div>
+        <div class="stat-label">Annual Dividend Yield</div>
+      </div>
+      <div class="stat-item reveal reveal-delay-3">
+        <div class="stat-num">30+</div>
+        <div class="stat-label">Years of Excellence</div>
+      </div>
+    </div>
   </div>
-</section>
 
-<!-- STATS -->
-<div id="stats">
-  <div class="stats-grid">
-    <div class="stat-item reveal">
-      <span class="stat-num" data-target="100">0</span><span class="stat-num" style="font-size:2rem">+</span>
-      <span class="stat-label">Countries Worldwide</span>
-    </div>
-    <div class="stat-item reveal reveal-delay-1">
-      <span class="stat-num">$250B</span><span class="stat-num" style="font-size:2rem">+</span>
-      <span class="stat-label">Assets Under Management</span>
-    </div>
-    <div class="stat-item reveal reveal-delay-2">
-      <span class="stat-num" data-target="500">0</span><span class="stat-num" style="font-size:2rem">+</span>
-      <span class="stat-label">Premium Properties</span>
-    </div>
-    <div class="stat-item reveal reveal-delay-3">
-      <span class="stat-num" data-target="50000">0</span><span class="stat-num" style="font-size:2rem">+</span>
-      <span class="stat-label">Global Employees</span>
+  <!-- Editorial Block 1 -->
+  <div class="editorial-block reveal" style="max-width:1600px;margin:2px auto;">
+    <img src="https://images.unsplash.com/photo-1582407947304-fd86f028f716?w=1200&q=85" alt="Dubai Skyline" class="editorial-img">
+    <div class="editorial-text">
+      <div class="section-label">Global Reach</div>
+      <h2 class="section-title mt-32">Presence in Every<br><em>Major Market</em></h2>
+      <div class="gold-rule"></div>
+      <p class="section-body">From the gleaming towers of Dubai to the cultural landmarks of Tokyo, The Qatari Investment Group has established a commanding presence across more than 100 countries, curating a portfolio of irreplaceable assets in the world's most dynamic markets.</p>
+      <a class="btn-ghost mt-48" onclick="navigate('portfolio')" style="cursor:pointer;display:inline-block;margin-top:40px">View Global Portfolio</a>
     </div>
   </div>
+
+  <!-- Editorial Block 2 -->
+  <div class="editorial-block reverse reveal" style="max-width:1600px;margin:2px auto;">
+    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1200&q=85" alt="Luxury Hotel" class="editorial-img">
+    <div class="editorial-text">
+      <div class="section-label">Luxury Developments</div>
+      <h2 class="section-title mt-32">Redefining<br><em>Luxury</em> Living</h2>
+      <div class="gold-rule"></div>
+      <p class="section-body">Our luxury hotels and resorts stand as testaments to architectural excellence and uncompromising service. Each property is conceived as a landmark — a destination in its own right — designed to transcend the ordinary and define the extraordinary.</p>
+      <a class="btn-ghost mt-48" onclick="navigate('portfolio')" style="cursor:pointer;display:inline-block;margin-top:40px">Explore Properties</a>
+    </div>
+  </div>
+
+  <!-- Editorial Block 3 -->
+  <div class="editorial-block reveal" style="max-width:1600px;margin:2px auto;">
+    <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1200&q=85" alt="Commercial Towers" class="editorial-img">
+    <div class="editorial-text">
+      <div class="section-label">Investment Strength</div>
+      <h2 class="section-title mt-32">Built on<br><em>Enduring</em> Value</h2>
+      <div class="gold-rule"></div>
+      <p class="section-body">Our investment philosophy centres on acquiring and developing assets with lasting intrinsic value. Strategic diversification across geographies, asset classes, and sectors ensures resilience — and the consistent delivery of superior returns to our investors.</p>
+      <a class="btn-primary mt-48" href="https://www.thesharegame.com/company/QA0000000309" target="_blank" style="display:inline-block;margin-top:40px">Invest Now</a>
+    </div>
+  </div>
+
+  <!-- World Presence -->
+  <div class="world-presence reveal">
+    <div class="section-label" style="justify-content:center;max-width:1600px;margin:0 auto 20px;">
+      <span style="display:inline-flex;align-items:center;gap:16px">
+        <span style="width:32px;height:1px;background:var(--gold);display:inline-block"></span>
+        Global Footprint
+      </span>
+    </div>
+    <h2 class="section-title" style="font-size:clamp(36px,4.5vw,72px);max-width:700px;margin:0 auto">The World is<br><em>Our Portfolio</em></h2>
+    <div class="world-stats">
+      <div class="world-stat reveal reveal-delay-1">
+        <div class="world-stat-num">342</div>
+        <div class="world-stat-label">Active Properties</div>
+      </div>
+      <div class="world-stat reveal reveal-delay-2">
+        <div class="world-stat-num">47</div>
+        <div class="world-stat-label">Luxury Hotels</div>
+      </div>
+      <div class="world-stat reveal reveal-delay-3">
+        <div class="world-stat-num">23</div>
+        <div class="world-stat-label">Iconic Skyscrapers</div>
+      </div>
+      <div class="world-stat reveal reveal-delay-4">
+        <div class="world-stat-num">$12B</div>
+        <div class="world-stat-label">Development Pipeline</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quote -->
+  <div style="max-width:1600px;margin:2px auto;padding:0 48px;" class="reveal">
+    <div class="blockquote">
+      <p>"We do not simply invest in properties. We invest in the future of cities, in the dreams of communities, and in the enduring prosperity of our shareholders."</p>
+      <cite>His Excellency Sheikh Khalid Al-Thani — Chairman, The Qatari Investment Group</cite>
+    </div>
+  </div>
+
+  <!-- CTA Section -->
+  <div style="background:var(--charcoal);text-align:center;padding:120px 48px;border-top:1px solid var(--border);" class="reveal">
+    <div class="section-label" style="justify-content:center">
+      <span style="display:inline-flex;align-items:center;gap:16px">
+        <span style="width:32px;height:1px;background:var(--gold);display:inline-block"></span>
+        Join Our Investors
+      </span>
+    </div>
+    <h2 class="section-title mt-32" style="font-size:clamp(36px,4.5vw,64px);margin:20px auto;max-width:700px;">Secure Your Position in a<br><em>World-Class</em> Portfolio</h2>
+    <p style="font-family:var(--sans);font-size:15px;line-height:1.8;color:var(--white-dim);max-width:520px;margin:24px auto 48px;">Benefit from a reliable 5% annual dividend and long-term capital appreciation through one of the world's most diversified real estate investment portfolios.</p>
+    <a href="https://www.thesharegame.com/company/QA0000000309" target="_blank" class="btn-primary">Invest Now</a>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="nav-logo" style="margin-bottom:20px;">
+            <span>Est. 1995</span>
+            <span>The Qatari Investment Group</span>
+          </div>
+          <p class="footer-tagline">A global investment and real estate group managing landmark assets across more than 100 countries, delivering enduring value to investors worldwide.</p>
+          <a href="https://www.thesharegame.com/company/QA0000000309" target="_blank" class="footer-invest">Invest Now</a>
+        </div>
+        <div>
+          <div class="footer-col-title">Company</div>
+          <ul class="footer-links">
+            <li><a onclick="navigate('about')">About Us</a></li>
+            <li><a onclick="navigate('leadership')">Leadership</a></li>
+            <li><a onclick="navigate('sustainability')">Sustainability</a></li>
+            <li><a onclick="navigate('news')">News &amp; Insights</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Investments</div>
+          <ul class="footer-links">
+            <li><a onclick="navigate('portfolio')">Global Portfolio</a></li>
+            <li><a onclick="navigate('investments')">Investment Case</a></li>
+            <li><a onclick="navigate('investor-relations')">Investor Relations</a></li>
+            <li><a href="https://www.thesharegame.com/company/QA0000000309" target="_blank">Invest Now</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Contact</div>
+          <ul class="footer-links">
+            <li><a onclick="navigate('contact')">Get in Touch</a></li>
+            <li><a href="mailto:bobjerf55@gmail.com">Investor Enquiries</a></li>
+            <li><a href="mailto:bobjerf55@gmail.com">Corporate Relations</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2025 The Qatari Investment Group. All rights reserved. Registered in Qatar.</span>
+        <a href="mailto:bobjerf55@gmail.com" class="footer-invest">Contact Us</a>
+      </div>
+    </div>
+  </footer>
 </div>
 
-<div class="divider"></div>
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- ABOUT PAGE -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div class="page" id="page-about">
+  <div class="about-hero">
+    <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=2400&q=80" alt="About">
+    <div style="position:absolute;inset:0;background:linear-gradient(to right, rgba(10,10,10,0.9) 0%, rgba(10,10,10,0.4) 100%)"></div>
+    <div class="page-header">
+      <div class="section-label">Our Story</div>
+      <h1 class="section-title" style="font-size:clamp(40px,5.5vw,80px);">About<br><em>The Group</em></h1>
+    </div>
+  </div>
 
-<!-- GLOBAL PRESENCE -->
-<section id="presence">
-  <div class="presence-inner">
+  <!-- History -->
+  <div class="section reveal">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;" class="editorial-responsive">
+      <div>
+        <div class="section-label">History</div>
+        <h2 class="section-title mt-32">Three Decades of<br><em>Global Vision</em></h2>
+        <div class="gold-rule"></div>
+        <p class="section-body">Founded in Doha in 1995, The Qatari Investment Group was established with a singular conviction: that the world's most exceptional real estate assets would define the prosperity of the next generation. From a modest beginning in Gulf real estate, we have grown into one of the most respected international investment organisations in the world.</p>
+        <p class="section-body mt-32" style="margin-top:20px">Our journey has been defined by bold vision, disciplined execution, and an unwavering commitment to excellence — values instilled at our founding and rigorously maintained across every decision we make today.</p>
+      </div>
+      <div>
+        <img src="https://images.unsplash.com/photo-1460574283810-2aab119d8511?w=1000&q=80" alt="Doha Skyline" style="width:100%;height:520px;object-fit:cover;filter:brightness(0.85) saturate(0.9);">
+      </div>
+    </div>
+  </div>
+
+  <!-- Timeline -->
+  <div style="background:var(--dark);padding:80px 0;">
+    <div class="section" style="padding-top:0;padding-bottom:0;">
+      <div class="section-label reveal">Milestones</div>
+      <h2 class="section-title reveal mt-32" style="margin-bottom:0;margin-top:16px">Our Journey</h2>
+    </div>
+    <div class="section" style="padding-top:0;padding-bottom:0;">
+      <div class="timeline">
+        <div class="timeline-item reveal">
+          <div class="timeline-content">
+            <div class="timeline-year">1995</div>
+            <div class="timeline-title">Foundation in Doha</div>
+            <p class="timeline-text">Established by Sheikh Khalid Al-Thani with an initial portfolio of premier Gulf commercial properties and a vision to expand globally.</p>
+          </div>
+          <div class="timeline-dot"></div>
+          <div></div>
+        </div>
+        <div class="timeline-item reveal">
+          <div></div>
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-year">2001</div>
+            <div class="timeline-title">European Expansion</div>
+            <p class="timeline-text">Strategic acquisitions across London, Paris, and Frankfurt establish the Group as a major European institutional property investor.</p>
+          </div>
+        </div>
+        <div class="timeline-item reveal">
+          <div class="timeline-content">
+            <div class="timeline-year">2007</div>
+            <div class="timeline-title">First Luxury Hotel Portfolio</div>
+            <p class="timeline-text">Launch of our first portfolio of five-star luxury hotels across the Middle East and Mediterranean, setting a new standard for hospitality investment.</p>
+          </div>
+          <div class="timeline-dot"></div>
+          <div></div>
+        </div>
+        <div class="timeline-item reveal">
+          <div></div>
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-year">2012</div>
+            <div class="timeline-title">Asia Pacific Entry</div>
+            <p class="timeline-text">Major investments in Japan, Singapore, and Australia mark our entry into the world's fastest-growing real estate markets.</p>
+          </div>
+        </div>
+        <div class="timeline-item reveal">
+          <div class="timeline-content">
+            <div class="timeline-year">2018</div>
+            <div class="timeline-title">100-Country Milestone</div>
+            <p class="timeline-text">The Group reaches active operations in 100 countries, cementing its position as one of the most globally diversified investment organisations on earth.</p>
+          </div>
+          <div class="timeline-dot"></div>
+          <div></div>
+        </div>
+        <div class="timeline-item reveal">
+          <div></div>
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-year">2025</div>
+            <div class="timeline-title">$280B in Assets</div>
+            <p class="timeline-text">The Qatari Investment Group manages over $280 billion in global assets, delivering consistent 5% annual dividends and pursuing an ambitious $12 billion development pipeline.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Values -->
+  <div class="section reveal">
+    <div class="section-label">Our Values</div>
+    <h2 class="section-title mt-32" style="margin-bottom:64px;margin-top:16px">The Principles That<br><em>Guide</em> Us</h2>
+    <div class="values-grid">
+      <div class="value-card reveal">
+        <div class="value-num">01</div>
+        <div class="value-title">Integrity</div>
+        <p class="value-text">Every investment decision is grounded in transparency, accountability, and the highest standards of corporate governance. We hold ourselves to a standard that exceeds what is required.</p>
+      </div>
+      <div class="value-card reveal reveal-delay-1">
+        <div class="value-num">02</div>
+        <div class="value-title">Excellence</div>
+        <p class="value-text">We pursue only the finest assets in the world's most important markets. Mediocrity is not an option — our portfolio reflects a relentless commitment to quality in every detail.</p>
+      </div>
+      <div class="value-card reveal reveal-delay-2">
+        <div class="value-num">03</div>
+        <div class="value-title">Vision</div>
+        <p class="value-text">We take a long-term perspective in everything we do. Our decisions are guided by where the world is heading, not simply where it has been — enabling us to build enduring value.</p>
+      </div>
+      <div class="value-card reveal reveal-delay-3">
+        <div class="value-num">04</div>
+        <div class="value-title">Legacy</div>
+        <p class="value-text">The assets we develop and acquire are built to endure for generations. We are stewards of places and communities, creating a legacy that extends far beyond financial return.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Global Presence -->
+  <div style="background:var(--dark);padding:80px 0 0;" class="reveal">
+    <div class="section" style="padding-top:48px;padding-bottom:48px;">
+      <div class="section-label">Global Presence</div>
+      <h2 class="section-title mt-32" style="margin-top:16px;margin-bottom:48px">Present Across<br><em>Every Continent</em></h2>
+    </div>
+    <div class="presence-grid" style="max-width:1600px;margin:0 auto;">
+      <div class="presence-item reveal"><div class="presence-flag">🇦🇪</div><div class="presence-country">United Arab Emirates</div><div class="presence-type">HQ &amp; Luxury Hotels</div></div>
+      <div class="presence-item reveal"><div class="presence-flag">🇯🇵</div><div class="presence-country">Japan</div><div class="presence-type">Resorts &amp; Mixed-Use</div></div>
+      <div class="presence-item reveal"><div class="presence-flag">🇬🇧</div><div class="presence-country">United Kingdom</div><div class="presence-type">Commercial Real Estate</div></div>
+      <div class="presence-item reveal"><div class="presence-flag">🇺🇸</div><div class="presence-country">United States</div><div class="presence-type">Skyscrapers &amp; Hotels</div></div>
+      <div class="presence-item reveal"><div class="presence-flag">🇫🇷</div><div class="presence-country">France</div><div class="presence-type">Luxury Developments</div></div>
+      <div class="presence-item reveal"><div class="presence-flag">🇸🇬</div><div class="presence-country">Singapore</div><div class="presence-type">Mixed-Use &amp; Commercial</div></div>
+      <div class="presence-item reveal"><div class="presence-flag">🇹🇳</div><div class="presence-country">Tunisia</div><div class="presence-type">Beach Resorts</div></div>
+      <div class="presence-item reveal"><div class="presence-flag">🇩🇪</div><div class="presence-country">Germany</div><div class="presence-type">Infrastructure</div></div>
+      <div class="presence-item reveal"><div class="presence-flag">🇦🇺</div><div class="presence-country">Australia</div><div class="presence-type">Commercial &amp; Retail</div></div>
+      <div class="presence-item reveal"><div class="presence-flag">🇧🇷</div><div class="presence-country">Brazil</div><div class="presence-type">Hotels &amp; Resorts</div></div>
+    </div>
+  </div>
+
+  <footer style="background:var(--charcoal);border-top:1px solid var(--border);padding:40px 0;">
+    <div class="footer-inner">
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2025 The Qatari Investment Group. All rights reserved.</span>
+        <a href="https://www.thesharegame.com/company/QA0000000309" target="_blank" class="footer-invest">Invest Now</a>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- PORTFOLIO PAGE -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div class="page" id="page-portfolio">
+  <section style="position:relative;height:65vh;overflow:hidden;display:flex;align-items:flex-end;">
+    <img src="https://images.unsplash.com/photo-1555881400-74d7acaacd8b?w=2400&q=80" alt="Portfolio" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.45) saturate(0.8);">
+    <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(10,10,10,0.95) 0%, transparent 60%);"></div>
+    <div class="page-header">
+      <div class="section-label">Our Holdings</div>
+      <h1 class="section-title" style="font-size:clamp(40px,5.5vw,80px);">Global<br><em>Portfolio</em></h1>
+      <p style="font-family:var(--sans);font-size:14px;color:var(--white-dim);max-width:480px;margin-top:20px;line-height:1.8;">342 active properties across 100+ countries — from towering commercial skyscrapers to intimate beachfront retreats.</p>
+    </div>
+  </section>
+
+  <!-- Portfolio Grid -->
+  <div class="portfolio-grid" style="max-width:1600px;margin:2px auto;padding:0;" >
+    <div class="portfolio-card reveal">
+      <img src="https://images.unsplash.com/photo-1548574505-5e239809ee19?w=1400&q=80" alt="Luxury Hotel Dubai">
+      <div class="portfolio-card-overlay">
+        <div class="portfolio-card-cat">Luxury Hotel</div>
+        <div class="portfolio-card-title">The Pinnacle<br>Resort &amp; Spa</div>
+        <div class="portfolio-card-loc">Palm Jumeirah, Dubai</div>
+      </div>
+      <div class="portfolio-card-arrow">↗</div>
+    </div>
+    <div class="portfolio-card reveal reveal-delay-1">
+      <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=800&q=80" alt="Tokyo Resort">
+      <div class="portfolio-card-overlay">
+        <div class="portfolio-card-cat">Resort</div>
+        <div class="portfolio-card-title">Kyoto Mountain<br>Retreat</div>
+        <div class="portfolio-card-loc">Kyoto, Japan</div>
+      </div>
+      <div class="portfolio-card-arrow">↗</div>
+    </div>
+    <div class="portfolio-card reveal reveal-delay-2">
+      <img src="https://images.unsplash.com/photo-1575517111839-3a3843ee7f5d?w=800&q=80" alt="London Commercial">
+      <div class="portfolio-card-overlay">
+        <div class="portfolio-card-cat">Commercial Tower</div>
+        <div class="portfolio-card-title">One Canary<br>Wharf</div>
+        <div class="portfolio-card-loc">London, United Kingdom</div>
+      </div>
+      <div class="portfolio-card-arrow">↗</div>
+    </div>
+    <div class="portfolio-card reveal">
+      <img src="https://images.unsplash.com/photo-1492138786289-d35ea832da43?w=800&q=80" alt="Singapore Tower">
+      <div class="portfolio-card-overlay">
+        <div class="portfolio-card-cat">Skyscraper</div>
+        <div class="portfolio-card-title">Marina Bay<br>Tower</div>
+        <div class="portfolio-card-loc">Singapore</div>
+      </div>
+      <div class="portfolio-card-arrow">↗</div>
+    </div>
+    <div class="portfolio-card reveal reveal-delay-1">
+      <img src="https://images.unsplash.com/photo-1578645510447-e20b4311e3ce?w=800&q=80" alt="Beach Resort Tunisia">
+      <div class="portfolio-card-overlay">
+        <div class="portfolio-card-cat">Beach Resort</div>
+        <div class="portfolio-card-title">La Côte d'Azur<br>Resort</div>
+        <div class="portfolio-card-loc">Hammamet, Tunisia</div>
+      </div>
+      <div class="portfolio-card-arrow">↗</div>
+    </div>
+    <div class="portfolio-card reveal reveal-delay-2">
+      <img src="https://images.unsplash.com/photo-1485470733090-0aae1788d5af?w=800&q=80" alt="NYC Mixed Use">
+      <div class="portfolio-card-overlay">
+        <div class="portfolio-card-cat">Mixed-Use Development</div>
+        <div class="portfolio-card-title">Manhattan<br>Gateway Complex</div>
+        <div class="portfolio-card-loc">New York, USA</div>
+      </div>
+      <div class="portfolio-card-arrow">↗</div>
+    </div>
+  </div>
+
+  <!-- Categories Section -->
+  <div class="section reveal">
+    <div class="section-label">Asset Classes</div>
+    <h2 class="section-title mt-32" style="margin-top:16px;margin-bottom:64px">Diversified Across<br><em>Every Sector</em></h2>
+    <div class="features-grid">
+      <div class="feature-card reveal">
+        <div class="feature-icon">🏨</div>
+        <div class="feature-title">Luxury Hotels &amp; Resorts</div>
+        <p class="feature-text">47 five-star properties across the world's most coveted destinations, from the Maldives to the Swiss Alps. Each delivers an unparalleled guest experience and consistent occupancy.</p>
+      </div>
+      <div class="feature-card reveal reveal-delay-1">
+        <div class="feature-icon">🏙</div>
+        <div class="feature-title">Commercial Towers &amp; Skyscrapers</div>
+        <p class="feature-text">23 iconic commercial towers in global financial districts. Premium Grade-A office space commanding the highest rents in their respective markets.</p>
+      </div>
+      <div class="feature-card reveal reveal-delay-2">
+        <div class="feature-icon">🏗</div>
+        <div class="feature-title">Mixed-Use Developments</div>
+        <p class="feature-text">Integrated urban developments combining retail, residential, hospitality and commercial space into vibrant, self-sustaining destinations that anchor entire districts.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">🌐</div>
+        <div class="feature-title">Infrastructure Assets</div>
+        <p class="feature-text">Strategic infrastructure investments across transport, energy, and logistics in emerging and established markets — generating stable, long-duration income streams.</p>
+      </div>
+      <div class="feature-card reveal reveal-delay-1">
+        <div class="feature-icon">🏖</div>
+        <div class="feature-title">Beach &amp; Leisure Resorts</div>
+        <p class="feature-text">Premium leisure and resort destinations from the Mediterranean to Southeast Asia, capitalising on the global growth in luxury travel and experiential tourism.</p>
+      </div>
+      <div class="feature-card reveal reveal-delay-2">
+        <div class="feature-icon">📈</div>
+        <div class="feature-title">Strategic Investments</div>
+        <p class="feature-text">Minority and majority stakes in high-growth real estate businesses, REITs, and development platforms across North America, Europe, and Asia Pacific.</p>
+      </div>
+    </div>
+  </div>
+
+  <footer style="background:var(--charcoal);border-top:1px solid var(--border);padding:40px 0;">
+    <div class="footer-inner">
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2025 The Qatari Investment Group. All rights reserved.</span>
+        <a href="https://www.thesharegame.com/company/QA0000000309" target="_blank" class="footer-invest">Invest Now</a>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- INVESTMENTS PAGE -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div class="page" id="page-investments">
+  <div class="invest-hero">
+    <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=2400&q=80" alt="Investments">
+    <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0.2) 100%);"></div>
+    <div class="invest-hero-content">
+      <div class="section-label" style="color:rgba(201,169,110,0.7)">For Investors</div>
+      <h1 class="section-title" style="font-size:clamp(40px,5.5vw,80px);margin-top:16px;">The<br><em>Investment Case</em></h1>
+    </div>
+  </div>
+
+  <!-- Dividend Highlight -->
+  <div class="dividend-box reveal" style="max-width:1600px;margin:2px auto;">
     <div>
-      <div class="section-label reveal">Global Presence</div>
-      <h2 class="section-title reveal reveal-delay-1">Spanning <em>Every</em><br>Continent</h2>
-      <p class="section-body reveal reveal-delay-2">
-        From the gleaming towers of Doha to the tranquil countryside of rural Japan, from the azure Mediterranean coast to the steel-and-glass canyons of Manhattan — The Qatari Investment Group has established a presence that transcends borders and connects cultures through world-class development.
-      </p>
-      <div class="region-tags reveal reveal-delay-3">
-        <span class="region-tag">Qatar</span>
-        <span class="region-tag">Dubai</span>
-        <span class="region-tag">Japan</span>
-        <span class="region-tag">Tunisia</span>
-        <span class="region-tag">Europe</span>
-        <span class="region-tag">North America</span>
-        <span class="region-tag">Asia-Pacific</span>
-        <span class="region-tag">Africa</span>
-        <span class="region-tag">Latin America</span>
-      </div>
+      <div class="section-label">Annual Dividend</div>
+      <div class="dividend-num" style="margin-top:24px;">5<span class="dividend-sup">%</span></div>
+      <p style="font-family:var(--sans);font-size:14px;color:var(--white-dim);line-height:1.8;max-width:400px;margin-top:20px;">A reliable 5% annual dividend — distributed consistently to shareholders for over two decades — reflecting the resilience and income-generating power of our global asset portfolio.</p>
+      <a href="https://www.thesharegame.com/company/QA0000000309" target="_blank" class="btn-primary" style="margin-top:40px;display:inline-block;">Invest Now</a>
     </div>
-
-    <div class="world-map-container reveal reveal-delay-2">
-      <svg class="world-map-svg" viewBox="0 0 900 500" xmlns="http://www.w3.org/2000/svg">
-        <!-- Simplified world map paths -->
-        <defs>
-          <radialGradient id="mapGlow" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stop-color="#c9a84c" stop-opacity="0.15"/>
-            <stop offset="100%" stop-color="#c9a84c" stop-opacity="0"/>
-          </radialGradient>
-        </defs>
-        <rect width="900" height="500" fill="url(#mapGlow)"/>
-        <!-- Grid lines -->
-        <g stroke="#c9a84c" stroke-opacity="0.08" stroke-width="0.5">
-          <line x1="0" y1="100" x2="900" y2="100"/>
-          <line x1="0" y1="200" x2="900" y2="200"/>
-          <line x1="0" y1="300" x2="900" y2="300"/>
-          <line x1="0" y1="400" x2="900" y2="400"/>
-          <line x1="100" y1="0" x2="100" y2="500"/>
-          <line x1="200" y1="0" x2="200" y2="500"/>
-          <line x1="300" y1="0" x2="300" y2="500"/>
-          <line x1="400" y1="0" x2="400" y2="500"/>
-          <line x1="500" y1="0" x2="500" y2="500"/>
-          <line x1="600" y1="0" x2="600" y2="500"/>
-          <line x1="700" y1="0" x2="700" y2="500"/>
-          <line x1="800" y1="0" x2="800" y2="500"/>
-        </g>
-        <!-- Simplified continent shapes -->
-        <!-- North America -->
-        <path d="M80,80 L180,70 L200,90 L210,140 L190,180 L160,200 L130,240 L100,260 L80,230 L60,200 L50,160 L70,120 Z" fill="#c9a84c" fill-opacity="0.12" stroke="#c9a84c" stroke-opacity="0.3" stroke-width="0.8"/>
-        <!-- South America -->
-        <path d="M150,270 L190,260 L210,300 L220,360 L200,420 L170,440 L145,410 L130,360 L140,310 Z" fill="#c9a84c" fill-opacity="0.12" stroke="#c9a84c" stroke-opacity="0.3" stroke-width="0.8"/>
-        <!-- Europe -->
-        <path d="M390,80 L450,70 L470,90 L460,120 L430,130 L400,120 L385,100 Z" fill="#c9a84c" fill-opacity="0.12" stroke="#c9a84c" stroke-opacity="0.3" stroke-width="0.8"/>
-        <!-- Africa -->
-        <path d="M400,140 L460,130 L490,160 L500,240 L480,320 L440,360 L400,350 L370,300 L360,220 L370,160 Z" fill="#c9a84c" fill-opacity="0.12" stroke="#c9a84c" stroke-opacity="0.3" stroke-width="0.8"/>
-        <!-- Middle East -->
-        <path d="M490,130 L540,120 L560,150 L550,190 L510,200 L485,180 Z" fill="#c9a84c" fill-opacity="0.2" stroke="#c9a84c" stroke-opacity="0.5" stroke-width="0.8"/>
-        <!-- Asia -->
-        <path d="M560,60 L720,50 L760,100 L780,160 L740,220 L680,240 L620,220 L560,200 L540,170 L550,110 Z" fill="#c9a84c" fill-opacity="0.12" stroke="#c9a84c" stroke-opacity="0.3" stroke-width="0.8"/>
-        <!-- Australia -->
-        <path d="M700,300 L770,290 L800,330 L790,390 L740,400 L700,370 L685,330 Z" fill="#c9a84c" fill-opacity="0.12" stroke="#c9a84c" stroke-opacity="0.3" stroke-width="0.8"/>
-
-        <!-- Pulsing location dots -->
-        <!-- Qatar/Dubai -->
-        <circle cx="530" cy="165" r="5" fill="#c9a84c" fill-opacity="0.9">
-          <animate attributeName="r" values="5;12;5" dur="2s" repeatCount="indefinite"/>
-          <animate attributeName="fill-opacity" values="0.9;0;0.9" dur="2s" repeatCount="indefinite"/>
-        </circle>
-        <circle cx="530" cy="165" r="4" fill="#c9a84c"/>
-        <!-- Japan -->
-        <circle cx="755" cy="125" r="5" fill="#c9a84c" fill-opacity="0.9">
-          <animate attributeName="r" values="5;12;5" dur="2.3s" repeatCount="indefinite"/>
-          <animate attributeName="fill-opacity" values="0.9;0;0.9" dur="2.3s" repeatCount="indefinite"/>
-        </circle>
-        <circle cx="755" cy="125" r="4" fill="#c9a84c"/>
-        <!-- London -->
-        <circle cx="415" cy="88" r="4" fill="#c9a84c" fill-opacity="0.9">
-          <animate attributeName="r" values="4;10;4" dur="2.7s" repeatCount="indefinite"/>
-          <animate attributeName="fill-opacity" values="0.9;0;0.9" dur="2.7s" repeatCount="indefinite"/>
-        </circle>
-        <circle cx="415" cy="88" r="3" fill="#c9a84c"/>
-        <!-- New York -->
-        <circle cx="165" cy="135" r="4" fill="#c9a84c" fill-opacity="0.9">
-          <animate attributeName="r" values="4;10;4" dur="1.8s" repeatCount="indefinite"/>
-          <animate attributeName="fill-opacity" values="0.9;0;0.9" dur="1.8s" repeatCount="indefinite"/>
-        </circle>
-        <circle cx="165" cy="135" r="3" fill="#c9a84c"/>
-        <!-- Tunisia -->
-        <circle cx="420" cy="148" r="3" fill="#c9a84c" fill-opacity="0.9">
-          <animate attributeName="r" values="3;8;3" dur="3s" repeatCount="indefinite"/>
-          <animate attributeName="fill-opacity" values="0.9;0;0.9" dur="3s" repeatCount="indefinite"/>
-        </circle>
-        <circle cx="420" cy="148" r="2.5" fill="#c9a84c"/>
-        <!-- Singapore -->
-        <circle cx="680" cy="215" r="3" fill="#c9a84c" fill-opacity="0.9">
-          <animate attributeName="r" values="3;8;3" dur="2.5s" repeatCount="indefinite"/>
-          <animate attributeName="fill-opacity" values="0.9;0;0.9" dur="2.5s" repeatCount="indefinite"/>
-        </circle>
-        <circle cx="680" cy="215" r="2.5" fill="#c9a84c"/>
-
-        <!-- Connection lines -->
-        <g stroke="#c9a84c" stroke-opacity="0.12" stroke-width="0.5" stroke-dasharray="3,5">
-          <line x1="530" y1="165" x2="755" y2="125"/>
-          <line x1="530" y1="165" x2="415" y2="88"/>
-          <line x1="530" y1="165" x2="165" y2="135"/>
-          <line x1="415" y1="88" x2="165" y2="135"/>
-          <line x1="530" y1="165" x2="680" y2="215"/>
-          <line x1="530" y1="165" x2="420" y2="148"/>
-        </g>
-      </svg>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- SIGNATURE PROPERTIES -->
-<section id="properties">
-  <div class="properties-header">
     <div>
-      <div class="section-label reveal">Signature Portfolio</div>
-      <h2 class="section-title reveal reveal-delay-1">
-        World-Class<br><em>Developments</em>
-      </h2>
-    </div>
-    <div class="property-filter reveal">
-      <button class="filter-btn active" onclick="filterProps(this,'all')">All</button>
-      <button class="filter-btn" onclick="filterProps(this,'hotel')">Hotels</button>
-      <button class="filter-btn" onclick="filterProps(this,'resort')">Resorts</button>
-      <button class="filter-btn" onclick="filterProps(this,'tower')">Towers</button>
+      <div class="section-label">Why Invest</div>
+      <p style="font-family:var(--serif);font-size:clamp(20px,2vw,28px);font-weight:300;color:var(--white);line-height:1.5;margin-top:24px;font-style:italic;">"The Qatari Investment Group offers investors access to a $280 billion portfolio of the world's most sought-after real assets — with the discipline and governance of a sovereign-grade institution."</p>
+      <p style="font-family:var(--display);font-size:10px;letter-spacing:0.2em;color:var(--gold);margin-top:20px;text-transform:uppercase;">Annual Report 2024</p>
     </div>
   </div>
 
-  <div class="properties-grid">
-    <!-- Card 1 - Large feature -->
-    <div class="prop-card" style="aspect-ratio: auto; min-height: 520px;">
-      <div class="prop-bg bg-dubai" style="background: linear-gradient(160deg, #0d0c08 0%, #1a1408 40%, #2a1e0a 100%);">
-        <div class="img-label">
-          <div class="img-label-icon">🏙️</div>
-          <div class="img-label-text">Dubai · UAE</div>
-        </div>
+  <!-- Features -->
+  <div class="section reveal">
+    <div class="section-label">Investment Pillars</div>
+    <h2 class="section-title mt-32" style="margin-top:16px;margin-bottom:64px">Why Investors<br><em>Choose</em> Us</h2>
+    <div class="features-grid">
+      <div class="feature-card reveal">
+        <div class="feature-icon">💰</div>
+        <div class="feature-title">Reliable 5% Annual Dividend</div>
+        <p class="feature-text">Consistent income distribution backed by diversified rental revenues, hospitality earnings, and infrastructure income streams across 100+ countries.</p>
       </div>
-      <div class="prop-overlay"></div>
-      <div class="prop-info">
-        <div class="prop-category">Luxury Hotel</div>
-        <div class="prop-name">Al Burj Palace<br>Dubai</div>
-        <div class="prop-location">Dubai, United Arab Emirates</div>
+      <div class="feature-card reveal reveal-delay-1">
+        <div class="feature-icon">🌍</div>
+        <div class="feature-title">Unmatched Global Diversification</div>
+        <p class="feature-text">No single market represents more than 12% of total assets. True geographic diversification provides resilience against regional downturns and currency volatility.</p>
       </div>
-    </div>
-    <!-- Card 2 -->
-    <div class="prop-card">
-      <div class="prop-bg" style="background: linear-gradient(160deg, #080d12 0%, #0a1520 60%, #0d1f30 100%);">
-        <div class="img-label">
-          <div class="img-label-icon">🗼</div>
-          <div class="img-label-text">Tokyo · Japan</div>
-        </div>
+      <div class="feature-card reveal reveal-delay-2">
+        <div class="feature-icon">📊</div>
+        <div class="feature-title">Long-Term Capital Growth</div>
+        <p class="feature-text">Beyond income, our portfolio has delivered compounding capital appreciation — driven by strategic asset selection in undersupplied, high-demand global markets.</p>
       </div>
-      <div class="prop-overlay"></div>
-      <div class="prop-info">
-        <div class="prop-category">Skyscraper</div>
-        <div class="prop-name">Sakura Tower</div>
-        <div class="prop-location">Tokyo, Japan</div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">🏛</div>
+        <div class="feature-title">Premium Asset Quality</div>
+        <p class="feature-text">Every asset in our portfolio meets our exacting standards for location, quality, and income profile. We do not compromise on asset quality, ever.</p>
       </div>
-    </div>
-    <!-- Card 3 -->
-    <div class="prop-card">
-      <div class="prop-bg" style="background: linear-gradient(160deg, #080d0a 0%, #0a1510 60%, #0d2018 100%);">
-        <div class="img-label">
-          <div class="img-label-icon">🌊</div>
-          <div class="img-label-text">Hammamet · Tunisia</div>
-        </div>
+      <div class="feature-card reveal reveal-delay-1">
+        <div class="feature-icon">🔒</div>
+        <div class="feature-title">Institutional-Grade Governance</div>
+        <p class="feature-text">Sovereign wealth fund-grade corporate governance, independent auditing by the Big Four, and a board of world-class fiduciaries protecting every shareholder's interest.</p>
       </div>
-      <div class="prop-overlay"></div>
-      <div class="prop-info">
-        <div class="prop-category">Beachfront Resort</div>
-        <div class="prop-name">Côte Méditerranée</div>
-        <div class="prop-location">Hammamet, Tunisia</div>
-      </div>
-    </div>
-    <!-- Card 4 -->
-    <div class="prop-card">
-      <div class="prop-bg" style="background: linear-gradient(160deg, #120808 0%, #1e0d0a 60%, #2a1205 100%);">
-        <div class="img-label">
-          <div class="img-label-icon">🏛️</div>
-          <div class="img-label-text">London · UK</div>
-        </div>
-      </div>
-      <div class="prop-overlay"></div>
-      <div class="prop-info">
-        <div class="prop-category">Commercial Tower</div>
-        <div class="prop-name">The Shard Annex</div>
-        <div class="prop-location">London, United Kingdom</div>
-      </div>
-    </div>
-    <!-- Card 5 -->
-    <div class="prop-card">
-      <div class="prop-bg" style="background: linear-gradient(160deg, #080812 0%, #0d0d20 60%, #151530 100%);">
-        <div class="img-label">
-          <div class="img-label-icon">🏨</div>
-          <div class="img-label-text">Doha · Qatar</div>
-        </div>
-      </div>
-      <div class="prop-overlay"></div>
-      <div class="prop-info">
-        <div class="prop-category">Flagship Hotel</div>
-        <div class="prop-name">QIG Corniche<br>Residences</div>
-        <div class="prop-location">Doha, Qatar</div>
-      </div>
-    </div>
-    <!-- Card 6 -->
-    <div class="prop-card">
-      <div class="prop-bg" style="background: linear-gradient(160deg, #060a08 0%, #081512 60%, #0a1e18 100%);">
-        <div class="img-label">
-          <div class="img-label-icon">🎋</div>
-          <div class="img-label-text">Kyoto · Japan</div>
-        </div>
-      </div>
-      <div class="prop-overlay"></div>
-      <div class="prop-info">
-        <div class="prop-category">Heritage Resort</div>
-        <div class="prop-name">Zen Garden Retreat</div>
-        <div class="prop-location">Kyoto, Japan</div>
+      <div class="feature-card reveal reveal-delay-2">
+        <div class="feature-icon">🚀</div>
+        <div class="feature-title">$12B Development Pipeline</div>
+        <p class="feature-text">A $12 billion active development pipeline across 14 countries will deliver significant net asset value uplift over the next five years, enhancing returns for current investors.</p>
       </div>
     </div>
   </div>
-</section>
 
-<div class="divider"></div>
-
-<!-- INVESTMENT -->
-<section id="investment">
-  <div class="investment-inner">
-    <div>
-      <div class="section-label reveal">Investment Opportunity</div>
-      <h2 class="section-title reveal reveal-delay-1">
-        A Portfolio Built<br>for <em>Exceptional</em><br>Returns
-      </h2>
-      <p class="section-body reveal reveal-delay-2">
-        The Qatari Investment Group offers investors direct access to one of the world's most diversified and resilient real estate portfolios — underpinned by premium assets across six continents and a commitment to consistent, reliable returns.
-      </p>
-      <div class="invest-reasons reveal reveal-delay-3">
-        <div class="invest-reason">
-          <div class="reason-icon">◈</div>
-          <div class="reason-title">5% Annual Dividend</div>
-          <div class="reason-desc">Reliable returns delivered annually to shareholders, underpinned by stable cash-flowing assets.</div>
-        </div>
-        <div class="invest-reason">
-          <div class="reason-icon">◉</div>
-          <div class="reason-title">Global Diversification</div>
-          <div class="reason-desc">Assets spread across 100+ countries reduce exposure and provide systemic resilience.</div>
-        </div>
-        <div class="invest-reason">
-          <div class="reason-icon">◈</div>
-          <div class="reason-title">Premium Asset Base</div>
-          <div class="reason-desc">Luxury hotels, iconic towers, and resort developments in the world's most sought-after locations.</div>
-        </div>
-        <div class="invest-reason">
-          <div class="reason-icon">◉</div>
-          <div class="reason-title">Long-Term Growth</div>
-          <div class="reason-desc">A patient, strategic approach to capital allocation focused on generational wealth creation.</div>
-        </div>
-        <div class="invest-reason">
-          <div class="reason-icon">◈</div>
-          <div class="reason-title">Institutional Governance</div>
-          <div class="reason-desc">World-class oversight structures and transparency standards comparable to sovereign funds.</div>
-        </div>
-        <div class="invest-reason">
-          <div class="reason-icon">◉</div>
-          <div class="reason-title">Market Access</div>
-          <div class="reason-desc">Exposure to emerging markets and established economies simultaneously through a single vehicle.</div>
-        </div>
-      </div>
+  <!-- Performance Chart -->
+  <div class="chart-section reveal" style="max-width:1600px;margin:0 auto 2px;">
+    <div class="section-label">Performance</div>
+    <h2 class="section-title mt-32" style="margin-top:16px;">Dividend History</h2>
+    <p style="font-family:var(--sans);font-size:13px;color:var(--white-dim);margin-top:16px;letter-spacing:0.03em;">Annual dividend distributions per share (2019–2024)</p>
+    <div class="chart-bars">
+      <div class="chart-bar" style="height:72%" data-label="4.8%" data-val="2019"></div>
+      <div class="chart-bar" style="height:80%" data-label="5.0%" data-val="2020"></div>
+      <div class="chart-bar" style="height:76%" data-label="4.9%" data-val="2021"></div>
+      <div class="chart-bar" style="height:84%" data-label="5.1%" data-val="2022"></div>
+      <div class="chart-bar" style="height:90%" data-label="5.0%" data-val="2023"></div>
+      <div class="chart-bar" style="height:100%" data-label="5.2%" data-val="2024"></div>
     </div>
-
-    <div class="reveal reveal-delay-2">
-      <div class="dividend-card">
-        <span class="dividend-pct">5%</span>
-        <div class="dividend-label">Annual Dividend Yield</div>
-        <p class="dividend-desc">
-          Investors in The Qatari Investment Group benefit from a reliable 5% annual dividend — making QIG one of the most trusted and profitable investment organisations in the world.
-        </p>
-        <div class="dividend-cta">
-          <a href="https://www.thesharegame.com/company/QA0000000309" class="btn-primary" target="_blank" rel="noopener">Begin Investing Today</a>
-        </div>
-        <div style="margin-top:1.5rem; font-size:0.55rem; color:var(--text-muted); letter-spacing:0.1em;">
-          Past performance is not indicative of future results.
-        </div>
-      </div>
+    <div style="margin-top:64px;text-align:center;">
+      <a href="https://www.thesharegame.com/company/QA0000000309" target="_blank" class="btn-primary">Begin Your Investment</a>
     </div>
   </div>
-</section>
 
-<div class="divider"></div>
+  <footer style="background:var(--charcoal);border-top:1px solid var(--border);padding:40px 0;">
+    <div class="footer-inner">
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2025 The Qatari Investment Group. All rights reserved.</span>
+        <a href="mailto:bobjerf55@gmail.com" class="footer-invest">Contact Investor Relations</a>
+      </div>
+    </div>
+  </footer>
+</div>
 
-<!-- LEADERSHIP -->
-<section id="leadership">
-  <div class="section-label reveal">Executive Leadership</div>
-  <h2 class="section-title reveal reveal-delay-1">Guided by <em>Vision</em><br>&amp; Experience</h2>
-  <p class="section-body reveal reveal-delay-2">
-    Our leadership team brings together decades of experience in global real estate, sovereign wealth, and international finance — united by a single vision of sustainable, long-term growth.
-  </p>
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- LEADERSHIP PAGE -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div class="page" id="page-leadership">
+  <div class="leadership-hero">
+    <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=2400&q=80" alt="Leadership">
+    <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(10,10,10,0.98) 0%, transparent 55%);"></div>
+    <div class="page-header">
+      <div class="section-label">Our People</div>
+      <h1 class="section-title" style="font-size:clamp(40px,5.5vw,80px);">Group<br><em>Leadership</em></h1>
+      <p style="font-family:var(--sans);font-size:14px;color:var(--white-dim);max-width:480px;margin-top:20px;line-height:1.8;">Guided by world-class executives with decades of experience across global real estate, finance, and international development.</p>
+    </div>
+  </div>
 
-  <div class="leadership-grid">
+  <div class="leaders-grid" style="max-width:1600px;margin:2px auto;">
+    <!-- Chairman -->
     <div class="leader-card reveal">
-      <div class="leader-portrait">
-        <div class="leader-portrait-bg leader-bg-1">
-          <div class="img-label" style="opacity:0.2">
-            <div class="img-label-icon" style="font-size:4rem">👤</div>
-          </div>
-        </div>
-        <div class="leader-portrait-overlay"></div>
-      </div>
+      <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=800&q=80" alt="Chairman" class="leader-img">
       <div class="leader-info">
-        <div class="leader-role">Chairman</div>
-        <div class="leader-name">Sheikh Abdullah<br>Al-Thani</div>
-        <div class="leader-bio">A visionary leader with over 30 years of experience in sovereign wealth management and international real estate development.</div>
+        <div class="leader-title">Chairman &amp; Founder</div>
+        <div class="leader-name">His Excellency<br>Sheikh Khalid Al-Thani</div>
+        <div class="gold-rule" style="margin:20px 0;"></div>
+        <p class="leader-bio">Sheikh Khalid Al-Thani founded The Qatari Investment Group in 1995 with a vision to create a globally diversified real estate institution of the highest order. Over three decades, he has guided the Group to become one of the most respected investment organisations in the world, managing over $280 billion in assets across more than 100 countries. Sheikh Khalid serves on the boards of numerous international financial institutions and is widely recognised as one of the most visionary figures in global real estate and investment.</p>
+        <p class="leader-bio" style="margin-top:16px;">A graduate of Oxford University and the Wharton School of Business, Sheikh Khalid brings unparalleled academic rigour and global perspective to every strategic decision the Group makes.</p>
       </div>
     </div>
+
+    <!-- CEO -->
+    <div class="leader-card reveal">
+      <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80" alt="CEO" class="leader-img">
+      <div class="leader-info">
+        <div class="leader-title">Chief Executive Officer</div>
+        <div class="leader-name">Rashid Al-Mansouri</div>
+        <p class="leader-bio">30 years of global investment experience. Former Managing Director, Goldman Sachs Real Estate. MBA, Harvard Business School.</p>
+      </div>
+    </div>
+
+    <!-- CFO -->
     <div class="leader-card reveal reveal-delay-1">
-      <div class="leader-portrait">
-        <div class="leader-portrait-bg leader-bg-2">
-          <div class="img-label" style="opacity:0.2">
-            <div class="img-label-icon" style="font-size:4rem">👤</div>
-          </div>
-        </div>
-        <div class="leader-portrait-overlay"></div>
-      </div>
+      <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&q=80" alt="CFO" class="leader-img">
       <div class="leader-info">
-        <div class="leader-role">Chief Executive Officer</div>
-        <div class="leader-name">Khalid Al-Mansouri</div>
-        <div class="leader-bio">Former Managing Director at a leading global investment bank, now driving QIG's expansion across six continents.</div>
+        <div class="leader-title">Chief Financial Officer</div>
+        <div class="leader-name">Nadia Hassan Al-Farsi</div>
+        <p class="leader-bio">Two decades at the intersection of international finance and real estate. Former Partner, McKinsey &amp; Company. INSEAD Graduate.</p>
       </div>
     </div>
+
+    <!-- CIO -->
     <div class="leader-card reveal reveal-delay-2">
-      <div class="leader-portrait">
-        <div class="leader-portrait-bg leader-bg-3">
-          <div class="img-label" style="opacity:0.2">
-            <div class="img-label-icon" style="font-size:4rem">👤</div>
-          </div>
-        </div>
-        <div class="leader-portrait-overlay"></div>
-      </div>
+      <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=600&q=80" alt="CIO" class="leader-img">
       <div class="leader-info">
-        <div class="leader-role">Chief Financial Officer</div>
-        <div class="leader-name">Yasmine Al-Rashid</div>
-        <div class="leader-bio">A CFA charterholder with expertise in structured finance and cross-border capital markets, overseeing $250B+ in assets.</div>
+        <div class="leader-title">Chief Investment Officer</div>
+        <div class="leader-name">James Whitmore</div>
+        <p class="leader-bio">Formerly Head of Real Assets, Blackstone. 25 years directing complex cross-border property transactions across Europe, Asia, and the Americas. Cambridge University.</p>
       </div>
     </div>
-    <div class="leader-card reveal reveal-delay-3">
-      <div class="leader-portrait">
-        <div class="leader-portrait-bg leader-bg-4">
-          <div class="img-label" style="opacity:0.2">
-            <div class="img-label-icon" style="font-size:4rem">👤</div>
-          </div>
-        </div>
-        <div class="leader-portrait-overlay"></div>
-      </div>
+
+    <!-- COO -->
+    <div class="leader-card reveal">
+      <img src="https://images.unsplash.com/photo-1600486913747-55e5470d2e9f?w=600&q=80" alt="COO" class="leader-img">
       <div class="leader-info">
-        <div class="leader-role">Chief Investment Officer</div>
-        <div class="leader-name">Omar Al-Farsi</div>
-        <div class="leader-bio">Leads global deal sourcing and portfolio strategy with a track record of delivering exceptional risk-adjusted returns across market cycles.</div>
+        <div class="leader-title">Chief Operating Officer</div>
+        <div class="leader-name">Ahmad Jaber Al-Kuwari</div>
+        <p class="leader-bio">Oversees the operational excellence of the Group's 342-property portfolio. Former VP Operations, Four Seasons Hotels &amp; Resorts. 20 years in luxury hospitality operations.</p>
+      </div>
+    </div>
+
+    <!-- Non-Executive Board Member -->
+    <div class="leader-card reveal reveal-delay-1">
+      <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=600&q=80" alt="Board Member" class="leader-img">
+      <div class="leader-info">
+        <div class="leader-title">Independent Board Director</div>
+        <div class="leader-name">Lady Caroline Ashford</div>
+        <p class="leader-bio">Former CEO, British Land. Governor, Bank of England. International advisor on ESG, sustainable development, and institutional governance. University of Edinburgh.</p>
       </div>
     </div>
   </div>
-</section>
 
-<div class="divider"></div>
-
-<!-- SUSTAINABILITY -->
-<section id="sustainability">
-  <div class="sustain-inner">
-    <div>
-      <div class="section-label reveal">Sustainability &amp; ESG</div>
-      <h2 class="section-title reveal reveal-delay-1">
-        Building for<br><em>Future</em><br>Generations
-      </h2>
-      <p class="section-body reveal reveal-delay-2">
-        The Qatari Investment Group is committed to shaping a sustainable future through responsible development, green infrastructure, and smart city innovation. Our ESG framework governs every investment decision we make.
-      </p>
-      <div class="sustain-pillars">
-        <div class="sustain-pillar reveal reveal-delay-1">
-          <div class="pillar-num">01</div>
-          <div class="pillar-content">
-            <h4>Sustainable Development</h4>
-            <p>All new developments are designed to meet or exceed LEED Platinum certification standards, with net-zero carbon targets by 2035.</p>
-          </div>
-        </div>
-        <div class="sustain-pillar reveal reveal-delay-2">
-          <div class="pillar-num">02</div>
-          <div class="pillar-content">
-            <h4>Smart Cities &amp; Innovation</h4>
-            <p>Embedding intelligent infrastructure — from AI-driven energy management to autonomous mobility — into every major development.</p>
-          </div>
-        </div>
-        <div class="sustain-pillar reveal reveal-delay-3">
-          <div class="pillar-num">03</div>
-          <div class="pillar-content">
-            <h4>Green Energy Integration</h4>
-            <p>Investing in renewable energy across our portfolio: solar, wind, and geothermal systems powering our global property network.</p>
-          </div>
-        </div>
-        <div class="sustain-pillar reveal reveal-delay-4">
-          <div class="pillar-num">04</div>
-          <div class="pillar-content">
-            <h4>Community &amp; Social Impact</h4>
-            <p>Creating meaningful economic opportunity in every market we operate in, with local hiring mandates and cultural preservation commitments.</p>
-          </div>
-        </div>
+  <footer style="background:var(--charcoal);border-top:1px solid var(--border);padding:40px 0;margin-top:2px;">
+    <div class="footer-inner">
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2025 The Qatari Investment Group. All rights reserved.</span>
+        <a href="https://www.thesharegame.com/company/QA0000000309" target="_blank" class="footer-invest">Invest Now</a>
       </div>
     </div>
+  </footer>
+</div>
 
-    <div class="sustain-visual reveal reveal-delay-2">
-      <div class="esg-ring">
-        <div class="esg-center">
-          <div class="esg-center-title">ESG</div>
-          <div class="esg-center-sub">Commitment</div>
-        </div>
-        <!-- ESG nodes positioned around the ring -->
-        <div class="esg-node" style="top:-16px; left:50%; transform:translateX(-50%);">
-          <div class="esg-node-dot"></div>
-          <div class="esg-node-label">Environment</div>
-        </div>
-        <div class="esg-node" style="bottom:-16px; left:50%; transform:translateX(-50%);">
-          <div class="esg-node-dot"></div>
-          <div class="esg-node-label">Social</div>
-        </div>
-        <div class="esg-node" style="right:-36px; top:50%; transform:translateY(-50%);">
-          <div class="esg-node-dot"></div>
-          <div class="esg-node-label">Governance</div>
-        </div>
-        <div class="esg-node" style="left:-30px; top:50%; transform:translateY(-50%);">
-          <div class="esg-node-dot"></div>
-          <div class="esg-node-label">Net Zero</div>
-        </div>
-      </div>
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- INVESTOR RELATIONS PAGE -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div class="page" id="page-investor-relations">
+  <div style="position:relative;height:55vh;overflow:hidden;display:flex;align-items:flex-end;">
+    <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=2400&q=80" alt="Investor Relations" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.35) saturate(0.6);">
+    <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(10,10,10,0.98) 0%, transparent 50%);"></div>
+    <div class="page-header">
+      <div class="section-label">Shareholder Portal</div>
+      <h1 class="section-title" style="font-size:clamp(40px,5.5vw,80px);">Investor<br><em>Relations</em></h1>
     </div>
   </div>
-</section>
 
-<div class="divider"></div>
-
-<!-- TIMELINE -->
-<section id="timeline">
-  <div class="section-label reveal">Our Journey</div>
-  <h2 class="section-title reveal reveal-delay-1">A Legacy of<br><em>Growth</em></h2>
-
-  <div class="timeline-track">
-    <div class="timeline-items">
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-year">1998</div>
-        <div class="timeline-event">Foundation</div>
-        <div class="timeline-desc">The Qatari Investment Group is established in Doha by a consortium of Qatar's most distinguished families, with a mandate to invest globally in premium real estate.</div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-year">2003</div>
-        <div class="timeline-event">Gulf Expansion</div>
-        <div class="timeline-desc">First major international acquisition in Dubai signals the beginning of QIG's Gulf-wide presence. The iconic Al Burj Palace project breaks ground.</div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-year">2008</div>
-        <div class="timeline-event">European Entry</div>
-        <div class="timeline-desc">Counter-cyclical investments during the financial crisis secure landmark positions in London, Paris, and Frankfurt at transformational valuations.</div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-year">2013</div>
-        <div class="timeline-event">Asia-Pacific Expansion</div>
-        <div class="timeline-desc">Entry into Japan, Singapore, and Australia establishes QIG as a truly global platform. Assets under management surpass $100 billion.</div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-year">2019</div>
-        <div class="timeline-event">$250B Milestone</div>
-        <div class="timeline-desc">Assets under management reach $250 billion across 100+ countries. QIG launches its Sustainable Development Charter and ESG framework.</div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-year">2025+</div>
-        <div class="timeline-event">Future Vision</div>
-        <div class="timeline-desc">QIG accelerates its smart city programme and green infrastructure investments, targeting $500B AUM and net-zero operations by 2035.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- INVESTOR RELATIONS -->
-<section id="investor-relations">
-  <div class="section-label reveal">Investor Relations</div>
-  <h2 class="section-title reveal reveal-delay-1">Transparency &amp;<br><em>Performance</em></h2>
-
-  <div class="ir-inner">
+  <div class="ir-grid" style="max-width:1600px;margin:2px auto;">
     <div class="ir-card reveal">
-      <span class="ir-card-icon">◈</span>
-      <div class="ir-card-title">Dividend Programme</div>
-      <div class="ir-card-text">Shareholders receive a reliable 5% annual dividend, distributed quarterly. QIG has maintained an unbroken dividend record since 2001, through multiple market cycles.</div>
-      <a href="https://www.thesharegame.com/company/QA0000000309" class="ir-card-link" target="_blank" rel="noopener">View Dividend History →</a>
+      <div class="ir-card-icon">📋</div>
+      <div class="ir-card-title">Financial Reports</div>
+      <p class="ir-card-text">Access the Group's complete library of audited annual reports, quarterly financial statements, and supplementary investor materials.</p>
+      <ul class="ir-list">
+        <li><span>Annual Report 2024</span><a href="mailto:bobjerf55@gmail.com">Request</a></li>
+        <li><span>Annual Report 2023</span><a href="mailto:bobjerf55@gmail.com">Request</a></li>
+        <li><span>Annual Report 2022</span><a href="mailto:bobjerf55@gmail.com">Request</a></li>
+        <li><span>Annual Report 2021</span><a href="mailto:bobjerf55@gmail.com">Request</a></li>
+      </ul>
     </div>
     <div class="ir-card reveal reveal-delay-1">
-      <span class="ir-card-icon">◉</span>
-      <div class="ir-card-title">Annual Reports</div>
-      <div class="ir-card-text">Comprehensive annual reports providing full financial disclosure, portfolio valuations, strategic updates, and independent auditor certifications.</div>
-      <a href="https://www.thesharegame.com/company/QA0000000309" class="ir-card-link" target="_blank" rel="noopener">Download Reports →</a>
-    </div>
-    <div class="ir-card reveal reveal-delay-2">
-      <span class="ir-card-icon">◈</span>
-      <div class="ir-card-title">Financial Performance</div>
-      <div class="ir-card-text">$250B+ assets under management. 26 consecutive years of positive total returns. A diversified income stream from luxury hospitality, commercial real estate, and strategic investments.</div>
-      <a href="https://www.thesharegame.com/company/QA0000000309" class="ir-card-link" target="_blank" rel="noopener">Performance Data →</a>
+      <div class="ir-card-icon">📊</div>
+      <div class="ir-card-title">Quarterly Updates</div>
+      <p class="ir-card-text">Quarterly investor briefings providing detailed performance updates, portfolio developments, and market commentary from senior management.</p>
+      <ul class="ir-list">
+        <li><span>Q1 2025 Update</span><a href="mailto:bobjerf55@gmail.com">Request</a></li>
+        <li><span>Q4 2024 Results</span><a href="mailto:bobjerf55@gmail.com">Request</a></li>
+        <li><span>Q3 2024 Update</span><a href="mailto:bobjerf55@gmail.com">Request</a></li>
+        <li><span>Q2 2024 Update</span><a href="mailto:bobjerf55@gmail.com">Request</a></li>
+      </ul>
     </div>
     <div class="ir-card reveal">
-      <span class="ir-card-icon">◉</span>
-      <div class="ir-card-title">Shareholder Resources</div>
-      <div class="ir-card-text">Access your shareholder portal, voting rights information, AGM materials, and account management services through our dedicated investor platform.</div>
-      <a href="https://www.thesharegame.com/company/QA0000000309" class="ir-card-link" target="_blank" rel="noopener">Shareholder Portal →</a>
+      <div class="ir-card-icon">💵</div>
+      <div class="ir-card-title">Dividend Information</div>
+      <p class="ir-card-text">Details on dividend policy, payment history, and projected distributions. The Group has paid a consistent 5% annual dividend for over two decades.</p>
+      <ul class="ir-list">
+        <li><span>2024 Dividend: 5.2%</span><span style="color:var(--gold)">Paid</span></li>
+        <li><span>2023 Dividend: 5.0%</span><span style="color:var(--gold)">Paid</span></li>
+        <li><span>2022 Dividend: 5.1%</span><span style="color:var(--gold)">Paid</span></li>
+        <li><span>2025 Dividend (est.)</span><span style="color:var(--gold)">5.0%+</span></li>
+      </ul>
     </div>
     <div class="ir-card reveal reveal-delay-1">
-      <span class="ir-card-icon">◈</span>
+      <div class="ir-card-icon">🏛</div>
       <div class="ir-card-title">Corporate Governance</div>
-      <div class="ir-card-text">World-class governance structures with an independent supervisory board, international audit committee, and full compliance with Qatar Financial Markets Authority regulations.</div>
-      <a href="https://www.thesharegame.com/company/QA0000000309" class="ir-card-link" target="_blank" rel="noopener">Governance Framework →</a>
+      <p class="ir-card-text">Our governance framework meets and exceeds international best practice. Independent board, Big Four audit, and full ESG reporting transparency.</p>
+      <ul class="ir-list">
+        <li><span>Board Charter</span><a href="mailto:bobjerf55@gmail.com">Request</a></li>
+        <li><span>Audit Committee Report</span><a href="mailto:bobjerf55@gmail.com">Request</a></li>
+        <li><span>ESG Framework 2024</span><a href="mailto:bobjerf55@gmail.com">Request</a></li>
+        <li><span>Remuneration Policy</span><a href="mailto:bobjerf55@gmail.com">Request</a></li>
+      </ul>
     </div>
-    <div class="ir-card reveal reveal-delay-2">
-      <span class="ir-card-icon">◉</span>
-      <div class="ir-card-title">Invest Today</div>
-      <div class="ir-card-text">Begin your investment journey with The Qatari Investment Group. Access our secure investment platform to purchase shares and join thousands of investors worldwide.</div>
-      <a href="https://www.thesharegame.com/company/QA0000000309" class="ir-card-link" target="_blank" rel="noopener" style="color:var(--gold-light);">Start Investing →</a>
+    <div class="ir-card full reveal" style="background:var(--dark);border-top:2px solid var(--gold);">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;" class="editorial-responsive">
+        <div>
+          <div class="ir-card-icon">📞</div>
+          <div class="ir-card-title">Investor Enquiries</div>
+          <p class="ir-card-text" style="max-width:480px;">Our dedicated Investor Relations team is available to assist all current and prospective shareholders. We welcome enquiries of any scale and respond within one business day.</p>
+          <a href="mailto:bobjerf55@gmail.com" class="btn-primary" style="display:inline-block;">Email IR Team</a>
+        </div>
+        <div>
+          <div class="section-label">Begin Investing Today</div>
+          <h3 style="font-family:var(--serif);font-size:clamp(24px,2.5vw,36px);font-weight:300;color:var(--white);margin-top:16px;margin-bottom:20px;line-height:1.3;">Access One of the World's Premier Investment Platforms</h3>
+          <p style="font-family:var(--sans);font-size:13px;color:var(--white-dim);line-height:1.8;margin-bottom:32px;">Join thousands of investors benefiting from The Qatari Investment Group's $280 billion global portfolio and consistent annual dividend returns.</p>
+          <a href="https://www.thesharegame.com/company/QA0000000309" target="_blank" class="btn-ghost">Invest Now ↗</a>
+        </div>
+      </div>
     </div>
   </div>
-</section>
 
-<div class="divider"></div>
-
-<!-- NEWS -->
-<section id="news">
-  <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:3.5rem;">
-    <div>
-      <div class="section-label reveal">Insights &amp; Intelligence</div>
-      <h2 class="section-title reveal reveal-delay-1">Latest <em>News</em></h2>
+  <footer style="background:var(--charcoal);border-top:1px solid var(--border);padding:40px 0;margin-top:2px;">
+    <div class="footer-inner">
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2025 The Qatari Investment Group. All rights reserved.</span>
+        <a href="mailto:bobjerf55@gmail.com" class="footer-invest">Investor Enquiries</a>
+      </div>
     </div>
-    <a href="#" class="btn-secondary reveal" style="font-size:0.58rem; padding:0.7rem 1.5rem;">All Articles</a>
+  </footer>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- SUSTAINABILITY PAGE -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div class="page" id="page-sustainability">
+  <div class="sustain-hero">
+    <img src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=2400&q=80" alt="Sustainability">
+    <div style="position:absolute;inset:0;background:linear-gradient(135deg, rgba(10,10,10,0.85) 0%, rgba(10,10,10,0.3) 100%);"></div>
+    <div class="page-header" style="position:relative;z-index:2;padding-top:100px;">
+      <div class="section-label" style="color:rgba(201,169,110,0.7)">ESG &amp; Responsibility</div>
+      <h1 class="section-title" style="font-size:clamp(40px,5.5vw,80px);margin-top:16px;">Building a<br><em>Sustainable</em> Future</h1>
+    </div>
   </div>
 
-  <div class="news-grid">
+  <div class="pillars-grid" style="max-width:1600px;margin:2px auto;">
+    <div class="pillar-card reveal">
+      <div class="pillar-icon">🌱</div>
+      <div class="pillar-title">Environmental Responsibility</div>
+      <p class="pillar-text">Net-zero carbon ambition by 2040. All new developments certified to LEED Platinum or equivalent. 100% renewable energy across our managed portfolio by 2030.</p>
+    </div>
+    <div class="pillar-card reveal reveal-delay-1">
+      <div class="pillar-icon">🌆</div>
+      <div class="pillar-title">Future Cities</div>
+      <p class="pillar-text">Investing in smart city infrastructure that reduces urban carbon footprints while improving quality of life for millions of residents in our development catchments.</p>
+    </div>
+    <div class="pillar-card reveal reveal-delay-2">
+      <div class="pillar-icon">♻️</div>
+      <div class="pillar-title">Green Infrastructure</div>
+      <p class="pillar-text">Green rooftops, urban parks, passive design systems, and water recycling embedded into every major new development, setting the standard for sustainable construction.</p>
+    </div>
+    <div class="pillar-card reveal reveal-delay-3">
+      <div class="pillar-icon">💡</div>
+      <div class="pillar-title">Innovation</div>
+      <p class="pillar-text">Proprietary PropTech and smart building management systems that reduce energy consumption by up to 40% while enhancing the experience for occupants.</p>
+    </div>
+  </div>
+
+  <div class="section reveal">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;" class="editorial-responsive">
+      <div>
+        <div class="section-label">Our Commitments</div>
+        <h2 class="section-title mt-32" style="margin-top:16px;">ESG at the Heart of<br><em>Everything We Do</em></h2>
+        <div class="gold-rule"></div>
+        <p class="section-body">Environmental, social, and governance principles are not an afterthought at The Qatari Investment Group — they are foundational to our investment thesis. We believe that the most sustainable assets are also the most valuable assets over the long term.</p>
+        <p class="section-body" style="margin-top:20px;">Our 2030 ESG Roadmap commits us to net-zero carbon across our portfolio, industry-leading social impact programmes in every market we operate in, and the highest standards of transparent corporate governance.</p>
+        <a href="mailto:bobjerf55@gmail.com" class="btn-ghost" style="display:inline-block;margin-top:40px;">Request ESG Report</a>
+      </div>
+      <div>
+        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80" alt="Sustainability" style="width:100%;height:540px;object-fit:cover;filter:brightness(0.85) saturate(0.9);">
+      </div>
+    </div>
+  </div>
+
+  <!-- ESG Metrics -->
+  <div style="background:var(--dark);padding:80px 48px;max-width:1600px;margin:0 auto 2px;">
+    <div class="section-label reveal">ESG Metrics 2024</div>
+    <h2 class="section-title reveal" style="margin-top:16px;margin-bottom:64px;">Progress We're<br><em>Proud Of</em></h2>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:2px;" class="stats-inner-grid">
+      <div style="background:var(--charcoal);padding:48px 40px;text-align:center;" class="reveal">
+        <div style="font-family:var(--serif);font-size:56px;font-weight:300;color:var(--gold);line-height:1;">38%</div>
+        <div style="font-family:var(--sans);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--white-dim);margin-top:12px;">Carbon Reduction Since 2019</div>
+      </div>
+      <div style="background:var(--charcoal);padding:48px 40px;text-align:center;" class="reveal reveal-delay-1">
+        <div style="font-family:var(--serif);font-size:56px;font-weight:300;color:var(--gold);line-height:1;">64%</div>
+        <div style="font-family:var(--sans);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--white-dim);margin-top:12px;">Renewable Energy Usage</div>
+      </div>
+      <div style="background:var(--charcoal);padding:48px 40px;text-align:center;" class="reveal reveal-delay-2">
+        <div style="font-family:var(--serif);font-size:56px;font-weight:300;color:var(--gold);line-height:1;">$420M</div>
+        <div style="font-family:var(--sans);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--white-dim);margin-top:12px;">Invested in Green Infrastructure</div>
+      </div>
+      <div style="background:var(--charcoal);padding:48px 40px;text-align:center;" class="reveal reveal-delay-3">
+        <div style="font-family:var(--serif);font-size:56px;font-weight:300;color:var(--gold);line-height:1;">47</div>
+        <div style="font-family:var(--sans);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--white-dim);margin-top:12px;">LEED Certified Properties</div>
+      </div>
+    </div>
+  </div>
+
+  <footer style="background:var(--charcoal);border-top:1px solid var(--border);padding:40px 0;margin-top:2px;">
+    <div class="footer-inner">
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2025 The Qatari Investment Group. All rights reserved.</span>
+        <a href="https://www.thesharegame.com/company/QA0000000309" target="_blank" class="footer-invest">Invest Now</a>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- NEWS PAGE -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div class="page" id="page-news">
+  <div class="news-hero">
+    <img src="https://images.unsplash.com/photo-1444653614773-995cb1ef9efa?w=2400&q=80" alt="News">
+    <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(10,10,10,0.98) 0%, transparent 50%);"></div>
+    <div class="page-header">
+      <div class="section-label">Insights &amp; Commentary</div>
+      <h1 class="section-title" style="font-size:clamp(40px,5.5vw,80px);">News &amp;<br><em>Insights</em></h1>
+    </div>
+  </div>
+
+  <div class="news-grid" style="max-width:1600px;margin:2px auto;">
+    <!-- Featured -->
     <div class="news-card reveal">
       <div class="news-card-img">
-        <div class="news-card-img-bg news-bg-1">
-          <div class="img-label" style="opacity:0.25">
-            <div class="img-label-icon">🏗️</div>
-          </div>
-        </div>
+        <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1200&q=80" alt="Featured">
       </div>
       <div class="news-card-body">
-        <div class="news-tag">Development</div>
-        <div class="news-title">QIG Breaks Ground on $4.2B Mixed-Use Tower in Central Dubai</div>
-        <div class="news-excerpt">The Qatari Investment Group has commenced construction on its most ambitious development to date — a 92-storey mixed-use tower set to redefine the Dubai skyline by 2027.</div>
-        <div class="news-date">December 2024</div>
+        <div class="news-cat">Corporate Announcement</div>
+        <div class="news-date">June 2025</div>
+        <div class="news-title">The Qatari Investment Group Announces $4.2 Billion Mixed-Use Development in Doha's New Financial District</div>
+        <p class="news-excerpt">The Group's most ambitious project to date will transform a 48-hectare site on the Doha waterfront into a world-class integrated development comprising luxury hotels, Grade-A offices, premium residences, and cultural amenities — redefining Qatar's skyline for the next century.</p>
+        <a href="mailto:bobjerf55@gmail.com" class="news-read-more">Read More →</a>
       </div>
     </div>
+
+    <!-- News Card 2 -->
+    <div class="news-card reveal">
+      <div class="news-card-img"><img src="https://images.unsplash.com/photo-1534430480872-3498386e7856?w=600&q=80" alt="News"></div>
+      <div class="news-card-body">
+        <div class="news-cat">Market Insight</div>
+        <div class="news-date">May 2025</div>
+        <div class="news-title">Asia Pacific: The Next Decade of Luxury Real Estate Growth</div>
+        <p class="news-excerpt">Our latest market report identifies Southeast Asia as the world's highest-growth luxury real estate corridor through 2035.</p>
+        <a href="mailto:bobjerf55@gmail.com" class="news-read-more">Read More →</a>
+      </div>
+    </div>
+
+    <!-- News Card 3 -->
     <div class="news-card reveal reveal-delay-1">
-      <div class="news-card-img">
-        <div class="news-card-img-bg news-bg-2">
-          <div class="img-label" style="opacity:0.25">
-            <div class="img-label-icon">📊</div>
-          </div>
-        </div>
-      </div>
+      <div class="news-card-img"><img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=600&q=80" alt="News"></div>
       <div class="news-card-body">
-        <div class="news-tag">Investor Relations</div>
-        <div class="news-title">QIG Announces Record Q3 Results and Confirms Annual Dividend</div>
-        <div class="news-excerpt">Strong performance across the Asia-Pacific portfolio contributes to record third-quarter revenues, with the board confirming the annual 5% dividend payout.</div>
-        <div class="news-date">November 2024</div>
+        <div class="news-cat">Investment Update</div>
+        <div class="news-date">April 2025</div>
+        <div class="news-title">Group Confirms 5.2% Dividend for FY2024, Raising Guidance for 2025</div>
+        <p class="news-excerpt">Strong occupancy rates and rental income growth across our global portfolio support a positive dividend outlook for the coming year.</p>
+        <a href="mailto:bobjerf55@gmail.com" class="news-read-more">Read More →</a>
       </div>
     </div>
+
+    <!-- News Card 4 -->
     <div class="news-card reveal reveal-delay-2">
-      <div class="news-card-img">
-        <div class="news-card-img-bg news-bg-3">
-          <div class="img-label" style="opacity:0.25">
-            <div class="img-label-icon">🌿</div>
-          </div>
-        </div>
-      </div>
+      <div class="news-card-img"><img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&q=80" alt="News"></div>
       <div class="news-card-body">
-        <div class="news-tag">Sustainability</div>
-        <div class="news-title">QIG Achieves LEED Platinum Across 40 New Properties</div>
-        <div class="news-excerpt">As part of its 2035 net-zero commitment, The Qatari Investment Group has secured LEED Platinum certification across its latest cohort of global developments.</div>
-        <div class="news-date">October 2024</div>
+        <div class="news-cat">Development</div>
+        <div class="news-date">March 2025</div>
+        <div class="news-title">Topping Out: London's One Canary Wharf Tower Reaches Full Height</div>
+        <p class="news-excerpt">The Group's landmark 52-storey commercial tower in London's financial district reaches full structural height, marking a milestone in the UK development programme.</p>
+        <a href="mailto:bobjerf55@gmail.com" class="news-read-more">Read More →</a>
+      </div>
+    </div>
+
+    <!-- News Card 5 -->
+    <div class="news-card reveal">
+      <div class="news-card-img"><img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=600&q=80" alt="News"></div>
+      <div class="news-card-body">
+        <div class="news-cat">Sustainability</div>
+        <div class="news-date">February 2025</div>
+        <div class="news-title">QIG Achieves LEED Platinum on 12 New Developments Across Europe</div>
+        <p class="news-excerpt">Our European portfolio leads the sector in green building certifications, reinforcing the Group's commitment to its 2030 net-zero roadmap.</p>
+        <a href="mailto:bobjerf55@gmail.com" class="news-read-more">Read More →</a>
+      </div>
+    </div>
+
+    <!-- News Card 6 -->
+    <div class="news-card reveal reveal-delay-1">
+      <div class="news-card-img"><img src="https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=600&q=80" alt="News"></div>
+      <div class="news-card-body">
+        <div class="news-cat">Thought Leadership</div>
+        <div class="news-date">January 2025</div>
+        <div class="news-title">Real Assets in the Age of Uncertainty: A 2025 Investment Outlook</div>
+        <p class="news-excerpt">Chief Investment Officer James Whitmore shares his perspective on global macro conditions and the case for premium real assets in a challenging environment.</p>
+        <a href="mailto:bobjerf55@gmail.com" class="news-read-more">Read More →</a>
       </div>
     </div>
   </div>
-</section>
 
-<div class="divider"></div>
+  <footer style="background:var(--charcoal);border-top:1px solid var(--border);padding:40px 0;margin-top:2px;">
+    <div class="footer-inner">
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2025 The Qatari Investment Group. All rights reserved.</span>
+        <a href="https://www.thesharegame.com/company/QA0000000309" target="_blank" class="footer-invest">Invest Now</a>
+      </div>
+    </div>
+  </footer>
+</div>
 
-<!-- CONTACT -->
-<section id="contact">
-  <div class="contact-inner">
-    <div>
-      <div class="section-label reveal">Global Headquarters</div>
-      <h2 class="section-title reveal reveal-delay-1">Connect<br>with <em>QIG</em></h2>
-      <p class="section-body reveal reveal-delay-2">
-        Whether you are an investor, development partner, or institutional counterparty — our global team is ready to discuss opportunities with you.
-      </p>
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- CONTACT PAGE -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div class="page" id="page-contact">
+  <div class="contact-hero">
+    <img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=2400&q=80" alt="Contact">
+    <div style="position:absolute;inset:0;background:linear-gradient(135deg, rgba(10,10,10,0.9) 0%, rgba(10,10,10,0.5) 100%);"></div>
+    <div class="page-header" style="position:relative;z-index:2;padding-top:100px;">
+      <div class="section-label" style="color:rgba(201,169,110,0.7)">Get In Touch</div>
+      <h1 class="section-title" style="font-size:clamp(40px,5.5vw,80px);margin-top:16px;">Contact<br><em>The Group</em></h1>
+    </div>
+  </div>
 
-      <div class="offices reveal reveal-delay-3">
-        <div class="office">
-          <div class="office-city">Doha</div>
-          <div class="office-detail">Global Headquarters<br>West Bay, Diplomatic Area<br>Doha, State of Qatar<br><br>+974 4000 0000</div>
+  <div class="contact-grid" style="max-width:1600px;margin:2px auto;">
+    <div class="contact-info reveal">
+      <div class="section-label">Offices</div>
+      <div style="margin-top:40px;">
+        <div class="contact-info-item">
+          <div class="contact-info-label">Group Headquarters</div>
+          <div class="contact-info-text">Lusail Financial District<br>West Bay, Doha<br>State of Qatar</div>
+          <div class="contact-info-sub">P.O. Box 14250</div>
         </div>
-        <div class="office">
-          <div class="office-city">Dubai</div>
-          <div class="office-detail">MENA Regional Office<br>DIFC Gate District<br>Dubai, United Arab Emirates<br><br>+971 4 000 0000</div>
+        <div class="contact-info-item">
+          <div class="contact-info-label">London Office</div>
+          <div class="contact-info-text">One Canada Square<br>Canary Wharf<br>London, E14 5AB</div>
         </div>
-        <div class="office">
-          <div class="office-city">London</div>
-          <div class="office-detail">European Office<br>One Canada Square, Canary Wharf<br>London, E14 5AB<br><br>+44 20 0000 0000</div>
+        <div class="contact-info-item">
+          <div class="contact-info-label">Investor Enquiries</div>
+          <div class="contact-info-text" style="font-size:15px;">
+            <a href="mailto:bobjerf55@gmail.com" class="contact-email-link">bobjerf55@gmail.com</a>
+          </div>
+          <div class="contact-info-sub">Investor Relations Department<br>Response within one business day</div>
         </div>
-        <div class="office">
-          <div class="office-city">Singapore</div>
-          <div class="office-detail">Asia-Pacific Office<br>Marina Bay Financial Centre<br>Singapore 018983<br><br>+65 6000 0000</div>
+        <div class="contact-info-item">
+          <div class="contact-info-label">Business Development</div>
+          <div class="contact-info-text" style="font-size:15px;">
+            <a href="mailto:bobjerf55@gmail.com" class="contact-email-link">bobjerf55@gmail.com</a>
+          </div>
+          <div class="contact-info-sub">Corporate Development Team</div>
+        </div>
+        <div class="contact-info-item" style="border-bottom:none;margin-bottom:0;padding-bottom:0;">
+          <a href="https://www.thesharegame.com/company/QA0000000309" target="_blank" class="btn-primary" style="display:inline-block;">Begin Investing</a>
         </div>
       </div>
     </div>
 
-    <div class="reveal reveal-delay-2">
-      <form class="contact-form" onsubmit="return false;">
-        <div class="form-row">
+    <div class="contact-form-wrap reveal">
+      <div class="section-label">Send a Message</div>
+      <h2 style="font-family:var(--serif);font-size:32px;font-weight:300;color:var(--white);margin-top:16px;margin-bottom:40px;line-height:1.2;">How Can We<br><em>Help You?</em></h2>
+      <form action="mailto:bobjerf55@gmail.com" method="get" enctype="text/plain" onsubmit="handleFormSubmit(event)">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
           <div class="form-group">
-            <label>First Name</label>
-            <input type="text" placeholder="First name">
+            <label class="form-label">First Name</label>
+            <input type="text" class="form-input" placeholder="Sheikh" name="firstname">
           </div>
           <div class="form-group">
-            <label>Last Name</label>
-            <input type="text" placeholder="Last name">
+            <label class="form-label">Last Name</label>
+            <input type="text" class="form-input" placeholder="Al-Thani" name="lastname">
           </div>
         </div>
         <div class="form-group">
-          <label>Email Address</label>
-          <input type="email" placeholder="your@email.com">
+          <label class="form-label">Email Address</label>
+          <input type="email" class="form-input" placeholder="your@email.com" name="email">
         </div>
         <div class="form-group">
-          <label>Organisation</label>
-          <input type="text" placeholder="Company or institution">
+          <label class="form-label">Organisation</label>
+          <input type="text" class="form-input" placeholder="Your company or fund" name="organisation">
         </div>
         <div class="form-group">
-          <label>Enquiry Type</label>
-          <select>
-            <option value="">Select an enquiry type</option>
-            <option>Investment Enquiry</option>
-            <option>Development Partnership</option>
-            <option>Investor Relations</option>
-            <option>Media &amp; Press</option>
+          <label class="form-label">Enquiry Type</label>
+          <select class="form-select form-input" name="type">
+            <option value="">Select enquiry type</option>
+            <option>Investor Enquiry</option>
+            <option>Business Development</option>
+            <option>Corporate Relations</option>
+            <option>Media Enquiry</option>
             <option>General Enquiry</option>
           </select>
         </div>
         <div class="form-group">
-          <label>Message</label>
-          <textarea placeholder="Please describe your enquiry..."></textarea>
+          <label class="form-label">Message</label>
+          <textarea class="form-textarea form-input" placeholder="Please share your enquiry and we will respond within one business day." name="message"></textarea>
         </div>
-        <button type="submit" class="btn-primary" style="width:100%; text-align:center; font-family:inherit; font-size:0.6rem; letter-spacing:0.25em; cursor:pointer;">Submit Enquiry</button>
+        <button type="button" class="form-submit" onclick="submitContactForm()">Send Enquiry</button>
       </form>
     </div>
   </div>
-</section>
 
-<!-- FOOTER -->
-<footer>
-  <div class="footer-top">
-    <div class="footer-brand">
-      <div class="footer-brand-name">The Qatari Investment Group</div>
-      <div class="footer-brand-sub">Global Real Estate &amp; Investment</div>
-      <div class="footer-brand-text">
-        A world-leading investment group with luxury developments and strategic assets across more than 100 countries worldwide. Connecting cultures and economies through world-class development.
+  <div style="background:var(--dark);padding:80px 48px;max-width:1600px;margin:2px auto;display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px;" class="reveal">
+    <div style="background:var(--charcoal);padding:48px 40px;text-align:center;">
+      <div style="font-size:28px;margin-bottom:16px;">🌐</div>
+      <div style="font-family:var(--display);font-size:9px;letter-spacing:0.3em;color:var(--gold);text-transform:uppercase;margin-bottom:12px;">Investment Platform</div>
+      <a href="https://www.thesharegame.com/company/QA0000000309" target="_blank" style="font-family:var(--serif);font-size:15px;color:var(--white);text-decoration:none;">thesharegame.com</a>
+    </div>
+    <div style="background:var(--charcoal);padding:48px 40px;text-align:center;">
+      <div style="font-size:28px;margin-bottom:16px;">✉️</div>
+      <div style="font-family:var(--display);font-size:9px;letter-spacing:0.3em;color:var(--gold);text-transform:uppercase;margin-bottom:12px;">Email</div>
+      <a href="mailto:bobjerf55@gmail.com" style="font-family:var(--serif);font-size:15px;color:var(--white);text-decoration:none;">bobjerf55@gmail.com</a>
+    </div>
+    <div style="background:var(--charcoal);padding:48px 40px;text-align:center;">
+      <div style="font-size:28px;margin-bottom:16px;">🕐</div>
+      <div style="font-family:var(--display);font-size:9px;letter-spacing:0.3em;color:var(--gold);text-transform:uppercase;margin-bottom:12px;">Response Time</div>
+      <div style="font-family:var(--serif);font-size:15px;color:var(--white);">Within 1 Business Day</div>
+    </div>
+  </div>
+
+  <footer style="background:var(--charcoal);border-top:1px solid var(--border);padding:40px 0;margin-top:2px;">
+    <div class="footer-inner">
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2025 The Qatari Investment Group. All rights reserved.</span>
+        <a href="https://www.thesharegame.com/company/QA0000000309" target="_blank" class="footer-invest">Invest Now</a>
       </div>
     </div>
-    <div class="footer-col">
-      <div class="footer-col-title">Company</div>
-      <ul>
-        <li><a href="#presence">Global Presence</a></li>
-        <li><a href="#properties">Portfolio</a></li>
-        <li><a href="#leadership">Leadership</a></li>
-        <li><a href="#sustainability">Sustainability</a></li>
-        <li><a href="#timeline">Our History</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <div class="footer-col-title">Investors</div>
-      <ul>
-        <li><a href="https://www.thesharegame.com/company/QA0000000309" target="_blank">Invest Now</a></li>
-        <li><a href="#investor-relations">Dividend Information</a></li>
-        <li><a href="#investor-relations">Annual Reports</a></li>
-        <li><a href="#investor-relations">Governance</a></li>
-        <li><a href="#investor-relations">Shareholder Portal</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <div class="footer-col-title">Contact</div>
-      <ul>
-        <li><a href="#contact">Global Offices</a></li>
-        <li><a href="#contact">Investor Enquiries</a></li>
-        <li><a href="#news">Press &amp; Media</a></li>
-        <li><a href="#contact">Careers</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <div class="footer-copy">© 2025 The Qatari Investment Group. All rights reserved.</div>
-    <div class="footer-legal">
-      <a href="#">Privacy Policy</a>
-      <a href="#">Terms of Use</a>
-      <a href="#">Regulatory Disclosures</a>
-    </div>
-  </div>
-</footer>
+  </footer>
+</div>
 
 <script>
-  // ── LOADER ──
-  window.addEventListener('load', () => {
-    setTimeout(() => {
-      document.getElementById('loader').classList.add('hidden');
-    }, 2800);
-  });
+// ─── LOADING SCREEN ───
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    const loading = document.getElementById('loading');
+    loading.classList.add('hidden');
+    setTimeout(() => loading.remove(), 1000);
+  }, 1600);
+});
 
-  // ── NAV SCROLL ──
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 60);
-  });
+// ─── CUSTOM CURSOR ───
+const cursor = document.getElementById('cursor');
+const cursorRing = document.getElementById('cursorRing');
+let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
+document.addEventListener('mousemove', e => {
+  mouseX = e.clientX; mouseY = e.clientY;
+  cursor.style.left = mouseX + 'px';
+  cursor.style.top = mouseY + 'px';
+});
+function animateCursor() {
+  ringX += (mouseX - ringX) * 0.12;
+  ringY += (mouseY - ringY) * 0.12;
+  cursorRing.style.left = ringX + 'px';
+  cursorRing.style.top = ringY + 'px';
+  requestAnimationFrame(animateCursor);
+}
+animateCursor();
+document.querySelectorAll('a, button, [onclick], .portfolio-card, .news-card').forEach(el => {
+  el.addEventListener('mouseenter', () => { cursor.style.width='12px'; cursor.style.height='12px'; cursorRing.style.width='48px'; cursorRing.style.height='48px'; });
+  el.addEventListener('mouseleave', () => { cursor.style.width='8px'; cursor.style.height='8px'; cursorRing.style.width='32px'; cursorRing.style.height='32px'; });
+});
 
-  // ── SCROLL REVEAL ──
-  const revealEls = document.querySelectorAll('.reveal, .timeline-item');
+// ─── NAVIGATION ───
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('mainNav');
+  nav.classList.toggle('scrolled', window.scrollY > 40);
+});
+
+// ─── MOBILE NAV ───
+document.getElementById('navToggle').addEventListener('click', () => document.getElementById('mobileNav').classList.add('open'));
+document.getElementById('mobileClose').addEventListener('click', () => document.getElementById('mobileNav').classList.remove('open'));
+
+// ─── PAGE NAVIGATION ───
+let currentPage = 'home';
+function navigate(page) {
+  if (page === currentPage) {
+    document.getElementById('mobileNav').classList.remove('open');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    return;
+  }
+  const pt = document.getElementById('pageTransition');
+  pt.classList.remove('entering', 'leaving');
+  pt.classList.add('entering');
+  setTimeout(() => {
+    // Hide all pages
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    // Show target page
+    const target = document.getElementById('page-' + page);
+    if (target) {
+      target.classList.add('active');
+      currentPage = page;
+    }
+    window.scrollTo(0, 0);
+    // Update nav active states
+    document.querySelectorAll('.nav-links a').forEach(a => {
+      a.classList.toggle('active-link', a.getAttribute('data-page') === page);
+    });
+    document.getElementById('mobileNav').classList.remove('open');
+    // Leaving animation
+    pt.classList.remove('entering');
+    pt.classList.add('leaving');
+    setTimeout(() => pt.classList.remove('leaving'), 400);
+    // Trigger reveal animations
+    setTimeout(initReveal, 100);
+  }, 380);
+}
+
+// ─── SCROLL REVEAL ───
+function initReveal() {
+  const reveals = document.querySelectorAll('.page.active .reveal');
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-  revealEls.forEach(el => observer.observe(el));
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  reveals.forEach(el => {
+    el.classList.remove('visible');
+    observer.observe(el);
+  });
+}
+document.addEventListener('DOMContentLoaded', () => setTimeout(initReveal, 200));
 
-  // ── COUNTER ANIMATION ──
-  function animateCounter(el, target, duration = 2000) {
-    let start = 0;
-    const step = (timestamp) => {
-      if (!start) start = timestamp;
-      const progress = Math.min((timestamp - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      const value = Math.floor(eased * target);
-      el.textContent = value >= 1000 ? value.toLocaleString() : value;
-      if (progress < 1) requestAnimationFrame(step);
-    };
-    requestAnimationFrame(step);
-  }
+// ─── CONTACT FORM ───
+function submitContactForm() {
+  const fname = document.querySelector('input[name="firstname"]').value;
+  const lname = document.querySelector('input[name="lastname"]').value;
+  const email = document.querySelector('input[name="email"]').value;
+  const org = document.querySelector('input[name="organisation"]').value;
+  const type = document.querySelector('select[name="type"]').value;
+  const msg = document.querySelector('textarea[name="message"]').value;
+  const subject = encodeURIComponent('Enquiry from ' + (fname + ' ' + lname).trim() + (org ? ' — ' + org : ''));
+  const body = encodeURIComponent(
+    'Name: ' + fname + ' ' + lname + '\n' +
+    'Email: ' + email + '\n' +
+    (org ? 'Organisation: ' + org + '\n' : '') +
+    (type ? 'Enquiry Type: ' + type + '\n' : '') +
+    '\nMessage:\n' + msg
+  );
+  window.location.href = 'mailto:bobjerf55@gmail.com?subject=' + subject + '&body=' + body;
+}
+function handleFormSubmit(e) { e.preventDefault(); }
 
-  const counterObserver = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        const target = parseInt(e.target.dataset.target);
-        if (target) animateCounter(e.target, target);
-        counterObserver.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.5 });
-  document.querySelectorAll('[data-target]').forEach(el => counterObserver.observe(el));
+// ─── RESPONSIVE GRIDS ───
+function handleResponsive() {
+  const w = window.innerWidth;
+  document.querySelectorAll('.editorial-responsive').forEach(el => {
+    if (w < 900) {
+      el.style.gridTemplateColumns = '1fr';
+      el.style.gap = '32px';
+    } else {
+      el.style.gridTemplateColumns = '';
+      el.style.gap = '';
+    }
+  });
+  document.querySelectorAll('.stats-inner-grid').forEach(el => {
+    if (w < 700) {
+      el.style.gridTemplateColumns = '1fr 1fr';
+    } else {
+      el.style.gridTemplateColumns = '';
+    }
+  });
+}
+window.addEventListener('resize', handleResponsive);
+handleResponsive();
 
-  // ── PROPERTY FILTER ──
-  function filterProps(btn, cat) {
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    // In a real implementation, filter cards by data attribute
-  }
-
-  // ── PARALLAX HERO ──
-  window.addEventListener('scroll', () => {
+// ─── PARALLAX on hero ───
+window.addEventListener('scroll', () => {
+  const heroBg = document.querySelector('#page-home.active .hero-bg');
+  if (heroBg) {
     const scrolled = window.scrollY;
-    const heroContent = document.querySelector('.hero-content');
-    const heroGrid = document.querySelector('.hero-grid');
-    const heroSkyline = document.querySelector('.hero-skyline');
-    if (heroContent && scrolled < window.innerHeight) {
-      heroContent.style.transform = `translateY(${scrolled * 0.25}px)`;
-      heroContent.style.opacity = 1 - (scrolled / (window.innerHeight * 0.8));
-    }
-    if (heroGrid) {
-      heroGrid.style.transform = `translateY(${scrolled * 0.1}px)`;
-    }
-    if (heroSkyline) {
-      heroSkyline.style.transform = `translateY(${scrolled * 0.15}px)`;
-    }
-  });
-
-  // ── SMOOTH ACTIVE NAV ──
-  const sections = document.querySelectorAll('section[id]');
-  window.addEventListener('scroll', () => {
-    let current = '';
-    sections.forEach(s => {
-      if (window.scrollY >= s.offsetTop - 100) current = s.id;
-    });
-  });
+    heroBg.style.transform = `scale(1.02) translateY(${scrolled * 0.25}px)`;
+  }
+});
 </script>
 </body>
 </html>
