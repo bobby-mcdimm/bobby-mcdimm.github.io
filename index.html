@@ -2663,6 +2663,9 @@ footer {
 <!-- ═══════════════════════════════════════════════════ -->
 <!-- NEWSLETTER PAGE -->
 <!-- ═══════════════════════════════════════════════════ -->
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- NEWSLETTER PAGE (Kit-powered) -->
+<!-- ═══════════════════════════════════════════════════ -->
 <div class="page" id="page-newsletter">
   <div class="invest-hero">
     <img src="https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?w=2400&q=80" alt="Newsletter">
@@ -2681,23 +2684,15 @@ footer {
       <h2 style="font-family:var(--serif);font-size:clamp(28px,3vw,40px);font-weight:300;color:var(--white);margin-top:24px;margin-bottom:20px;line-height:1.2;">Get This Week's<br><em>Market Update</em></h2>
       <p style="font-family:var(--sans);font-size:14px;color:var(--white-dim);line-height:1.8;max-width:400px;margin-bottom:36px;">One email a week. No spam, unsubscribe anytime.</p>
 
-      <!--
-        Replace YOUR_BREVO_FORM_ACTION_URL below with your real Brevo form
-        endpoint: Brevo dashboard → Contacts → Forms → Create a form →
-        Share/Embed → copy the form's "action" URL from the generated code.
-        This is the safe, keyless way to connect a public page to your
-        list — never put your secret API key in this file.
-      -->
-      <form action="YOUR_BREVO_FORM_ACTION_URL" method="POST" target="_blank">
+      <!-- Kit signup form, restyled to match the site theme -->
+      <form action="https://app.kit.com/forms/9872845/subscriptions" class="seva-form formkit-form" method="post" data-sv-form="9872845" data-uid="ad41fcb2f3" data-format="inline" data-version="5">
         <div class="form-group">
           <label class="form-label">Email Address</label>
-          <input type="email" class="form-input" placeholder="your@email.com" name="EMAIL" required>
+          <input class="formkit-input form-input" name="email_address" aria-label="Email Address" placeholder="your@email.com" required type="email">
         </div>
-        <div class="form-group">
-          <label class="form-label">First Name (optional)</label>
-          <input type="text" class="form-input" placeholder="Your name" name="FIRSTNAME">
-        </div>
-        <button type="submit" class="form-submit" style="width:auto;padding:16px 36px;">Subscribe</button>
+        <button data-element="submit" class="formkit-submit form-submit" type="submit" style="width:auto;padding:16px 36px;">
+          Subscribe
+        </button>
       </form>
     </div>
     <div>
