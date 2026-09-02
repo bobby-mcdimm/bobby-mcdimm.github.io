@@ -1973,15 +1973,23 @@ footer {
 
 <!-- ═══════════════════════════════════════════════════ -->
 <!-- PORTFOLIO PAGE -->
-<!-- Portfolio Grid -->
-<div class="portfolio-grid" style="max-width:1600px;margin:2px auto;padding:0;">
+<!-- ═══════════════════════════════════════════════════ -->
+
+<div class="portfolio-grid" style="
+  max-width:1600px;
+  margin:2px auto;
+  padding:0;
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:2px;
+">
 
   <!-- Dubai -->
-  <div class="portfolio-card reveal">
+  <div class="portfolio-card" style="position:relative;height:520px;overflow:hidden;">
     <img
       src="https://images.unsplash.com/photo-1555881400-74d7acaacd8b?w=2400&q=80"
       alt="Luxury Hotel Dubai"
-      style="width:100%;height:100%;object-fit:cover;object-position:center;"
+      style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;"
     >
     <div class="portfolio-card-overlay">
       <div class="portfolio-card-cat">Luxury Hotel</div>
@@ -1992,11 +2000,11 @@ footer {
   </div>
 
   <!-- Kyoto -->
-  <div class="portfolio-card reveal reveal-delay-1">
+  <div class="portfolio-card" style="position:relative;height:520px;overflow:hidden;">
     <img
-      src="https://images.unsplash.com/photo-1761847587996-fbbf092cf29a?auto=format&fit=crop&w=2400&q=80"
+      src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=2400&q=80"
       alt="Kyoto Mountain Retreat"
-      style="width:100%;height:100%;object-fit:cover;object-position:center;"
+      style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;"
     >
     <div class="portfolio-card-overlay">
       <div class="portfolio-card-cat">Resort</div>
@@ -2007,11 +2015,11 @@ footer {
   </div>
 
   <!-- London -->
-  <div class="portfolio-card reveal reveal-delay-2">
+  <div class="portfolio-card" style="position:relative;height:520px;overflow:hidden;">
     <img
       src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=2400&q=80"
       alt="London Commercial Tower"
-      style="width:100%;height:100%;object-fit:cover;object-position:center;"
+      style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;"
     >
     <div class="portfolio-card-overlay">
       <div class="portfolio-card-cat">Commercial Tower</div>
@@ -2022,11 +2030,11 @@ footer {
   </div>
 
   <!-- Singapore -->
-  <div class="portfolio-card reveal">
+  <div class="portfolio-card" style="position:relative;height:520px;overflow:hidden;">
     <img
       src="https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=2400&q=80"
       alt="Singapore Tower"
-      style="width:100%;height:100%;object-fit:cover;object-position:center;"
+      style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;"
     >
     <div class="portfolio-card-overlay">
       <div class="portfolio-card-cat">Skyscraper</div>
@@ -2037,11 +2045,11 @@ footer {
   </div>
 
   <!-- Tunisia -->
-  <div class="portfolio-card reveal reveal-delay-1">
+  <div class="portfolio-card" style="position:relative;height:520px;overflow:hidden;">
     <img
       src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=2400&q=80"
       alt="Beach Resort Tunisia"
-      style="width:100%;height:100%;object-fit:cover;object-position:center;"
+      style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;"
     >
     <div class="portfolio-card-overlay">
       <div class="portfolio-card-cat">Beach Resort</div>
@@ -2052,11 +2060,11 @@ footer {
   </div>
 
   <!-- New York -->
-  <div class="portfolio-card reveal reveal-delay-2">
+  <div class="portfolio-card" style="position:relative;height:520px;overflow:hidden;">
     <img
-      src="https://images.unsplash.com/photo-1786361284599-4774e4c0f0b9?auto=format&fit=crop&w=2400&q=80"
+      src="https://images.unsplash.com/photo-1485871981521-5b1fd3805eee?w=2400&q=80"
       alt="Manhattan Mixed Use Development"
-      style="width:100%;height:100%;object-fit:cover;object-position:center;"
+      style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;"
     >
     <div class="portfolio-card-overlay">
       <div class="portfolio-card-cat">Mixed-Use Development</div>
@@ -2067,6 +2075,104 @@ footer {
   </div>
 
 </div>
+
+<style>
+  .portfolio-card {
+    background:#111;
+  }
+
+  .portfolio-card img {
+    transition:transform .7s ease;
+  }
+
+  .portfolio-card:hover img {
+    transform:scale(1.05);
+  }
+
+  .portfolio-card::after {
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(
+      to top,
+      rgba(0,0,0,.9) 0%,
+      rgba(0,0,0,.25) 55%,
+      transparent 100%
+    );
+    pointer-events:none;
+  }
+
+  .portfolio-card-overlay {
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:0;
+    padding:40px;
+    z-index:2;
+  }
+
+  .portfolio-card-cat {
+    font-size:11px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:#c9a96e;
+    margin-bottom:12px;
+  }
+
+  .portfolio-card-title {
+    color:#fff;
+    font-family:var(--serif, Georgia, serif);
+    font-size:32px;
+    line-height:1.05;
+    margin-bottom:12px;
+  }
+
+  .portfolio-card-loc {
+    color:rgba(255,255,255,.7);
+    font-family:var(--sans, Arial, sans-serif);
+    font-size:13px;
+  }
+
+  .portfolio-card-arrow {
+    position:absolute;
+    top:25px;
+    right:25px;
+    z-index:3;
+    width:42px;
+    height:42px;
+    border:1px solid rgba(255,255,255,.5);
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#fff;
+    font-size:20px;
+  }
+
+  @media (max-width:900px) {
+    .portfolio-grid {
+      grid-template-columns:repeat(2,1fr) !important;
+    }
+  }
+
+  @media (max-width:600px) {
+    .portfolio-grid {
+      grid-template-columns:1fr !important;
+    }
+
+    .portfolio-card {
+      height:450px !important;
+    }
+
+    .portfolio-card-overlay {
+      padding:25px;
+    }
+
+    .portfolio-card-title {
+      font-size:28px;
+    }
+  }
+</style>
 
 <!-- ═══════════════════════════════════════════════════ -->
 <!-- INVESTMENTS PAGE -->
